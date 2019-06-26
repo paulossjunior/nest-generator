@@ -1,0 +1,29 @@
+grammar org.example.domainmodel.Domainmodel with
+                                      org.eclipse.xtext.common.Terminals
+ 
+generate domainmodel "http://www.example.org/domainmodel/Domainmodel"
+ 
+Domainmodel:
+    (elements+=AbstractElement)*;
+    
+AbstractElement:
+    Type;
+ 
+Entity:
+    'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'
+        (properties+=Property)*
+    '}';
+    
+Type:
+	DataType | Entity;
+	
+DataType:
+    'type' name=ID('[]')?(';')?;
+ 
+
+QualifiedName:
+   ID;
+ 
+Property:
+    name=ID ':' type=[Type|QualifiedName](array='[]')?(';')?;
+  
