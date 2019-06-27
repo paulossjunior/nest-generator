@@ -4,48 +4,48 @@
 	<extension
 		point="org.eclipse.ui.editors">
 		<editor
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
 			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
 			default="true"
-			extensions="nst"
-			id="org.example.domainmodel.Domainmodel"
-			name="Domainmodel Editor">
+			extensions="nestg"
+			id="prodest.es.gov.br.dsl.NestDsl"
+			name="NestDsl Editor">
 		</editor>
 	</extension>
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
 			commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
 			<activeWhen>
 				<reference
-					definitionId="org.example.domainmodel.Domainmodel.Editor.opened">
+					definitionId="prodest.es.gov.br.dsl.NestDsl.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
 		<handler
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
-			commandId="org.example.domainmodel.Domainmodel.validate">
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+			commandId="prodest.es.gov.br.dsl.NestDsl.validate">
 		<activeWhen>
 			<reference
-					definitionId="org.example.domainmodel.Domainmodel.Editor.opened">
+					definitionId="prodest.es.gov.br.dsl.NestDsl.Editor.opened">
 			</reference>
 		</activeWhen>
 		</handler>
 		<!-- copy qualified name -->
 		<handler
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
 			commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName">
 			<activeWhen>
-				<reference definitionId="org.example.domainmodel.Domainmodel.Editor.opened" />
+				<reference definitionId="prodest.es.gov.br.dsl.NestDsl.Editor.opened" />
 			</activeWhen>
 		</handler>
 		<handler
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
 			commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName">
 			<activeWhen>
 				<and>
-					<reference definitionId="org.example.domainmodel.Domainmodel.XtextEditor.opened" />
+					<reference definitionId="prodest.es.gov.br.dsl.NestDsl.XtextEditor.opened" />
 					<iterate>
 						<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
 					</iterate>
@@ -54,22 +54,22 @@
 		</handler>
 	</extension>
 	<extension point="org.eclipse.core.expressions.definitions">
-		<definition id="org.example.domainmodel.Domainmodel.Editor.opened">
+		<definition id="prodest.es.gov.br.dsl.NestDsl.Editor.opened">
 			<and>
 				<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
 				<with variable="activeEditor">
 					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
-						value="org.example.domainmodel.Domainmodel"
+						value="prodest.es.gov.br.dsl.NestDsl"
 						forcePluginActivation="true"/>
 				</with>
 			</and>
 		</definition>
-		<definition id="org.example.domainmodel.Domainmodel.XtextEditor.opened">
+		<definition id="prodest.es.gov.br.dsl.NestDsl.XtextEditor.opened">
 			<and>
 				<reference definitionId="isXtextEditorActive"/>
 				<with variable="activeEditor">
 					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
-						value="org.example.domainmodel.Domainmodel"
+						value="prodest.es.gov.br.dsl.NestDsl"
 						forcePluginActivation="true"/>
 				</with>
 			</and>
@@ -78,33 +78,33 @@
 	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-			id="org.example.domainmodel.Domainmodel"
-			name="Domainmodel">
-			<keywordReference id="org.example.domainmodel.ui.keyword_Domainmodel"/>
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+			id="prodest.es.gov.br.dsl.NestDsl"
+			name="NestDsl">
+			<keywordReference id="prodest.es.gov.br.dsl.ui.keyword_NestDsl"/>
 		</page>
 		<page
-			category="org.example.domainmodel.Domainmodel"
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-			id="org.example.domainmodel.Domainmodel.coloring"
+			category="prodest.es.gov.br.dsl.NestDsl"
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="prodest.es.gov.br.dsl.NestDsl.coloring"
 			name="Syntax Coloring">
-			<keywordReference id="org.example.domainmodel.ui.keyword_Domainmodel"/>
+			<keywordReference id="prodest.es.gov.br.dsl.ui.keyword_NestDsl"/>
 		</page>
 		<page
-			category="org.example.domainmodel.Domainmodel"
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
-			id="org.example.domainmodel.Domainmodel.templates"
+			category="prodest.es.gov.br.dsl.NestDsl"
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+			id="prodest.es.gov.br.dsl.NestDsl.templates"
 			name="Templates">
-			<keywordReference id="org.example.domainmodel.ui.keyword_Domainmodel"/>
+			<keywordReference id="prodest.es.gov.br.dsl.ui.keyword_NestDsl"/>
 		</page>
 	</extension>
 	<extension
 			point="org.eclipse.ui.propertyPages">
 		<page
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-			id="org.example.domainmodel.Domainmodel"
-			name="Domainmodel">
-			<keywordReference id="org.example.domainmodel.ui.keyword_Domainmodel"/>
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+			id="prodest.es.gov.br.dsl.NestDsl"
+			name="NestDsl">
+			<keywordReference id="prodest.es.gov.br.dsl.ui.keyword_NestDsl"/>
 			<enabledWhen>
 				<adapt type="org.eclipse.core.resources.IProject"/>
 			</enabledWhen>
@@ -114,14 +114,14 @@
 	<extension
 		point="org.eclipse.ui.keywords">
 		<keyword
-			id="org.example.domainmodel.ui.keyword_Domainmodel"
-			label="Domainmodel"/>
+			id="prodest.es.gov.br.dsl.ui.keyword_NestDsl"
+			label="NestDsl"/>
 	</extension>
 	<extension
 		point="org.eclipse.ui.commands">
 	<command
 			description="Trigger expensive validation"
-			id="org.example.domainmodel.Domainmodel.validate"
+			id="prodest.es.gov.br.dsl.NestDsl.validate"
 			name="Validate">
 	</command>
 	<!-- copy qualified name -->
@@ -142,12 +142,12 @@
 		<menuContribution
 			locationURI="popup:#TextEditorContext?after=group.edit">
 			 <command
-				 commandId="org.example.domainmodel.Domainmodel.validate"
+				 commandId="prodest.es.gov.br.dsl.NestDsl.validate"
 				 style="push"
 				 tooltip="Trigger expensive validation">
 			<visibleWhen checkEnabled="false">
 				<reference
-					definitionId="org.example.domainmodel.Domainmodel.Editor.opened">
+					definitionId="prodest.es.gov.br.dsl.NestDsl.Editor.opened">
 				</reference>
 			</visibleWhen>
 		</command>
@@ -157,7 +157,7 @@
 			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
 				style="push" tooltip="Copy Qualified Name">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="org.example.domainmodel.Domainmodel.Editor.opened" />
+					<reference definitionId="prodest.es.gov.br.dsl.NestDsl.Editor.opened" />
 				</visibleWhen>
 			</command>
 		</menuContribution>
@@ -165,7 +165,7 @@
 			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
 				style="push" tooltip="Copy Qualified Name">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="org.example.domainmodel.Domainmodel.Editor.opened" />
+					<reference definitionId="prodest.es.gov.br.dsl.NestDsl.Editor.opened" />
 				</visibleWhen>
 			</command>
 		</menuContribution>
@@ -174,7 +174,7 @@
 				style="push" tooltip="Copy Qualified Name">
 				<visibleWhen checkEnabled="false">
 					<and>
-						<reference definitionId="org.example.domainmodel.Domainmodel.XtextEditor.opened" />
+						<reference definitionId="prodest.es.gov.br.dsl.NestDsl.XtextEditor.opened" />
 						<iterate>
 							<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
 						</iterate>
@@ -187,7 +187,7 @@
 		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
 			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="org.example.domainmodel.Domainmodel.Editor.opened">
+					<reference definitionId="prodest.es.gov.br.dsl.NestDsl.Editor.opened">
 					</reference>
 				</visibleWhen>
 			</command>
@@ -195,11 +195,11 @@
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 		<handler
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
 			commandId="org.eclipse.xtext.ui.editor.FindReferences">
 			<activeWhen>
 				<reference
-					definitionId="org.example.domainmodel.Domainmodel.Editor.opened">
+					definitionId="prodest.es.gov.br.dsl.NestDsl.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -207,9 +207,9 @@
 	<extension point="org.eclipse.core.contenttype.contentTypes">
 		<content-type
 			base-type="org.eclipse.core.runtime.text"
-			file-extensions="nst"
-			id="org.example.domainmodel.Domainmodel.contenttype"
-			name="Domainmodel File"
+			file-extensions="nestg"
+			id="prodest.es.gov.br.dsl.NestDsl.contenttype"
+			name="NestDsl File"
 			priority="normal">
 		</content-type>
 	</extension>
@@ -217,68 +217,68 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-			type="nst">
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="nestg">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
 		<resourceServiceProvider
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-			uriExtension="nst">
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+			uriExtension="nestg">
 		</resourceServiceProvider>
 	</extension>
-	<!-- marker definitions for org.example.domainmodel.Domainmodel -->
+	<!-- marker definitions for prodest.es.gov.br.dsl.NestDsl -->
 	<extension
-			id="domainmodel.check.fast"
-			name="Domainmodel Problem"
+			id="nestdsl.check.fast"
+			name="NestDsl Problem"
 			point="org.eclipse.core.resources.markers">
 		<super type="org.eclipse.xtext.ui.check.fast"/>
 		<persistent value="true"/>
 	</extension>
 	<extension
-			id="domainmodel.check.normal"
-			name="Domainmodel Problem"
+			id="nestdsl.check.normal"
+			name="NestDsl Problem"
 			point="org.eclipse.core.resources.markers">
 		<super type="org.eclipse.xtext.ui.check.normal"/>
 		<persistent value="true"/>
 	</extension>
 	<extension
-			id="domainmodel.check.expensive"
-			name="Domainmodel Problem"
+			id="nestdsl.check.expensive"
+			name="NestDsl Problem"
 			point="org.eclipse.core.resources.markers">
 		<super type="org.eclipse.xtext.ui.check.expensive"/>
 		<persistent value="true"/>
 	</extension>
 	<extension point="org.eclipse.ui.preferencePages">
 		<page
-			category="org.example.domainmodel.Domainmodel"
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
-			id="org.example.domainmodel.Domainmodel.validator.preferencePage"
+			category="prodest.es.gov.br.dsl.NestDsl"
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
+			id="prodest.es.gov.br.dsl.NestDsl.validator.preferencePage"
 			name="Errors/Warnings">
-			<keywordReference id="org.example.domainmodel.ui.keyword_Domainmodel"/>
+			<keywordReference id="prodest.es.gov.br.dsl.ui.keyword_NestDsl"/>
 		</page>
 	</extension>
 	<extension point="org.eclipse.xtext.builder.participant">
 		<participant
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
-			fileExtensions="nst"/>
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
+			fileExtensions="nestg"/>
 	</extension>
 	<extension point="org.eclipse.ui.preferencePages">
 		<page
-			category="org.example.domainmodel.Domainmodel"
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-			id="org.example.domainmodel.Domainmodel.compiler.preferencePage"
+			category="prodest.es.gov.br.dsl.NestDsl"
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+			id="prodest.es.gov.br.dsl.NestDsl.compiler.preferencePage"
 			name="Compiler">
-			<keywordReference id="org.example.domainmodel.ui.keyword_Domainmodel"/>
+			<keywordReference id="prodest.es.gov.br.dsl.ui.keyword_NestDsl"/>
 		</page>
 	</extension>
 	<extension point="org.eclipse.ui.propertyPages">
 		<page
-			category="org.example.domainmodel.Domainmodel"
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-			id="org.example.domainmodel.Domainmodel.compiler.propertyPage"
+			category="prodest.es.gov.br.dsl.NestDsl"
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+			id="prodest.es.gov.br.dsl.NestDsl.compiler.propertyPage"
 			name="Compiler">
-			<keywordReference id="org.example.domainmodel.ui.keyword_Domainmodel"/>
+			<keywordReference id="prodest.es.gov.br.dsl.ui.keyword_NestDsl"/>
 			<enabledWhen>
 				<adapt type="org.eclipse.core.resources.IProject"/>
 			</enabledWhen>
@@ -289,20 +289,20 @@
 		<menuContribution locationURI="popup:#TextEditorContext?after=xtext.ui.openDeclaration">
 			<command
 				commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand"
-				id="org.example.domainmodel.Domainmodel.OpenGeneratedCode"
+				id="prodest.es.gov.br.dsl.NestDsl.OpenGeneratedCode"
 				style="push">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="org.example.domainmodel.Domainmodel.Editor.opened" />
+					<reference definitionId="prodest.es.gov.br.dsl.NestDsl.Editor.opened" />
 				</visibleWhen>
 			</command>
 		</menuContribution>
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 		<handler
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"
 			commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand">
 			<activeWhen>
-				<reference definitionId="org.example.domainmodel.Domainmodel.Editor.opened" />
+				<reference definitionId="prodest.es.gov.br.dsl.NestDsl.Editor.opened" />
 			</activeWhen>
 		</handler>
 	</extension>
@@ -310,11 +310,11 @@
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler 
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
 			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
 			<activeWhen>
 				<reference
-					definitionId="org.example.domainmodel.Domainmodel.Editor.opened">
+					definitionId="prodest.es.gov.br.dsl.NestDsl.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -334,33 +334,33 @@
 				style="push"
 				tooltip="Open Quick Outline">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="org.example.domainmodel.Domainmodel.Editor.opened"/>
+					<reference definitionId="prodest.es.gov.br.dsl.NestDsl.Editor.opened"/>
 				</visibleWhen>
 			</command>
 		</menuContribution>
 	</extension>
-	<!-- quickfix marker resolution generator for org.example.domainmodel.Domainmodel -->
+	<!-- quickfix marker resolution generator for prodest.es.gov.br.dsl.NestDsl -->
 	<extension
 			point="org.eclipse.ui.ide.markerResolution">
 		<markerResolutionGenerator
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-			markerType="nest_dsl.ui.domainmodel.check.fast">
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			markerType="nest_dsl.ui.nestdsl.check.fast">
 			<attribute
 				name="FIXABLE_KEY"
 				value="true">
 			</attribute>
 		</markerResolutionGenerator>
 		<markerResolutionGenerator
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-			markerType="nest_dsl.ui.domainmodel.check.normal">
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			markerType="nest_dsl.ui.nestdsl.check.normal">
 			<attribute
 				name="FIXABLE_KEY"
 				value="true">
 			</attribute>
 		</markerResolutionGenerator>
 		<markerResolutionGenerator
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-			markerType="nest_dsl.ui.domainmodel.check.expensive">
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			markerType="nest_dsl.ui.nestdsl.check.expensive">
 			<attribute
 				name="FIXABLE_KEY"
 				value="true">
@@ -370,11 +370,11 @@
 	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
 			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
 			<activeWhen>
 				<reference
-					definitionId="org.example.domainmodel.Domainmodel.Editor.opened">
+					definitionId="prodest.es.gov.br.dsl.NestDsl.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -386,7 +386,7 @@
 				style="push">
 				<visibleWhen checkEnabled="false">
 					<reference
-						definitionId="org.example.domainmodel.Domainmodel.Editor.opened">
+						definitionId="prodest.es.gov.br.dsl.NestDsl.Editor.opened">
 					</reference>
 				</visibleWhen>
 			</command>
@@ -394,40 +394,40 @@
 	</extension>
 	<extension point="org.eclipse.ui.preferencePages">
 		<page
-			category="org.example.domainmodel.Domainmodel"
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
-			id="org.example.domainmodel.Domainmodel.refactoring"
+			category="prodest.es.gov.br.dsl.NestDsl"
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+			id="prodest.es.gov.br.dsl.NestDsl.refactoring"
 			name="Refactoring">
-			<keywordReference id="org.example.domainmodel.ui.keyword_Domainmodel"/>
+			<keywordReference id="prodest.es.gov.br.dsl.ui.keyword_NestDsl"/>
 		</page>
 	</extension>
 	<extension point="org.eclipse.compare.contentViewers">
-		<viewer id="org.example.domainmodel.Domainmodel.compare.contentViewers"
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-			extensions="nst">
+		<viewer id="prodest.es.gov.br.dsl.NestDsl.compare.contentViewers"
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+			extensions="nestg">
 		</viewer>
 		<contentTypeBinding
-			contentTypeId="org.example.domainmodel.Domainmodel.contenttype"
-			contentViewerId="org.example.domainmodel.Domainmodel.compare.contentViewers" />
+			contentTypeId="prodest.es.gov.br.dsl.NestDsl.contenttype"
+			contentViewerId="prodest.es.gov.br.dsl.NestDsl.compare.contentViewers" />
 	</extension>
 	<extension point="org.eclipse.compare.contentMergeViewers">
-		<viewer id="org.example.domainmodel.Domainmodel.compare.contentMergeViewers"
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-			extensions="nst" label="Domainmodel Compare">
+		<viewer id="prodest.es.gov.br.dsl.NestDsl.compare.contentMergeViewers"
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+			extensions="nestg" label="NestDsl Compare">
 		</viewer>
 		<contentTypeBinding
-			contentTypeId="org.example.domainmodel.Domainmodel.contenttype"
-			contentMergeViewerId="org.example.domainmodel.Domainmodel.compare.contentMergeViewers" />
+			contentTypeId="prodest.es.gov.br.dsl.NestDsl.contenttype"
+			contentMergeViewerId="prodest.es.gov.br.dsl.NestDsl.compare.contentMergeViewers" />
 	</extension>
 	<extension point="org.eclipse.ui.editors.documentProviders">
-		<provider id="org.example.domainmodel.Domainmodel.editors.documentProviders"
-			class="org.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
-			extensions="nst">
+		<provider id="prodest.es.gov.br.dsl.NestDsl.editors.documentProviders"
+			class="prodest.es.gov.br.dsl.ui.NestDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+			extensions="nestg">
 		</provider>
 	</extension>
 	<extension point="org.eclipse.team.core.fileTypes">
 		<fileTypes
-			extension="nst"
+			extension="nestg"
 			type="text">
 		</fileTypes>
 	</extension>

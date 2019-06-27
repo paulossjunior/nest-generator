@@ -3,8 +3,8 @@
 <plugin>
 	<extension point="org.eclipse.emf.ecore.generated_package">
 		<package 
-			uri = "http://www.example.org/domainmodel/Domainmodel"
-			class = "org.example.domainmodel.domainmodel.DomainmodelPackage"
-			genModel = "model/generated/Domainmodel.genmodel" />
+			uri = "http://www.prodest.es.gov.br/dsl/NestDsl"
+			class = "prodest.es.gov.br.dsl.nestdsl.NestdslPackage"
+			genModel = "model/generated/NestDsl.genmodel" />
 	</extension>
 </plugin>

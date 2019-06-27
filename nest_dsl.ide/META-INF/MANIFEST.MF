@@ -11,7 +11,5 @@ Require-Bundle: nest_dsl,
  org.eclipse.xtext.xbase.ide,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: org.example.domainmodel.ide.contentassist.antlr,
- org.example.domainmodel.ide.contentassist.antlr.internal,
- prodest.es.gov.br.dsl.ide.contentassist.antlr,
+Export-Package: prodest.es.gov.br.dsl.ide.contentassist.antlr,
  prodest.es.gov.br.dsl.ide.contentassist.antlr.internal

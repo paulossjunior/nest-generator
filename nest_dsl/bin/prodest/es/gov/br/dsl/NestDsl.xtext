@@ -19,11 +19,10 @@ Type:
 	
 DataType:
     'type' name=ID('[]')?(';')?;
- 
 
 QualifiedName:
    ID;
  
 Property:
     name=ID ':' type=[Type|QualifiedName](array='[]')?(';')?;
-  
+    
