@@ -4,34 +4,25 @@ import com.google.inject.Inject;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.extensions.InjectionExtension;
 import org.eclipse.xtext.testing.util.ParseHelper;
-import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.example.domainmodel.domainmodel.AbstractElement;
-import org.example.domainmodel.domainmodel.Domainmodel;
-import org.example.domainmodel.domainmodel.Entity;
-import org.example.domainmodel.domainmodel.Property;
-import org.example.domainmodel.tests.DomainmodelInjectorProvider;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-@ExtendWith(InjectionExtension.class)
-@InjectWith(DomainmodelInjectorProvider.class)
+@ExtendWith(InjectionExtension.class)/* 
+@InjectWith(/* name is null */) */
 @SuppressWarnings("all")
 public class DomainmodelParsingTest {
   @Inject
-  private ParseHelper<Domainmodel> parseHelper;
+  private /* ParseHelper<Domainmodel> */Object parseHelper;
   
   @Test
   public void parseDomainmodel() {
-    try {
-      final Domainmodel model = this.parseHelper.parse(
-        "entity MyEntity {\r\n                parent: MyEntity\r\n            }");
-      AbstractElement _head = IterableExtensions.<AbstractElement>head(model.getElements());
-      final Entity entity = ((Entity) _head);
-      Assert.assertSame(entity, IterableExtensions.<Property>head(entity.getProperties()).getType());
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nEntity cannot be resolved to a type."
+      + "\nThe field DomainmodelParsingTest.parseHelper refers to the missing type Domainmodel"
+      + "\nelements cannot be resolved"
+      + "\nhead cannot be resolved"
+      + "\nproperties cannot be resolved"
+      + "\nhead cannot be resolved"
+      + "\ntype cannot be resolved");
   }
 }

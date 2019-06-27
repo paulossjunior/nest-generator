@@ -26,5 +26,16 @@ Export-Package: org.example.domainmodel.scoping,
  org.example.domainmodel.validation,
  org.example.domainmodel.generator,
  org.example.domainmodel.domainmodel.util,
- org.example.domainmodel
+ org.example.domainmodel,
+ prodest.es.gov.br.dsl.serializer,
+ prodest.es.gov.br.dsl.scoping,
+ prodest.es.gov.br.dsl.nestdsl.impl,
+ prodest.es.gov.br.dsl.validation,
+ prodest.es.gov.br.dsl,
+ prodest.es.gov.br.dsl.nestdsl.util,
+ prodest.es.gov.br.dsl.parser.antlr.internal,
+ prodest.es.gov.br.dsl.parser.antlr,
+ prodest.es.gov.br.dsl.services,
+ prodest.es.gov.br.dsl.nestdsl,
+ prodest.es.gov.br.dsl.generator
 Import-Package: org.apache.log4j

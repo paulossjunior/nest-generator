@@ -3,11 +3,9 @@
  */
 package org.example.domainmodel.ide;
 
-import org.example.domainmodel.ide.AbstractDomainmodelIdeModule;
-
 /**
  * Use this class to register ide components.
  */
 @SuppressWarnings("all")
-public class DomainmodelIdeModule extends AbstractDomainmodelIdeModule {
+public class DomainmodelIdeModule /* implements AbstractDomainmodelIdeModule  */{
 }

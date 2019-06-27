@@ -21,5 +21,7 @@ Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: nest_dsl.ui.internal,
  org.example.domainmodel.ui.quickfix,
- org.example.domainmodel.ui.contentassist
+ org.example.domainmodel.ui.contentassist,
+ prodest.es.gov.br.dsl.ui.quickfix,
+ prodest.es.gov.br.dsl.ui.contentassist
 Bundle-Activator: nest_dsl.ui.internal.Nest_dslActivator

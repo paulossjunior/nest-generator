@@ -15,4 +15,5 @@ Require-Bundle: nest_dsl.ui,
  org.eclipse.core.runtime,
  org.eclipse.ui.workbench;resolution:=optional
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: org.example.domainmodel.ui.tests;x-internal=true
+Export-Package: org.example.domainmodel.ui.tests;x-internal=true,
+ prodest.es.gov.br.dsl.ui.tests;x-internal=true
