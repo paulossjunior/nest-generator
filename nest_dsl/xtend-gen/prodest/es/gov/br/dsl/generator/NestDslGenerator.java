@@ -15,7 +15,10 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import prodest.es.gov.br.dsl.nestdsl.Entity;
+import prodest.es.gov.br.dsl.nestdsl.MultipleArgumentRelation;
+import prodest.es.gov.br.dsl.nestdsl.OneArgumentRelation;
 import prodest.es.gov.br.dsl.nestdsl.Property;
+import prodest.es.gov.br.dsl.nestdsl.Relation;
 
 @SuppressWarnings("all")
 public class NestDslGenerator extends AbstractGenerator {
@@ -60,12 +63,12 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.newLineIfNotEmpty();
     {
       EList<Property> _properties = e.getProperties();
-      for(final Property f : _properties) {
+      for(final Property p : _properties) {
         _builder.append("    ");
         _builder.newLine();
         _builder.append("    ");
         _builder.append(" ");
-        CharSequence _compile = this.compile(f);
+        CharSequence _compile = this.compile(p);
         _builder.append(_compile, "     ");
         _builder.newLineIfNotEmpty();
       }
@@ -75,23 +78,75 @@ public class NestDslGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence compile(final Property f) {
+  public CharSequence compile(final Property p) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      if ((Objects.equal(f.getName(), "id") || Objects.equal(f.getName(), "ID"))) {
+      if ((Objects.equal(p.getName(), "id") || Objects.equal(p.getName(), "ID"))) {
         _builder.append("@PrimaryGeneratedColumn()");
         _builder.newLine();
       } else {
-        _builder.append("@Column()");
-        _builder.newLine();
+        {
+          Relation _relation = p.getRelation();
+          boolean _tripleNotEquals = (_relation != null);
+          if (_tripleNotEquals) {
+            {
+              OneArgumentRelation _oneArgument = p.getRelation().getOneArgument();
+              boolean _tripleNotEquals_1 = (_oneArgument != null);
+              if (_tripleNotEquals_1) {
+                String oneArgument = p.getRelation().getOneArgument().getArgument();
+                _builder.newLineIfNotEmpty();
+                _builder.append("@");
+                _builder.append(oneArgument);
+                _builder.append("(type => ");
+                String _name = p.getRelation().getOneArgument().getType().getName();
+                _builder.append(_name);
+                _builder.append(")");
+                _builder.newLineIfNotEmpty();
+                {
+                  boolean _equals = Objects.equal(oneArgument, "OneToOne");
+                  if (_equals) {
+                    _builder.append("@JoinColumn()");
+                    _builder.newLine();
+                  } else {
+                    boolean _equals_1 = Objects.equal(oneArgument, "ManyToMany");
+                    if (_equals_1) {
+                      _builder.append("@JoinTable()");
+                      _builder.newLine();
+                    }
+                  }
+                }
+              } else {
+                MultipleArgumentRelation _multipleArgument = p.getRelation().getMultipleArgument();
+                boolean _tripleNotEquals_2 = (_multipleArgument != null);
+                if (_tripleNotEquals_2) {
+                  _builder.newLine();
+                  _builder.append("@");
+                  String _argument = p.getRelation().getMultipleArgument().getArgument();
+                  _builder.append(_argument);
+                  _builder.append("(type => ");
+                  String _name_1 = p.getRelation().getMultipleArgument().getType().getName();
+                  _builder.append(_name_1);
+                  _builder.append(",");
+                  String _secondArgument = p.getRelation().getMultipleArgument().getSecondArgument();
+                  _builder.append(_secondArgument);
+                  _builder.append(")");
+                  _builder.newLineIfNotEmpty();
+                }
+              }
+            }
+          } else {
+            _builder.append("@Column()");
+            _builder.newLine();
+          }
+        }
       }
     }
-    String _name = f.getName();
-    _builder.append(_name);
+    String _name_2 = p.getName();
+    _builder.append(_name_2);
     _builder.append(": ");
-    QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(f.getType());
+    QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(p.getType());
     _builder.append(_fullyQualifiedName);
-    String _array = f.getArray();
+    String _array = p.getArray();
     _builder.append(_array);
     _builder.append(";");
     _builder.newLineIfNotEmpty();

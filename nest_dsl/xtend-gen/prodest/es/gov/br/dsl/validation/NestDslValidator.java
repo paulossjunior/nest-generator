@@ -40,7 +40,7 @@ public class NestDslValidator extends AbstractNestDslValidator {
           String _name_1 = other.getName();
           boolean _equals = Objects.equal(_name, _name_1);
           if (_equals) {
-            this.error("Feature names have to be unique", 
+            this.error("Nome de propriedades devem ser únicos", 
               NestdslPackage.Literals.PROPERTY__NAME);
             return;
           }

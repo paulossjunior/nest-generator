@@ -11,7 +11,7 @@ AbstractElement:
  
 Entity:
     'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'
-        (properties+=Property)*
+        (properties += Property)*
     '}';
     
 Type:
@@ -24,5 +24,23 @@ QualifiedName:
    ID;
  
 Property:
+	relation = (Relation)?
     name=ID ':' type=[Type|QualifiedName](array='[]')?(';')?;
     
+Relation:
+	( oneArgument = OneArgumentRelation | multipleArgument =  MultipleArgumentRelation );
+	
+OneArgumentRelation:
+	argument = ('OneToOne' | 'ManyToMany' ) type=[Entity];
+
+
+MultipleArgumentRelation:
+	argument = ('ManyToOne' | 'OneToMany') type=[Entity]',' secondArgument = SECONDARGUMENT;
+	
+terminal SECONDARGUMENT:
+	('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*'.'('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	
+
+
+
+

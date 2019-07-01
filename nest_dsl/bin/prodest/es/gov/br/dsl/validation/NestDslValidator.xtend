@@ -29,7 +29,7 @@ class NestDslValidator extends AbstractNestDslValidator {
 	    while (superEntity !== null) {
 	        for (other : superEntity.properties) {
 	            if (f.name == other.name) {
-	                error("Feature names have to be unique",
+	                error("Nome de propriedades devem ser únicos",
 	                    NestdslPackage.Literals.PROPERTY__NAME)
 	                return
 	            }
