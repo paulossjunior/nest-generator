@@ -119,6 +119,8 @@ public class NestDslGenerator extends AbstractGenerator {
                 MultipleArgumentRelation _multipleArgument = p.getRelation().getMultipleArgument();
                 boolean _tripleNotEquals_2 = (_multipleArgument != null);
                 if (_tripleNotEquals_2) {
+                  String secondArgument = p.getRelation().getMultipleArgument().getSecondArgument();
+                  _builder.newLineIfNotEmpty();
                   _builder.newLine();
                   _builder.append("@");
                   String _argument = p.getRelation().getMultipleArgument().getArgument();
@@ -126,9 +128,8 @@ public class NestDslGenerator extends AbstractGenerator {
                   _builder.append("(type => ");
                   String _name_1 = p.getRelation().getMultipleArgument().getType().getName();
                   _builder.append(_name_1);
-                  _builder.append(",");
-                  String _secondArgument = p.getRelation().getMultipleArgument().getSecondArgument();
-                  _builder.append(_secondArgument);
+                  _builder.append(", ");
+                  _builder.append(secondArgument);
                   _builder.append(")");
                   _builder.newLineIfNotEmpty();
                 }

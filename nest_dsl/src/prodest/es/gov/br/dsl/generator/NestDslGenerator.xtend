@@ -50,8 +50,9 @@ class NestDslGenerator extends AbstractGenerator {
 						@JoinTable()
 					«ENDIF»
 				«ELSEIF p.relation.multipleArgument !== null»
+					«var secondArgument = p.relation.multipleArgument.secondArgument»
 					
-					@«p.relation.multipleArgument.argument»(type => «p.relation.multipleArgument.type.name»,«p.relation.multipleArgument.secondArgument»)
+					@«p.relation.multipleArgument.argument»(type => «p.relation.multipleArgument.type.name», «secondArgument»)
 				«ENDIF»
 				«ELSE»
 				@Column()

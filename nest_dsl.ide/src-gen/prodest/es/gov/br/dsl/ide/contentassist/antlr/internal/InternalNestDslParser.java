@@ -22,8 +22,9 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalNestDslParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_SECONDARGUMENT", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'OneToOne'", "'ManyToMany'", "'ManyToOne'", "'OneToMany'", "'entity'", "'{'", "'}'", "'extends'", "'type'", "'[]'", "';'", "':'", "','"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_ARGUMENTREGEX", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'OneToOne'", "'ManyToMany'", "'ManyToOne'", "'OneToMany'", "'entity'", "'{'", "'}'", "'extends'", "'type'", "'[]'", "';'", "':'", "','"
     };
+    public static final int RULE_ARGUMENTREGEX=5;
     public static final int RULE_STRING=7;
     public static final int RULE_SL_COMMENT=9;
     public static final int T__19=19;
@@ -40,7 +41,6 @@ public class InternalNestDslParser extends AbstractInternalContentAssistParser {
     public static final int RULE_ANY_OTHER=11;
     public static final int RULE_INT=6;
     public static final int T__22=22;
-    public static final int RULE_SECONDARGUMENT=5;
     public static final int RULE_ML_COMMENT=8;
     public static final int T__23=23;
     public static final int T__24=24;
@@ -3822,21 +3822,21 @@ public class InternalNestDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MultipleArgumentRelation__SecondArgumentAssignment_3"
-    // InternalNestDsl.g:1279:1: rule__MultipleArgumentRelation__SecondArgumentAssignment_3 : ( RULE_SECONDARGUMENT ) ;
+    // InternalNestDsl.g:1279:1: rule__MultipleArgumentRelation__SecondArgumentAssignment_3 : ( RULE_ARGUMENTREGEX ) ;
     public final void rule__MultipleArgumentRelation__SecondArgumentAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalNestDsl.g:1283:1: ( ( RULE_SECONDARGUMENT ) )
-            // InternalNestDsl.g:1284:2: ( RULE_SECONDARGUMENT )
+            // InternalNestDsl.g:1283:1: ( ( RULE_ARGUMENTREGEX ) )
+            // InternalNestDsl.g:1284:2: ( RULE_ARGUMENTREGEX )
             {
-            // InternalNestDsl.g:1284:2: ( RULE_SECONDARGUMENT )
-            // InternalNestDsl.g:1285:3: RULE_SECONDARGUMENT
+            // InternalNestDsl.g:1284:2: ( RULE_ARGUMENTREGEX )
+            // InternalNestDsl.g:1285:3: RULE_ARGUMENTREGEX
             {
-             before(grammarAccess.getMultipleArgumentRelationAccess().getSecondArgumentSECONDARGUMENTTerminalRuleCall_3_0()); 
-            match(input,RULE_SECONDARGUMENT,FOLLOW_2); 
-             after(grammarAccess.getMultipleArgumentRelationAccess().getSecondArgumentSECONDARGUMENTTerminalRuleCall_3_0()); 
+             before(grammarAccess.getMultipleArgumentRelationAccess().getSecondArgumentARGUMENTREGEXTerminalRuleCall_3_0()); 
+            match(input,RULE_ARGUMENTREGEX,FOLLOW_2); 
+             after(grammarAccess.getMultipleArgumentRelationAccess().getSecondArgumentARGUMENTREGEXTerminalRuleCall_3_0()); 
 
             }
 

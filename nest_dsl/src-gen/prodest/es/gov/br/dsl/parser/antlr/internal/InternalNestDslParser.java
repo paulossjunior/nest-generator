@@ -21,8 +21,9 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalNestDslParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_SECONDARGUMENT", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'entity'", "'extends'", "'{'", "'}'", "'type'", "'[]'", "';'", "':'", "'OneToOne'", "'ManyToMany'", "'ManyToOne'", "'OneToMany'", "','"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_ARGUMENTREGEX", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'entity'", "'extends'", "'{'", "'}'", "'type'", "'[]'", "';'", "':'", "'OneToOne'", "'ManyToMany'", "'ManyToOne'", "'OneToMany'", "','"
     };
+    public static final int RULE_ARGUMENTREGEX=5;
     public static final int RULE_STRING=7;
     public static final int RULE_SL_COMMENT=9;
     public static final int T__19=19;
@@ -39,7 +40,6 @@ public class InternalNestDslParser extends AbstractInternalAntlrParser {
     public static final int RULE_ANY_OTHER=11;
     public static final int RULE_INT=6;
     public static final int T__22=22;
-    public static final int RULE_SECONDARGUMENT=5;
     public static final int RULE_ML_COMMENT=8;
     public static final int T__23=23;
     public static final int T__24=24;
@@ -1456,7 +1456,7 @@ public class InternalNestDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleMultipleArgumentRelation"
-    // InternalNestDsl.g:548:1: ruleMultipleArgumentRelation returns [EObject current=null] : ( ( ( (lv_argument_0_1= 'ManyToOne' | lv_argument_0_2= 'OneToMany' ) ) ) ( (otherlv_1= RULE_ID ) ) otherlv_2= ',' ( (lv_secondArgument_3_0= RULE_SECONDARGUMENT ) ) ) ;
+    // InternalNestDsl.g:548:1: ruleMultipleArgumentRelation returns [EObject current=null] : ( ( ( (lv_argument_0_1= 'ManyToOne' | lv_argument_0_2= 'OneToMany' ) ) ) ( (otherlv_1= RULE_ID ) ) otherlv_2= ',' ( (lv_secondArgument_3_0= RULE_ARGUMENTREGEX ) ) ) ;
     public final EObject ruleMultipleArgumentRelation() throws RecognitionException {
         EObject current = null;
 
@@ -1470,11 +1470,11 @@ public class InternalNestDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalNestDsl.g:554:2: ( ( ( ( (lv_argument_0_1= 'ManyToOne' | lv_argument_0_2= 'OneToMany' ) ) ) ( (otherlv_1= RULE_ID ) ) otherlv_2= ',' ( (lv_secondArgument_3_0= RULE_SECONDARGUMENT ) ) ) )
-            // InternalNestDsl.g:555:2: ( ( ( (lv_argument_0_1= 'ManyToOne' | lv_argument_0_2= 'OneToMany' ) ) ) ( (otherlv_1= RULE_ID ) ) otherlv_2= ',' ( (lv_secondArgument_3_0= RULE_SECONDARGUMENT ) ) )
+            // InternalNestDsl.g:554:2: ( ( ( ( (lv_argument_0_1= 'ManyToOne' | lv_argument_0_2= 'OneToMany' ) ) ) ( (otherlv_1= RULE_ID ) ) otherlv_2= ',' ( (lv_secondArgument_3_0= RULE_ARGUMENTREGEX ) ) ) )
+            // InternalNestDsl.g:555:2: ( ( ( (lv_argument_0_1= 'ManyToOne' | lv_argument_0_2= 'OneToMany' ) ) ) ( (otherlv_1= RULE_ID ) ) otherlv_2= ',' ( (lv_secondArgument_3_0= RULE_ARGUMENTREGEX ) ) )
             {
-            // InternalNestDsl.g:555:2: ( ( ( (lv_argument_0_1= 'ManyToOne' | lv_argument_0_2= 'OneToMany' ) ) ) ( (otherlv_1= RULE_ID ) ) otherlv_2= ',' ( (lv_secondArgument_3_0= RULE_SECONDARGUMENT ) ) )
-            // InternalNestDsl.g:556:3: ( ( (lv_argument_0_1= 'ManyToOne' | lv_argument_0_2= 'OneToMany' ) ) ) ( (otherlv_1= RULE_ID ) ) otherlv_2= ',' ( (lv_secondArgument_3_0= RULE_SECONDARGUMENT ) )
+            // InternalNestDsl.g:555:2: ( ( ( (lv_argument_0_1= 'ManyToOne' | lv_argument_0_2= 'OneToMany' ) ) ) ( (otherlv_1= RULE_ID ) ) otherlv_2= ',' ( (lv_secondArgument_3_0= RULE_ARGUMENTREGEX ) ) )
+            // InternalNestDsl.g:556:3: ( ( (lv_argument_0_1= 'ManyToOne' | lv_argument_0_2= 'OneToMany' ) ) ) ( (otherlv_1= RULE_ID ) ) otherlv_2= ',' ( (lv_secondArgument_3_0= RULE_ARGUMENTREGEX ) )
             {
             // InternalNestDsl.g:556:3: ( ( (lv_argument_0_1= 'ManyToOne' | lv_argument_0_2= 'OneToMany' ) ) )
             // InternalNestDsl.g:557:4: ( (lv_argument_0_1= 'ManyToOne' | lv_argument_0_2= 'OneToMany' ) )
@@ -1565,15 +1565,15 @@ public class InternalNestDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_2, grammarAccess.getMultipleArgumentRelationAccess().getCommaKeyword_2());
             		
-            // InternalNestDsl.g:600:3: ( (lv_secondArgument_3_0= RULE_SECONDARGUMENT ) )
-            // InternalNestDsl.g:601:4: (lv_secondArgument_3_0= RULE_SECONDARGUMENT )
+            // InternalNestDsl.g:600:3: ( (lv_secondArgument_3_0= RULE_ARGUMENTREGEX ) )
+            // InternalNestDsl.g:601:4: (lv_secondArgument_3_0= RULE_ARGUMENTREGEX )
             {
-            // InternalNestDsl.g:601:4: (lv_secondArgument_3_0= RULE_SECONDARGUMENT )
-            // InternalNestDsl.g:602:5: lv_secondArgument_3_0= RULE_SECONDARGUMENT
+            // InternalNestDsl.g:601:4: (lv_secondArgument_3_0= RULE_ARGUMENTREGEX )
+            // InternalNestDsl.g:602:5: lv_secondArgument_3_0= RULE_ARGUMENTREGEX
             {
-            lv_secondArgument_3_0=(Token)match(input,RULE_SECONDARGUMENT,FOLLOW_2); 
+            lv_secondArgument_3_0=(Token)match(input,RULE_ARGUMENTREGEX,FOLLOW_2); 
 
-            					newLeafNode(lv_secondArgument_3_0, grammarAccess.getMultipleArgumentRelationAccess().getSecondArgumentSECONDARGUMENTTerminalRuleCall_3_0());
+            					newLeafNode(lv_secondArgument_3_0, grammarAccess.getMultipleArgumentRelationAccess().getSecondArgumentARGUMENTREGEXTerminalRuleCall_3_0());
             				
 
             					if (current==null) {
@@ -1583,7 +1583,7 @@ public class InternalNestDslParser extends AbstractInternalAntlrParser {
             						current,
             						"secondArgument",
             						lv_secondArgument_3_0,
-            						"prodest.es.gov.br.dsl.NestDsl.SECONDARGUMENT");
+            						"prodest.es.gov.br.dsl.NestDsl.ARGUMENTREGEX");
             				
 
             }

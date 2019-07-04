@@ -35,10 +35,11 @@ OneArgumentRelation:
 
 
 MultipleArgumentRelation:
-	argument = ('ManyToOne' | 'OneToMany') type=[Entity]',' secondArgument = SECONDARGUMENT;
+	argument = ('ManyToOne' | 'OneToMany') type=[Entity]',' secondArgument = ARGUMENTREGEX;
 	
-terminal SECONDARGUMENT:
-	('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*'.'('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	
+terminal ARGUMENTREGEX:
+	('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*'.';
 	
 
 
