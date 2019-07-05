@@ -30,10 +30,16 @@ public class NestDslGenerator extends AbstractGenerator {
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     Iterable<Entity> _filter = Iterables.<Entity>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Entity.class);
     for (final Entity e : _filter) {
-      String _string = this._iQualifiedNameProvider.getFullyQualifiedName(e).toString("/");
-      String _plus = (_string + ".entity.ts");
-      fsa.generateFile(_plus, 
-        this.compile(e));
+      {
+        String _string = this._iQualifiedNameProvider.getFullyQualifiedName(e).toString("/");
+        String _plus = (_string + ".entity.ts");
+        fsa.generateFile(_plus, 
+          this.compile(e));
+        String _string_1 = this._iQualifiedNameProvider.getFullyQualifiedName(e).toString("/");
+        String _plus_1 = (_string_1 + ".controller.ts");
+        fsa.generateFile(_plus_1, 
+          this.compileController(e));
+      }
     }
   }
   
@@ -150,6 +156,18 @@ public class NestDslGenerator extends AbstractGenerator {
     String _array = p.getArray();
     _builder.append(_array);
     _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  public CharSequence compileController(final Entity e) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import { Controller, Get, Req } from \'@nestjs/common\';");
+    _builder.newLine();
+    _builder.append("@Controller(\'");
+    String _lowerCase = e.getName().toLowerCase();
+    _builder.append(_lowerCase);
+    _builder.append("\')");
     _builder.newLineIfNotEmpty();
     return _builder;
   }

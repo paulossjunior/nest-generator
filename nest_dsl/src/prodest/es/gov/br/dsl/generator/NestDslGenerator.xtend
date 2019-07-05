@@ -18,21 +18,24 @@ class NestDslGenerator extends AbstractGenerator {
             fsa.generateFile(
                 e.fullyQualifiedName.toString("/") + ".entity.ts",
                 e.compile)
+           fsa.generateFile(
+                e.fullyQualifiedName.toString("/") + ".controller.ts",
+                e.compileController)
         }
     }
  
     def compile(Entity e) 
 	    ''' 
-	    import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
-	        
-	    @Entity()
-	    export class «e.name» «IF e.superType !== null
-	            »extends «e.superType.fullyQualifiedName» «ENDIF»{
-	        «FOR p : e.properties»
-	        
-	         «p.compile»
-	        «ENDFOR»
-	    }
+		    import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+		        
+		    @Entity()
+		    export class «e.name» «IF e.superType !== null
+		            »extends «e.superType.fullyQualifiedName» «ENDIF»{
+		        «FOR p : e.properties»
+		        
+		         «p.compile»
+		        «ENDFOR»
+		    }
 	    '''
  
 	def compile(Property p) 
@@ -60,6 +63,11 @@ class NestDslGenerator extends AbstractGenerator {
 		«ENDIF»
 		«p.name»: «p.type.fullyQualifiedName»«p.array»;
 	    '''
-
+	
+	def compileController(Entity e)
+	'''
+		import { Controller, Get, Req } from '@nestjs/common';
+		@Controller('«e.name.toLowerCase»')
+	'''
   
 }
