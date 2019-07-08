@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="nest_dsl.ide/src-gen"/>
+	<classpathentry kind="src" path="nest_dsl.ide/xtend-gen"/>
+	<classpathentry kind="src" path="nest_dsl.tests/src-gen"/>
+	<classpathentry kind="src" path="nest_dsl.tests/xtend-gen"/>
+	<classpathentry kind="src" path="nest_dsl.ui.tests/src-gen"/>
+	<classpathentry kind="src" path="nest_dsl.ui/src-gen"/>
+	<classpathentry kind="src" path="nest_dsl.ui/xtend-gen"/>
+	<classpathentry kind="src" path="nest_dsl/src-gen"/>
+	<classpathentry kind="src" path="nest_dsl/xtend-gen"/>
+	<classpathentry kind="lib" path="nest_dsl/.antlr-generator-3.2.0-patch.jar"/>
+	<classpathentry kind="output" path="nest_dsl/bin"/>
+</classpath>
