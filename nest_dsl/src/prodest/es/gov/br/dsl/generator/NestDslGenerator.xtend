@@ -21,6 +21,9 @@ class NestDslGenerator extends AbstractGenerator {
            fsa.generateFile(
                 e.fullyQualifiedName.toString("/") + ".controller.ts",
                 e.compileController)
+           fsa.generateFile(
+                e.fullyQualifiedName.toString("/") + ".service.ts",
+                e.compileService)
         }
     }
  
@@ -131,17 +134,52 @@ class NestDslGenerator extends AbstractGenerator {
 				}
 			}
 			@Delete(/:id)
-			public async deleteOne(@Res() res, @Param('id') id){
+			public async deleteOne(@Res() res, @Param('id') id): Promise<void> {
 				try{
 					res
 					 .status(HttpStatus.OK)
-					 .send(await this.service.deleteOne(id));
+					 .send(await this.service.delete(id));
 				}
 				catch(error){
 					res
 					 .status(HttpStatus.BAD_GATEWAY)
 					 .send({error.message, HttpStatus.BAD_GATEWAY})
 				}
+			}
+		}
+	'''
+	def compileService (Entity e)
+	'''
+		import { Injectable, Inject } from '@nestjs/common';
+		import { Repository } from 'typeorm';
+		import { «e.name» } from './«e.name.toLowerCase».entity'
+		
+		@Injectable()
+		export class «e.name»Service {
+			
+			constructor(
+				@Inject('«e.name.toUpperCase»_REPOSITORY')
+				private readonly «e.name.toLowerCase»Repository: Repositopry<«e.name»>
+			){}
+			
+			async findAll(): Promise<«e.name»[]> {
+				return await this.«e.name.toLowerCase»Repository.find();
+			}
+			
+			async findOne(id: number): Promise<«e.name»> {
+				return await this.«e.name.toLowerCase»Repository.find({id: id});
+			}
+			
+			async createOne(«e.name.toLowerCase»: «e.name»): Promise<void> {
+				await this.«e.name.toLowerCase»Repository.find(«e.name.toLowerCase»);
+			}
+			
+			async updateOne( «e.name.toLowerCase»: «e.name»): Promise<void> {
+				await this.«e.name.toLowerCase»Repository.update(«e.name.toLowerCase».id, «e.name.toLowerCase»);
+			}
+			
+			async delete(id: number): Promise<void> {
+				await this.«e.name.toLowerCase»Repository.delete(id)
 			}
 		}
 	'''
