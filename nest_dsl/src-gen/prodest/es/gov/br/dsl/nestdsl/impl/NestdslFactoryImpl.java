@@ -74,6 +74,8 @@ public class NestdslFactoryImpl extends EFactoryImpl implements NestdslFactory
       case NestdslPackage.RELATION: return createRelation();
       case NestdslPackage.ONE_ARGUMENT_RELATION: return createOneArgumentRelation();
       case NestdslPackage.MULTIPLE_ARGUMENT_RELATION: return createMultipleArgumentRelation();
+      case NestdslPackage.METHOD: return createMethod();
+      case NestdslPackage.METHOD_ARG: return createMethodArg();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -185,6 +187,30 @@ public class NestdslFactoryImpl extends EFactoryImpl implements NestdslFactory
   {
     MultipleArgumentRelationImpl multipleArgumentRelation = new MultipleArgumentRelationImpl();
     return multipleArgumentRelation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Method createMethod()
+  {
+    MethodImpl method = new MethodImpl();
+    return method;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public MethodArg createMethodArg()
+  {
+    MethodArgImpl methodArg = new MethodArgImpl();
+    return methodArg;
   }
 
   /**

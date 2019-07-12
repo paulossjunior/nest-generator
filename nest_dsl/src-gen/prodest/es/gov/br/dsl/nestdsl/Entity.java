@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.Entity#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.Entity#getProperties <em>Properties</em>}</li>
+ *   <li>{@link prodest.es.gov.br.dsl.nestdsl.Entity#getMethods <em>Methods</em>}</li>
  * </ul>
  *
  * @see prodest.es.gov.br.dsl.nestdsl.NestdslPackage#getEntity()
@@ -57,5 +58,17 @@ public interface Entity extends Type
    * @generated
    */
   EList<Property> getProperties();
+
+  /**
+   * Returns the value of the '<em><b>Methods</b></em>' containment reference list.
+   * The list contents are of type {@link prodest.es.gov.br.dsl.nestdsl.Method}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Methods</em>' containment reference list.
+   * @see prodest.es.gov.br.dsl.nestdsl.NestdslPackage#getEntity_Methods()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Method> getMethods();
 
 } // Entity

@@ -8,6 +8,7 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider
 import com.google.inject.Inject
 import prodest.es.gov.br.dsl.nestdsl.Entity
 import prodest.es.gov.br.dsl.nestdsl.Property
+import prodest.es.gov.br.dsl.nestdsl.MethodArg
 
 class NestDslGenerator extends AbstractGenerator {
  
@@ -16,14 +17,17 @@ class NestDslGenerator extends AbstractGenerator {
     override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
         for (e : resource.allContents.toIterable.filter(Entity)) {
             fsa.generateFile(
-                e.fullyQualifiedName.toString("/") + ".entity.ts",
+                e.fullyQualifiedName.toString("/").toLowerCase + ".entity.ts",
                 e.compile)
            fsa.generateFile(
-                e.fullyQualifiedName.toString("/") + ".controller.ts",
+                e.fullyQualifiedName.toString("/").toLowerCase + ".controller.ts",
                 e.compileController)
            fsa.generateFile(
-                e.fullyQualifiedName.toString("/") + ".service.ts",
+                e.fullyQualifiedName.toString("/").toLowerCase + ".service.ts",
                 e.compileService)
+            fsa.generateFile(
+                e.fullyQualifiedName.toString("/").toLowerCase + ".providers.ts",
+                e.compileProviders)
         }
     }
  
@@ -34,9 +38,9 @@ class NestDslGenerator extends AbstractGenerator {
 	    	@Entity()
 	    	export class «e.name» «IF e.superType !== null
 		            »extends «e.superType.fullyQualifiedName» «ENDIF»{
-		            	
 		        «FOR p : e.properties»
-			        «p.compile»
+	        	
+	        		«p.compile»
 		        «ENDFOR»
 	    	}
 	    '''
@@ -49,21 +53,21 @@ class NestDslGenerator extends AbstractGenerator {
 			«IF p.relation !== null»
 				«IF p.relation.oneArgument !== null»
 					«var oneArgument = p.relation.oneArgument.argument»
-						@«oneArgument»(type => «p.relation.oneArgument.type.name»)
+					@«oneArgument»(type => «p.relation.oneArgument.type.name»)
 					«IF oneArgument == 'OneToOne'»
 						@JoinColumn()
 					«ELSEIF oneArgument == 'ManyToMany'»
-				 		@JoinTable()
+						@JoinTable()
 					«ENDIF»
 				«ELSEIF p.relation.multipleArgument !== null»
 					«var secondArgument = p.relation.multipleArgument.secondArgument»
-						@«p.relation.multipleArgument.argument»(type => «p.relation.multipleArgument.type.name», «secondArgument»)
+					@«p.relation.multipleArgument.argument»(type => «p.relation.multipleArgument.type.name», «secondArgument»)
 				«ENDIF»
 				«ELSE»
-						@Column()
+					@Column()
 			«ENDIF»
 		«ENDIF»
-			«p.name»: «p.type.fullyQualifiedName»«p.array»;
+		«p.name»: «p.type.fullyQualifiedName»«p.array»;
 	    '''
 	
 	def compileController(Entity e)
@@ -159,7 +163,7 @@ class NestDslGenerator extends AbstractGenerator {
 			
 			constructor(
 				@Inject('«e.name.toUpperCase»_REPOSITORY')
-				private readonly «e.name.toLowerCase»Repository: Repositopry<«e.name»>
+				private readonly «e.name.toLowerCase»Repository: Repository<«e.name»>
 			){}
 			
 			async findAll(): Promise<«e.name»[]> {
@@ -181,7 +185,29 @@ class NestDslGenerator extends AbstractGenerator {
 			async delete(id: number): Promise<void> {
 				await this.«e.name.toLowerCase»Repository.delete(id)
 			}
+			«FOR method: e.methods»
+				
+				async «method.name»(«FOR arg: method.args»«arg.compile»«ENDFOR»): Promise<«method.returnType.fullyQualifiedName»«method.array»> {
+					//To do «method.name»
+				}
+			«ENDFOR»
 		}
+	'''
+	def compile(MethodArg arg)
+	'''«arg.name»: «arg.type.fullyQualifiedName»«arg.array»'''
+	
+	def compileProviders (Entity e)
+	'''
+		import { Connection, Repository } from 'typeorm';
+		import { «e.name» } from './«e.name.toLowerCase».entity'
+		
+		export const «e.name.toLowerCase»Providers = [
+			{
+				provide: '«e.name.toUpperCase»_REPOSITORY',
+				useFactory: (connection: Connection) => connection.getRepository(«e.name»),
+				inject: ['DATABASE_CONNECTION'],
+			}
+		];
 	'''
   
 }

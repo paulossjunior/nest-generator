@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import prodest.es.gov.br.dsl.nestdsl.Entity;
+import prodest.es.gov.br.dsl.nestdsl.Method;
 import prodest.es.gov.br.dsl.nestdsl.NestdslPackage;
 import prodest.es.gov.br.dsl.nestdsl.Property;
 
@@ -32,6 +33,7 @@ import prodest.es.gov.br.dsl.nestdsl.Property;
  * <ul>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.impl.EntityImpl#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.impl.EntityImpl#getProperties <em>Properties</em>}</li>
+ *   <li>{@link prodest.es.gov.br.dsl.nestdsl.impl.EntityImpl#getMethods <em>Methods</em>}</li>
  * </ul>
  *
  * @generated
@@ -57,6 +59,16 @@ public class EntityImpl extends TypeImpl implements Entity
    * @ordered
    */
   protected EList<Property> properties;
+
+  /**
+   * The cached value of the '{@link #getMethods() <em>Methods</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getMethods()
+   * @generated
+   * @ordered
+   */
+  protected EList<Method> methods;
 
   /**
    * <!-- begin-user-doc -->
@@ -145,12 +157,29 @@ public class EntityImpl extends TypeImpl implements Entity
    * @generated
    */
   @Override
+  public EList<Method> getMethods()
+  {
+    if (methods == null)
+    {
+      methods = new EObjectContainmentEList<Method>(Method.class, this, NestdslPackage.ENTITY__METHODS);
+    }
+    return methods;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
     {
       case NestdslPackage.ENTITY__PROPERTIES:
         return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
+      case NestdslPackage.ENTITY__METHODS:
+        return ((InternalEList<?>)getMethods()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -170,6 +199,8 @@ public class EntityImpl extends TypeImpl implements Entity
         return basicGetSuperType();
       case NestdslPackage.ENTITY__PROPERTIES:
         return getProperties();
+      case NestdslPackage.ENTITY__METHODS:
+        return getMethods();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -192,6 +223,10 @@ public class EntityImpl extends TypeImpl implements Entity
         getProperties().clear();
         getProperties().addAll((Collection<? extends Property>)newValue);
         return;
+      case NestdslPackage.ENTITY__METHODS:
+        getMethods().clear();
+        getMethods().addAll((Collection<? extends Method>)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -212,6 +247,9 @@ public class EntityImpl extends TypeImpl implements Entity
       case NestdslPackage.ENTITY__PROPERTIES:
         getProperties().clear();
         return;
+      case NestdslPackage.ENTITY__METHODS:
+        getMethods().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -230,6 +268,8 @@ public class EntityImpl extends TypeImpl implements Entity
         return superType != null;
       case NestdslPackage.ENTITY__PROPERTIES:
         return properties != null && !properties.isEmpty();
+      case NestdslPackage.ENTITY__METHODS:
+        return methods != null && !methods.isEmpty();
     }
     return super.eIsSet(featureID);
   }

@@ -170,13 +170,22 @@ public interface NestdslPackage extends EPackage
   int ENTITY__PROPERTIES = TYPE_FEATURE_COUNT + 1;
 
   /**
+   * The feature id for the '<em><b>Methods</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENTITY__METHODS = TYPE_FEATURE_COUNT + 2;
+
+  /**
    * The number of structural features of the '<em>Entity</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENTITY_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
+  int ENTITY_FEATURE_COUNT = TYPE_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.DataTypeImpl <em>Data Type</em>}' class.
@@ -381,6 +390,116 @@ public interface NestdslPackage extends EPackage
    */
   int MULTIPLE_ARGUMENT_RELATION_FEATURE_COUNT = 3;
 
+  /**
+   * The meta object id for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.MethodImpl <em>Method</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see prodest.es.gov.br.dsl.nestdsl.impl.MethodImpl
+   * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getMethod()
+   * @generated
+   */
+  int METHOD = 9;
+
+  /**
+   * The feature id for the '<em><b>Verb</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METHOD__VERB = 0;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METHOD__NAME = 1;
+
+  /**
+   * The feature id for the '<em><b>Args</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METHOD__ARGS = 2;
+
+  /**
+   * The feature id for the '<em><b>Return Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METHOD__RETURN_TYPE = 3;
+
+  /**
+   * The feature id for the '<em><b>Array</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METHOD__ARRAY = 4;
+
+  /**
+   * The number of structural features of the '<em>Method</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METHOD_FEATURE_COUNT = 5;
+
+  /**
+   * The meta object id for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.MethodArgImpl <em>Method Arg</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see prodest.es.gov.br.dsl.nestdsl.impl.MethodArgImpl
+   * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getMethodArg()
+   * @generated
+   */
+  int METHOD_ARG = 10;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METHOD_ARG__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METHOD_ARG__TYPE = 1;
+
+  /**
+   * The feature id for the '<em><b>Array</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METHOD_ARG__ARRAY = 2;
+
+  /**
+   * The number of structural features of the '<em>Method Arg</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METHOD_ARG_FEATURE_COUNT = 3;
+
 
   /**
    * Returns the meta object for class '{@link prodest.es.gov.br.dsl.nestdsl.Domainmodel <em>Domainmodel</em>}'.
@@ -444,6 +563,17 @@ public interface NestdslPackage extends EPackage
    * @generated
    */
   EReference getEntity_Properties();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link prodest.es.gov.br.dsl.nestdsl.Entity#getMethods <em>Methods</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Methods</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.Entity#getMethods()
+   * @see #getEntity()
+   * @generated
+   */
+  EReference getEntity_Methods();
 
   /**
    * Returns the meta object for class '{@link prodest.es.gov.br.dsl.nestdsl.Type <em>Type</em>}'.
@@ -638,6 +768,114 @@ public interface NestdslPackage extends EPackage
   EAttribute getMultipleArgumentRelation_SecondArgument();
 
   /**
+   * Returns the meta object for class '{@link prodest.es.gov.br.dsl.nestdsl.Method <em>Method</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Method</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.Method
+   * @generated
+   */
+  EClass getMethod();
+
+  /**
+   * Returns the meta object for the attribute '{@link prodest.es.gov.br.dsl.nestdsl.Method#getVerb <em>Verb</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Verb</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.Method#getVerb()
+   * @see #getMethod()
+   * @generated
+   */
+  EAttribute getMethod_Verb();
+
+  /**
+   * Returns the meta object for the attribute '{@link prodest.es.gov.br.dsl.nestdsl.Method#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.Method#getName()
+   * @see #getMethod()
+   * @generated
+   */
+  EAttribute getMethod_Name();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link prodest.es.gov.br.dsl.nestdsl.Method#getArgs <em>Args</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Args</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.Method#getArgs()
+   * @see #getMethod()
+   * @generated
+   */
+  EReference getMethod_Args();
+
+  /**
+   * Returns the meta object for the reference '{@link prodest.es.gov.br.dsl.nestdsl.Method#getReturnType <em>Return Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Return Type</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.Method#getReturnType()
+   * @see #getMethod()
+   * @generated
+   */
+  EReference getMethod_ReturnType();
+
+  /**
+   * Returns the meta object for the attribute '{@link prodest.es.gov.br.dsl.nestdsl.Method#getArray <em>Array</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Array</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.Method#getArray()
+   * @see #getMethod()
+   * @generated
+   */
+  EAttribute getMethod_Array();
+
+  /**
+   * Returns the meta object for class '{@link prodest.es.gov.br.dsl.nestdsl.MethodArg <em>Method Arg</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Method Arg</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.MethodArg
+   * @generated
+   */
+  EClass getMethodArg();
+
+  /**
+   * Returns the meta object for the attribute '{@link prodest.es.gov.br.dsl.nestdsl.MethodArg#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.MethodArg#getName()
+   * @see #getMethodArg()
+   * @generated
+   */
+  EAttribute getMethodArg_Name();
+
+  /**
+   * Returns the meta object for the reference '{@link prodest.es.gov.br.dsl.nestdsl.MethodArg#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Type</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.MethodArg#getType()
+   * @see #getMethodArg()
+   * @generated
+   */
+  EReference getMethodArg_Type();
+
+  /**
+   * Returns the meta object for the attribute '{@link prodest.es.gov.br.dsl.nestdsl.MethodArg#getArray <em>Array</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Array</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.MethodArg#getArray()
+   * @see #getMethodArg()
+   * @generated
+   */
+  EAttribute getMethodArg_Array();
+
+  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -713,6 +951,14 @@ public interface NestdslPackage extends EPackage
      * @generated
      */
     EReference ENTITY__PROPERTIES = eINSTANCE.getEntity_Properties();
+
+    /**
+     * The meta object literal for the '<em><b>Methods</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ENTITY__METHODS = eINSTANCE.getEntity_Methods();
 
     /**
      * The meta object literal for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.TypeImpl <em>Type</em>}' class.
@@ -869,6 +1115,90 @@ public interface NestdslPackage extends EPackage
      * @generated
      */
     EAttribute MULTIPLE_ARGUMENT_RELATION__SECOND_ARGUMENT = eINSTANCE.getMultipleArgumentRelation_SecondArgument();
+
+    /**
+     * The meta object literal for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.MethodImpl <em>Method</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see prodest.es.gov.br.dsl.nestdsl.impl.MethodImpl
+     * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getMethod()
+     * @generated
+     */
+    EClass METHOD = eINSTANCE.getMethod();
+
+    /**
+     * The meta object literal for the '<em><b>Verb</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute METHOD__VERB = eINSTANCE.getMethod_Verb();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute METHOD__NAME = eINSTANCE.getMethod_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Args</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference METHOD__ARGS = eINSTANCE.getMethod_Args();
+
+    /**
+     * The meta object literal for the '<em><b>Return Type</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference METHOD__RETURN_TYPE = eINSTANCE.getMethod_ReturnType();
+
+    /**
+     * The meta object literal for the '<em><b>Array</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute METHOD__ARRAY = eINSTANCE.getMethod_Array();
+
+    /**
+     * The meta object literal for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.MethodArgImpl <em>Method Arg</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see prodest.es.gov.br.dsl.nestdsl.impl.MethodArgImpl
+     * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getMethodArg()
+     * @generated
+     */
+    EClass METHOD_ARG = eINSTANCE.getMethodArg();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute METHOD_ARG__NAME = eINSTANCE.getMethodArg_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference METHOD_ARG__TYPE = eINSTANCE.getMethodArg_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Array</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute METHOD_ARG__ARRAY = eINSTANCE.getMethodArg_Array();
 
   }
 

@@ -105,6 +105,24 @@ public interface NestdslFactory extends EFactory
   MultipleArgumentRelation createMultipleArgumentRelation();
 
   /**
+   * Returns a new object of class '<em>Method</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Method</em>'.
+   * @generated
+   */
+  Method createMethod();
+
+  /**
+   * Returns a new object of class '<em>Method Arg</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Method Arg</em>'.
+   * @generated
+   */
+  MethodArg createMethodArg();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -15,6 +15,8 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import prodest.es.gov.br.dsl.nestdsl.Entity;
+import prodest.es.gov.br.dsl.nestdsl.Method;
+import prodest.es.gov.br.dsl.nestdsl.MethodArg;
 import prodest.es.gov.br.dsl.nestdsl.MultipleArgumentRelation;
 import prodest.es.gov.br.dsl.nestdsl.OneArgumentRelation;
 import prodest.es.gov.br.dsl.nestdsl.Property;
@@ -31,18 +33,22 @@ public class NestDslGenerator extends AbstractGenerator {
     Iterable<Entity> _filter = Iterables.<Entity>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Entity.class);
     for (final Entity e : _filter) {
       {
-        String _string = this._iQualifiedNameProvider.getFullyQualifiedName(e).toString("/");
-        String _plus = (_string + ".entity.ts");
+        String _lowerCase = this._iQualifiedNameProvider.getFullyQualifiedName(e).toString("/").toLowerCase();
+        String _plus = (_lowerCase + ".entity.ts");
         fsa.generateFile(_plus, 
           this.compile(e));
-        String _string_1 = this._iQualifiedNameProvider.getFullyQualifiedName(e).toString("/");
-        String _plus_1 = (_string_1 + ".controller.ts");
+        String _lowerCase_1 = this._iQualifiedNameProvider.getFullyQualifiedName(e).toString("/").toLowerCase();
+        String _plus_1 = (_lowerCase_1 + ".controller.ts");
         fsa.generateFile(_plus_1, 
           this.compileController(e));
-        String _string_2 = this._iQualifiedNameProvider.getFullyQualifiedName(e).toString("/");
-        String _plus_2 = (_string_2 + ".service.ts");
+        String _lowerCase_2 = this._iQualifiedNameProvider.getFullyQualifiedName(e).toString("/").toLowerCase();
+        String _plus_2 = (_lowerCase_2 + ".service.ts");
         fsa.generateFile(_plus_2, 
           this.compileService(e));
+        String _lowerCase_3 = this._iQualifiedNameProvider.getFullyQualifiedName(e).toString("/").toLowerCase();
+        String _plus_3 = (_lowerCase_3 + ".providers.ts");
+        fsa.generateFile(_plus_3, 
+          this.compileProviders(e));
       }
     }
   }
@@ -70,13 +76,13 @@ public class NestDslGenerator extends AbstractGenerator {
     }
     _builder.append("{");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t\t            \t");
-    _builder.newLine();
     {
       EList<Property> _properties = e.getProperties();
       for(final Property p : _properties) {
+        _builder.newLine();
+        _builder.append("\t");
         CharSequence _compile = this.compile(p);
-        _builder.append(_compile);
+        _builder.append(_compile, "\t");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -102,12 +108,11 @@ public class NestDslGenerator extends AbstractGenerator {
               if (_tripleNotEquals_1) {
                 String oneArgument = p.getRelation().getOneArgument().getArgument();
                 _builder.newLineIfNotEmpty();
-                _builder.append("\t");
                 _builder.append("@");
-                _builder.append(oneArgument, "\t");
+                _builder.append(oneArgument);
                 _builder.append("(type => ");
                 String _name = p.getRelation().getOneArgument().getType().getName();
-                _builder.append(_name, "\t");
+                _builder.append(_name);
                 _builder.append(")");
                 _builder.newLineIfNotEmpty();
                 {
@@ -129,15 +134,14 @@ public class NestDslGenerator extends AbstractGenerator {
                 if (_tripleNotEquals_2) {
                   String secondArgument = p.getRelation().getMultipleArgument().getSecondArgument();
                   _builder.newLineIfNotEmpty();
-                  _builder.append("\t");
                   _builder.append("@");
                   String _argument = p.getRelation().getMultipleArgument().getArgument();
-                  _builder.append(_argument, "\t");
+                  _builder.append(_argument);
                   _builder.append("(type => ");
                   String _name_1 = p.getRelation().getMultipleArgument().getType().getName();
-                  _builder.append(_name_1, "\t");
+                  _builder.append(_name_1);
                   _builder.append(", ");
-                  _builder.append(secondArgument, "\t");
+                  _builder.append(secondArgument);
                   _builder.append(")");
                   _builder.newLineIfNotEmpty();
                 }
@@ -150,14 +154,13 @@ public class NestDslGenerator extends AbstractGenerator {
         }
       }
     }
-    _builder.append("\t");
     String _name_2 = p.getName();
-    _builder.append(_name_2, "\t");
+    _builder.append(_name_2);
     _builder.append(": ");
     QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(p.getType());
-    _builder.append(_fullyQualifiedName, "\t");
+    _builder.append(_fullyQualifiedName);
     String _array = p.getArray();
-    _builder.append(_array, "\t");
+    _builder.append(_array);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     return _builder;
@@ -472,7 +475,7 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.append("private readonly ");
     String _lowerCase_1 = e.getName().toLowerCase();
     _builder.append(_lowerCase_1, "\t\t");
-    _builder.append("Repository: Repositopry<");
+    _builder.append("Repository: Repository<");
     String _name_2 = e.getName();
     _builder.append(_name_2, "\t\t");
     _builder.append(">");
@@ -577,7 +580,98 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
+    {
+      EList<Method> _methods = e.getMethods();
+      for(final Method method : _methods) {
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("async ");
+        String _name_7 = method.getName();
+        _builder.append(_name_7, "\t");
+        _builder.append("(");
+        {
+          EList<MethodArg> _args = method.getArgs();
+          for(final MethodArg arg : _args) {
+            CharSequence _compile = this.compile(arg);
+            _builder.append(_compile, "\t");
+          }
+        }
+        _builder.append("): Promise<");
+        QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(method.getReturnType());
+        _builder.append(_fullyQualifiedName, "\t");
+        String _array = method.getArray();
+        _builder.append(_array, "\t");
+        _builder.append("> {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.append("//To do ");
+        String _name_8 = method.getName();
+        _builder.append(_name_8, "\t\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
     _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence compile(final MethodArg arg) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _name = arg.getName();
+    _builder.append(_name);
+    _builder.append(": ");
+    QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(arg.getType());
+    _builder.append(_fullyQualifiedName);
+    String _array = arg.getArray();
+    _builder.append(_array);
+    return _builder;
+  }
+  
+  public CharSequence compileProviders(final Entity e) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import { Connection, Repository } from \'typeorm\';");
+    _builder.newLine();
+    _builder.append("import { ");
+    String _name = e.getName();
+    _builder.append(_name);
+    _builder.append(" } from \'./");
+    String _lowerCase = e.getName().toLowerCase();
+    _builder.append(_lowerCase);
+    _builder.append(".entity\'");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("export const ");
+    String _lowerCase_1 = e.getName().toLowerCase();
+    _builder.append(_lowerCase_1);
+    _builder.append("Providers = [");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("provide: \'");
+    String _upperCase = e.getName().toUpperCase();
+    _builder.append(_upperCase, "\t\t");
+    _builder.append("_REPOSITORY\',");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("useFactory: (connection: Connection) => connection.getRepository(");
+    String _name_1 = e.getName();
+    _builder.append(_name_1, "\t\t");
+    _builder.append("),");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("inject: [\'DATABASE_CONNECTION\'],");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("];");
     _builder.newLine();
     return _builder;
   }

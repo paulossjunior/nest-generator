@@ -63,13 +63,15 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cPropertiesAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cPropertiesPropertyParserRuleCall_4_0 = (RuleCall)cPropertiesAssignment_4.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cMethodsAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cMethodsMethodParserRuleCall_5_0 = (RuleCall)cMethodsAssignment_5.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//Entity:
-		//	'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{' properties+=Property* '}';
+		//	'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{' properties+=Property* methods+=Method* '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{' properties+=Property* '}'
+		//'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{' properties+=Property* methods+=Method* '}'
 		public Group getGroup() { return cGroup; }
 		
 		//'entity'
@@ -105,8 +107,14 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 		//Property
 		public RuleCall getPropertiesPropertyParserRuleCall_4_0() { return cPropertiesPropertyParserRuleCall_4_0; }
 		
+		//methods+=Method*
+		public Assignment getMethodsAssignment_5() { return cMethodsAssignment_5; }
+		
+		//Method
+		public RuleCall getMethodsMethodParserRuleCall_5_0() { return cMethodsMethodParserRuleCall_5_0; }
+		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
+		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
 	public class TypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "prodest.es.gov.br.dsl.NestDsl.Type");
@@ -341,6 +349,142 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 		//ARGUMENTREGEX
 		public RuleCall getSecondArgumentARGUMENTREGEXTerminalRuleCall_3_0() { return cSecondArgumentARGUMENTREGEXTerminalRuleCall_3_0; }
 	}
+	public class MethodElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "prodest.es.gov.br.dsl.NestDsl.Method");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cVerbAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Alternatives cVerbAlternatives_0_0 = (Alternatives)cVerbAssignment_0.eContents().get(0);
+		private final Keyword cVerbGetKeyword_0_0_0 = (Keyword)cVerbAlternatives_0_0.eContents().get(0);
+		private final Keyword cVerbPostKeyword_0_0_1 = (Keyword)cVerbAlternatives_0_0.eContents().get(1);
+		private final Keyword cVerbDeleteKeyword_0_0_2 = (Keyword)cVerbAlternatives_0_0.eContents().get(2);
+		private final Keyword cVerbPutKeyword_0_0_3 = (Keyword)cVerbAlternatives_0_0.eContents().get(3);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Assignment cArgsAssignment_3_0 = (Assignment)cGroup_3.eContents().get(0);
+		private final RuleCall cArgsMethodArgParserRuleCall_3_0_0 = (RuleCall)cArgsAssignment_3_0.eContents().get(0);
+		private final Keyword cCommaKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
+		private final Keyword cRightParenthesisColonKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cReturnTypeAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final CrossReference cReturnTypeTypeCrossReference_5_0 = (CrossReference)cReturnTypeAssignment_5.eContents().get(0);
+		private final RuleCall cReturnTypeTypeQualifiedNameParserRuleCall_5_0_1 = (RuleCall)cReturnTypeTypeCrossReference_5_0.eContents().get(1);
+		private final Assignment cArrayAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final Keyword cArrayLeftSquareBracketRightSquareBracketKeyword_6_0 = (Keyword)cArrayAssignment_6.eContents().get(0);
+		private final Keyword cSemicolonKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		
+		//Method:
+		//	verb=('Get' | 'Post' | 'Delete' | 'Put') name=ID '(' (args+=MethodArg ','?)* '):' returnType=[Type|QualifiedName]
+		//	array='[]'? ';'?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//verb=('Get' | 'Post' | 'Delete' | 'Put') name=ID '(' (args+=MethodArg ','?)* '):' returnType=[Type|QualifiedName]
+		//array='[]'? ';'?
+		public Group getGroup() { return cGroup; }
+		
+		//verb=('Get' | 'Post' | 'Delete' | 'Put')
+		public Assignment getVerbAssignment_0() { return cVerbAssignment_0; }
+		
+		//('Get' | 'Post' | 'Delete' | 'Put')
+		public Alternatives getVerbAlternatives_0_0() { return cVerbAlternatives_0_0; }
+		
+		//'Get'
+		public Keyword getVerbGetKeyword_0_0_0() { return cVerbGetKeyword_0_0_0; }
+		
+		//'Post'
+		public Keyword getVerbPostKeyword_0_0_1() { return cVerbPostKeyword_0_0_1; }
+		
+		//'Delete'
+		public Keyword getVerbDeleteKeyword_0_0_2() { return cVerbDeleteKeyword_0_0_2; }
+		
+		//'Put'
+		public Keyword getVerbPutKeyword_0_0_3() { return cVerbPutKeyword_0_0_3; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//'('
+		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
+		
+		//(args+=MethodArg ','?)*
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//args+=MethodArg
+		public Assignment getArgsAssignment_3_0() { return cArgsAssignment_3_0; }
+		
+		//MethodArg
+		public RuleCall getArgsMethodArgParserRuleCall_3_0_0() { return cArgsMethodArgParserRuleCall_3_0_0; }
+		
+		//','?
+		public Keyword getCommaKeyword_3_1() { return cCommaKeyword_3_1; }
+		
+		//'):'
+		public Keyword getRightParenthesisColonKeyword_4() { return cRightParenthesisColonKeyword_4; }
+		
+		//returnType=[Type|QualifiedName]
+		public Assignment getReturnTypeAssignment_5() { return cReturnTypeAssignment_5; }
+		
+		//[Type|QualifiedName]
+		public CrossReference getReturnTypeTypeCrossReference_5_0() { return cReturnTypeTypeCrossReference_5_0; }
+		
+		//QualifiedName
+		public RuleCall getReturnTypeTypeQualifiedNameParserRuleCall_5_0_1() { return cReturnTypeTypeQualifiedNameParserRuleCall_5_0_1; }
+		
+		//array='[]'?
+		public Assignment getArrayAssignment_6() { return cArrayAssignment_6; }
+		
+		//'[]'
+		public Keyword getArrayLeftSquareBracketRightSquareBracketKeyword_6_0() { return cArrayLeftSquareBracketRightSquareBracketKeyword_6_0; }
+		
+		//';'?
+		public Keyword getSemicolonKeyword_7() { return cSemicolonKeyword_7; }
+	}
+	public class MethodArgElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "prodest.es.gov.br.dsl.NestDsl.MethodArg");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cTypeTypeCrossReference_2_0 = (CrossReference)cTypeAssignment_2.eContents().get(0);
+		private final RuleCall cTypeTypeQualifiedNameParserRuleCall_2_0_1 = (RuleCall)cTypeTypeCrossReference_2_0.eContents().get(1);
+		private final Assignment cArrayAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final Keyword cArrayLeftSquareBracketRightSquareBracketKeyword_3_0 = (Keyword)cArrayAssignment_3.eContents().get(0);
+		
+		//MethodArg:
+		//	name=ID ':' type=[Type|QualifiedName] array='[]'?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//name=ID ':' type=[Type|QualifiedName] array='[]'?
+		public Group getGroup() { return cGroup; }
+		
+		//name=ID
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
+		
+		//':'
+		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
+		
+		//type=[Type|QualifiedName]
+		public Assignment getTypeAssignment_2() { return cTypeAssignment_2; }
+		
+		//[Type|QualifiedName]
+		public CrossReference getTypeTypeCrossReference_2_0() { return cTypeTypeCrossReference_2_0; }
+		
+		//QualifiedName
+		public RuleCall getTypeTypeQualifiedNameParserRuleCall_2_0_1() { return cTypeTypeQualifiedNameParserRuleCall_2_0_1; }
+		
+		//array='[]'?
+		public Assignment getArrayAssignment_3() { return cArrayAssignment_3; }
+		
+		//'[]'
+		public Keyword getArrayLeftSquareBracketRightSquareBracketKeyword_3_0() { return cArrayLeftSquareBracketRightSquareBracketKeyword_3_0; }
+	}
 	
 	
 	private final DomainmodelElements pDomainmodel;
@@ -354,6 +498,8 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 	private final OneArgumentRelationElements pOneArgumentRelation;
 	private final MultipleArgumentRelationElements pMultipleArgumentRelation;
 	private final TerminalRule tARGUMENTREGEX;
+	private final MethodElements pMethod;
+	private final MethodArgElements pMethodArg;
 	
 	private final Grammar grammar;
 	
@@ -375,6 +521,8 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 		this.pOneArgumentRelation = new OneArgumentRelationElements();
 		this.pMultipleArgumentRelation = new MultipleArgumentRelationElements();
 		this.tARGUMENTREGEX = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "prodest.es.gov.br.dsl.NestDsl.ARGUMENTREGEX");
+		this.pMethod = new MethodElements();
+		this.pMethodArg = new MethodArgElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -425,7 +573,7 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Entity:
-	//	'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{' properties+=Property* '}';
+	//	'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{' properties+=Property* methods+=Method* '}';
 	public EntityElements getEntityAccess() {
 		return pEntity;
 	}
@@ -509,6 +657,27 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 	//	'A'..'Z' | '_' | '0'..'9')* '.' ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getARGUMENTREGEXRule() {
 		return tARGUMENTREGEX;
+	}
+	
+	//Method:
+	//	verb=('Get' | 'Post' | 'Delete' | 'Put') name=ID '(' (args+=MethodArg ','?)* '):' returnType=[Type|QualifiedName]
+	//	array='[]'? ';'?;
+	public MethodElements getMethodAccess() {
+		return pMethod;
+	}
+	
+	public ParserRule getMethodRule() {
+		return getMethodAccess().getRule();
+	}
+	
+	//MethodArg:
+	//	name=ID ':' type=[Type|QualifiedName] array='[]'?;
+	public MethodArgElements getMethodArgAccess() {
+		return pMethodArg;
+	}
+	
+	public ParserRule getMethodArgRule() {
+		return getMethodArgAccess().getRule();
 	}
 	
 	//terminal ID:

@@ -4,44 +4,61 @@ grammar prodest.es.gov.br.dsl.NestDsl with
 generate nestdsl "http://www.prodest.es.gov.br/dsl/NestDsl"
  
 Domainmodel:
-    (elements+=AbstractElement)*;
+    (elements+=AbstractElement)*
+    ;
     
 AbstractElement:
-    Type;
+    Type
+    ;
  
 Entity:
     'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'
         (properties += Property)*
-    '}';
+        (methods += Method)*
+    '}'
+    ;
     
 Type:
-	DataType | Entity;
+	DataType | Entity
+	;
 	
 DataType:
-    'type' name=ID('[]')?(';')?;
+    'type' name=ID('[]')?(';')?
+    ;
 
 QualifiedName:
-   ID;
+   ID
+   ;
  
 Property:
 	relation = (Relation)?
-    name=ID ':' type=[Type|QualifiedName](array='[]')?(';')?;
+    name=ID ':' type=[Type|QualifiedName](array='[]')?(';')?
+    ;
     
 Relation:
-	( oneArgument = OneArgumentRelation | multipleArgument =  MultipleArgumentRelation );
+	( oneArgument = OneArgumentRelation | multipleArgument =  MultipleArgumentRelation )
+	;
 	
 OneArgumentRelation:
-	argument = ('OneToOne' | 'ManyToMany' ) type=[Entity];
+	argument = ('OneToOne' | 'ManyToMany' ) type=[Entity]
+	;
 
 
 MultipleArgumentRelation:
-	argument = ('ManyToOne' | 'OneToMany') type=[Entity]',' secondArgument = ARGUMENTREGEX;
+	argument = ('ManyToOne' | 'OneToMany') type=[Entity]',' secondArgument = ARGUMENTREGEX
+	;
 	
 	
 terminal ARGUMENTREGEX:
-	('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*'=>'('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*'.'('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*'=>'('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*'.'('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*
+	;
+
+Method:
+	verb=( 'Get' | 'Post' | 'Delete' | 'Put' ) name=ID '(' (args+= MethodArg(',')?)* '):' returnType=[Type|QualifiedName](array='[]')?(';')?
+	;
 	
-
-
+MethodArg:
+	name=ID ':' type=[Type|QualifiedName](array='[]')?
+;
 
 

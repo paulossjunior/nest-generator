@@ -17,6 +17,8 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransi
 import prodest.es.gov.br.dsl.nestdsl.DataType;
 import prodest.es.gov.br.dsl.nestdsl.Domainmodel;
 import prodest.es.gov.br.dsl.nestdsl.Entity;
+import prodest.es.gov.br.dsl.nestdsl.Method;
+import prodest.es.gov.br.dsl.nestdsl.MethodArg;
 import prodest.es.gov.br.dsl.nestdsl.MultipleArgumentRelation;
 import prodest.es.gov.br.dsl.nestdsl.NestdslPackage;
 import prodest.es.gov.br.dsl.nestdsl.OneArgumentRelation;
@@ -46,6 +48,12 @@ public class NestDslSemanticSequencer extends AbstractDelegatingSemanticSequence
 				return; 
 			case NestdslPackage.ENTITY:
 				sequence_Entity(context, (Entity) semanticObject); 
+				return; 
+			case NestdslPackage.METHOD:
+				sequence_Method(context, (Method) semanticObject); 
+				return; 
+			case NestdslPackage.METHOD_ARG:
+				sequence_MethodArg(context, (MethodArg) semanticObject); 
 				return; 
 			case NestdslPackage.MULTIPLE_ARGUMENT_RELATION:
 				sequence_MultipleArgumentRelation(context, (MultipleArgumentRelation) semanticObject); 
@@ -103,9 +111,33 @@ public class NestDslSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     Type returns Entity
 	 *
 	 * Constraint:
-	 *     (name=ID superType=[Entity|QualifiedName]? properties+=Property*)
+	 *     (name=ID superType=[Entity|QualifiedName]? properties+=Property* methods+=Method*)
 	 */
 	protected void sequence_Entity(ISerializationContext context, Entity semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     MethodArg returns MethodArg
+	 *
+	 * Constraint:
+	 *     (name=ID type=[Type|QualifiedName] array='[]'?)
+	 */
+	protected void sequence_MethodArg(ISerializationContext context, MethodArg semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Method returns Method
+	 *
+	 * Constraint:
+	 *     ((verb='Get' | verb='Post' | verb='Delete' | verb='Put') name=ID args+=MethodArg* returnType=[Type|QualifiedName] array='[]'?)
+	 */
+	protected void sequence_Method(ISerializationContext context, Method semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

@@ -121,6 +121,16 @@ public class NestdslAdapterFactory extends AdapterFactoryImpl
         return createMultipleArgumentRelationAdapter();
       }
       @Override
+      public Adapter caseMethod(Method object)
+      {
+        return createMethodAdapter();
+      }
+      @Override
+      public Adapter caseMethodArg(MethodArg object)
+      {
+        return createMethodArgAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -273,6 +283,36 @@ public class NestdslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createMultipleArgumentRelationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link prodest.es.gov.br.dsl.nestdsl.Method <em>Method</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see prodest.es.gov.br.dsl.nestdsl.Method
+   * @generated
+   */
+  public Adapter createMethodAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link prodest.es.gov.br.dsl.nestdsl.MethodArg <em>Method Arg</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see prodest.es.gov.br.dsl.nestdsl.MethodArg
+   * @generated
+   */
+  public Adapter createMethodArgAdapter()
   {
     return null;
   }

@@ -204,9 +204,28 @@ ruleEntity returns [EObject current=null]
 				}
 			)
 		)*
-		otherlv_6='}'
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getEntityAccess().getMethodsMethodParserRuleCall_5_0());
+				}
+				lv_methods_6_0=ruleMethod
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEntityRule());
+					}
+					add(
+						$current,
+						"methods",
+						lv_methods_6_0,
+						"prodest.es.gov.br.dsl.NestDsl.Method");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		otherlv_7='}'
 		{
-			newLeafNode(otherlv_6, grammarAccess.getEntityAccess().getRightCurlyBracketKeyword_5());
+			newLeafNode(otherlv_7, grammarAccess.getEntityAccess().getRightCurlyBracketKeyword_6());
 		}
 	)
 ;
@@ -615,6 +634,234 @@ ruleMultipleArgumentRelation returns [EObject current=null]
 				}
 			)
 		)
+	)
+;
+
+// Entry rule entryRuleMethod
+entryRuleMethod returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getMethodRule()); }
+	iv_ruleMethod=ruleMethod
+	{ $current=$iv_ruleMethod.current; }
+	EOF;
+
+// Rule Method
+ruleMethod returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				(
+					lv_verb_0_1='Get'
+					{
+						newLeafNode(lv_verb_0_1, grammarAccess.getMethodAccess().getVerbGetKeyword_0_0_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getMethodRule());
+						}
+						setWithLastConsumed($current, "verb", lv_verb_0_1, null);
+					}
+					    |
+					lv_verb_0_2='Post'
+					{
+						newLeafNode(lv_verb_0_2, grammarAccess.getMethodAccess().getVerbPostKeyword_0_0_1());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getMethodRule());
+						}
+						setWithLastConsumed($current, "verb", lv_verb_0_2, null);
+					}
+					    |
+					lv_verb_0_3='Delete'
+					{
+						newLeafNode(lv_verb_0_3, grammarAccess.getMethodAccess().getVerbDeleteKeyword_0_0_2());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getMethodRule());
+						}
+						setWithLastConsumed($current, "verb", lv_verb_0_3, null);
+					}
+					    |
+					lv_verb_0_4='Put'
+					{
+						newLeafNode(lv_verb_0_4, grammarAccess.getMethodAccess().getVerbPutKeyword_0_0_3());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getMethodRule());
+						}
+						setWithLastConsumed($current, "verb", lv_verb_0_4, null);
+					}
+				)
+			)
+		)
+		(
+			(
+				lv_name_1_0=RULE_ID
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getMethodAccess().getNameIDTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getMethodRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+		otherlv_2='('
+		{
+			newLeafNode(otherlv_2, grammarAccess.getMethodAccess().getLeftParenthesisKeyword_2());
+		}
+		(
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getMethodAccess().getArgsMethodArgParserRuleCall_3_0_0());
+					}
+					lv_args_3_0=ruleMethodArg
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getMethodRule());
+						}
+						add(
+							$current,
+							"args",
+							lv_args_3_0,
+							"prodest.es.gov.br.dsl.NestDsl.MethodArg");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			(
+				otherlv_4=','
+				{
+					newLeafNode(otherlv_4, grammarAccess.getMethodAccess().getCommaKeyword_3_1());
+				}
+			)?
+		)*
+		otherlv_5='):'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getMethodAccess().getRightParenthesisColonKeyword_4());
+		}
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getMethodRule());
+					}
+				}
+				{
+					newCompositeNode(grammarAccess.getMethodAccess().getReturnTypeTypeCrossReference_5_0());
+				}
+				ruleQualifiedName
+				{
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			(
+				lv_array_7_0='[]'
+				{
+					newLeafNode(lv_array_7_0, grammarAccess.getMethodAccess().getArrayLeftSquareBracketRightSquareBracketKeyword_6_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getMethodRule());
+					}
+					setWithLastConsumed($current, "array", lv_array_7_0, "[]");
+				}
+			)
+		)?
+		(
+			otherlv_8=';'
+			{
+				newLeafNode(otherlv_8, grammarAccess.getMethodAccess().getSemicolonKeyword_7());
+			}
+		)?
+	)
+;
+
+// Entry rule entryRuleMethodArg
+entryRuleMethodArg returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getMethodArgRule()); }
+	iv_ruleMethodArg=ruleMethodArg
+	{ $current=$iv_ruleMethodArg.current; }
+	EOF;
+
+// Rule MethodArg
+ruleMethodArg returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				lv_name_0_0=RULE_ID
+				{
+					newLeafNode(lv_name_0_0, grammarAccess.getMethodArgAccess().getNameIDTerminalRuleCall_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getMethodArgRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_0_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+		otherlv_1=':'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getMethodArgAccess().getColonKeyword_1());
+		}
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getMethodArgRule());
+					}
+				}
+				{
+					newCompositeNode(grammarAccess.getMethodArgAccess().getTypeTypeCrossReference_2_0());
+				}
+				ruleQualifiedName
+				{
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			(
+				lv_array_3_0='[]'
+				{
+					newLeafNode(lv_array_3_0, grammarAccess.getMethodArgAccess().getArrayLeftSquareBracketRightSquareBracketKeyword_3_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getMethodArgRule());
+					}
+					setWithLastConsumed($current, "array", lv_array_3_0, "[]");
+				}
+			)
+		)?
 	)
 ;
 

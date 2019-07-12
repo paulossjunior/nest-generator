@@ -14,6 +14,8 @@ import prodest.es.gov.br.dsl.nestdsl.AbstractElement;
 import prodest.es.gov.br.dsl.nestdsl.DataType;
 import prodest.es.gov.br.dsl.nestdsl.Domainmodel;
 import prodest.es.gov.br.dsl.nestdsl.Entity;
+import prodest.es.gov.br.dsl.nestdsl.Method;
+import prodest.es.gov.br.dsl.nestdsl.MethodArg;
 import prodest.es.gov.br.dsl.nestdsl.MultipleArgumentRelation;
 import prodest.es.gov.br.dsl.nestdsl.NestdslFactory;
 import prodest.es.gov.br.dsl.nestdsl.NestdslPackage;
@@ -92,6 +94,20 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
    * @generated
    */
   private EClass multipleArgumentRelationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass methodEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass methodArgEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -220,6 +236,17 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
   public EReference getEntity_Properties()
   {
     return (EReference)entityEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEntity_Methods()
+  {
+    return (EReference)entityEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -426,6 +453,116 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
    * @generated
    */
   @Override
+  public EClass getMethod()
+  {
+    return methodEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getMethod_Verb()
+  {
+    return (EAttribute)methodEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getMethod_Name()
+  {
+    return (EAttribute)methodEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getMethod_Args()
+  {
+    return (EReference)methodEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getMethod_ReturnType()
+  {
+    return (EReference)methodEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getMethod_Array()
+  {
+    return (EAttribute)methodEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getMethodArg()
+  {
+    return methodArgEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getMethodArg_Name()
+  {
+    return (EAttribute)methodArgEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getMethodArg_Type()
+  {
+    return (EReference)methodArgEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getMethodArg_Array()
+  {
+    return (EAttribute)methodArgEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NestdslFactory getNestdslFactory()
   {
     return (NestdslFactory)getEFactoryInstance();
@@ -459,6 +596,7 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
     entityEClass = createEClass(ENTITY);
     createEReference(entityEClass, ENTITY__SUPER_TYPE);
     createEReference(entityEClass, ENTITY__PROPERTIES);
+    createEReference(entityEClass, ENTITY__METHODS);
 
     typeEClass = createEClass(TYPE);
     createEAttribute(typeEClass, TYPE__NAME);
@@ -483,6 +621,18 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
     createEAttribute(multipleArgumentRelationEClass, MULTIPLE_ARGUMENT_RELATION__ARGUMENT);
     createEReference(multipleArgumentRelationEClass, MULTIPLE_ARGUMENT_RELATION__TYPE);
     createEAttribute(multipleArgumentRelationEClass, MULTIPLE_ARGUMENT_RELATION__SECOND_ARGUMENT);
+
+    methodEClass = createEClass(METHOD);
+    createEAttribute(methodEClass, METHOD__VERB);
+    createEAttribute(methodEClass, METHOD__NAME);
+    createEReference(methodEClass, METHOD__ARGS);
+    createEReference(methodEClass, METHOD__RETURN_TYPE);
+    createEAttribute(methodEClass, METHOD__ARRAY);
+
+    methodArgEClass = createEClass(METHOD_ARG);
+    createEAttribute(methodArgEClass, METHOD_ARG__NAME);
+    createEReference(methodArgEClass, METHOD_ARG__TYPE);
+    createEAttribute(methodArgEClass, METHOD_ARG__ARRAY);
   }
 
   /**
@@ -527,6 +677,7 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
     initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEntity_SuperType(), this.getEntity(), null, "superType", null, 0, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEntity_Properties(), this.getProperty(), null, "properties", null, 0, -1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEntity_Methods(), this.getMethod(), null, "methods", null, 0, -1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getType_Name(), ecorePackage.getEString(), "name", null, 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -551,6 +702,18 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
     initEAttribute(getMultipleArgumentRelation_Argument(), ecorePackage.getEString(), "argument", null, 0, 1, MultipleArgumentRelation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMultipleArgumentRelation_Type(), this.getEntity(), null, "type", null, 0, 1, MultipleArgumentRelation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getMultipleArgumentRelation_SecondArgument(), ecorePackage.getEString(), "secondArgument", null, 0, 1, MultipleArgumentRelation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(methodEClass, Method.class, "Method", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getMethod_Verb(), ecorePackage.getEString(), "verb", null, 0, 1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMethod_Name(), ecorePackage.getEString(), "name", null, 0, 1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMethod_Args(), this.getMethodArg(), null, "args", null, 0, -1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMethod_ReturnType(), this.getType(), null, "returnType", null, 0, 1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMethod_Array(), ecorePackage.getEString(), "array", null, 0, 1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(methodArgEClass, MethodArg.class, "MethodArg", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getMethodArg_Name(), ecorePackage.getEString(), "name", null, 0, 1, MethodArg.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMethodArg_Type(), this.getType(), null, "type", null, 0, 1, MethodArg.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMethodArg_Array(), ecorePackage.getEString(), "array", null, 0, 1, MethodArg.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);
