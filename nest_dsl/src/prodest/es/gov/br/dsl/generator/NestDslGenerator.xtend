@@ -91,11 +91,11 @@ class NestDslGenerator extends AbstractGenerator {
 				catch(error){
 					res
 					 .status(HttpStatus.BAD_GATEWAY)
-					 .send({error.message, HttpStatus.BAD_GATEWAY})
+					 .send({error.message, HttpStatus.BAD_GATEWAY});
 				}
 			}
 			
-			@Get(/:id)
+			@Get('/:id')
 			public async findOne(@Res() res, @Param('id') id): Promise<«e.name»> {
 				try{
 					res
@@ -105,7 +105,7 @@ class NestDslGenerator extends AbstractGenerator {
 				catch(error){
 					res
 					 .status(HttpStatus.BAD_GATEWAY)
-					 .send({error.message, HttpStatus.BAD_GATEWAY})
+					 .send({error.message, HttpStatus.BAD_GATEWAY});
 				}
 			}
 			
@@ -119,11 +119,11 @@ class NestDslGenerator extends AbstractGenerator {
 				catch(error){
 					res
 					 .status(HttpStatus.BAD_GATEWAY)
-					 .send({error.message, HttpStatus.BAD_GATEWAY})
+					 .send({error.message, HttpStatus.BAD_GATEWAY});
 				}
 			}
 			
-			@Put(/:id)
+			@Put('/:id')
 			public async updateOne(@Res() res, @Param('id') id, @Body() «e.name.toLowerCase»: «e.name»): Promise<void> {
 				try{
 					«e.name.toLowerCase».id = Number(id);
@@ -134,10 +134,10 @@ class NestDslGenerator extends AbstractGenerator {
 				catch(error){
 					res
 					 .status(HttpStatus.BAD_GATEWAY)
-					 .send({error.message, HttpStatus.BAD_GATEWAY})
+					 .send({error.message, HttpStatus.BAD_GATEWAY});
 				}
 			}
-			@Delete(/:id)
+			@Delete('/:id')
 			public async deleteOne(@Res() res, @Param('id') id): Promise<void> {
 				try{
 					res
@@ -147,9 +147,24 @@ class NestDslGenerator extends AbstractGenerator {
 				catch(error){
 					res
 					 .status(HttpStatus.BAD_GATEWAY)
-					 .send({error.message, HttpStatus.BAD_GATEWAY})
+					 .send({error.message, HttpStatus.BAD_GATEWAY});
 				}
 			}
+			«FOR method: e.methods»
+			@«method.verb»('/«method.name»')
+			public async «method.name»(@Res() res): Promise<«method.returnType.fullyQualifiedName»> {
+				try{
+					res
+					.status(HttpStatus.OK)
+					.send(await this.service.«method.name»(//Parameters));
+				}
+				catch(error){
+					res
+					.status(HttpStatus.BAD_GATEWAY)
+					.send({error.message, HttpStatus.BAD_GATEWAY});
+				}
+			}
+			«ENDFOR»
 		}
 	'''
 	def compileService (Entity e)
@@ -178,16 +193,17 @@ class NestDslGenerator extends AbstractGenerator {
 				await this.«e.name.toLowerCase»Repository.find(«e.name.toLowerCase»);
 			}
 			
-			async updateOne( «e.name.toLowerCase»: «e.name»): Promise<void> {
+			async updateOne(«e.name.toLowerCase»: «e.name»): Promise<void> {
 				await this.«e.name.toLowerCase»Repository.update(«e.name.toLowerCase».id, «e.name.toLowerCase»);
 			}
 			
 			async delete(id: number): Promise<void> {
 				await this.«e.name.toLowerCase»Repository.delete(id)
 			}
+			
 			«FOR method: e.methods»
 				
-				async «method.name»(«FOR arg: method.args»«arg.compile»«ENDFOR»): Promise<«method.returnType.fullyQualifiedName»«method.array»> {
+				async «method.name»(«method.args.remove(0).compile»«FOR arg: method.args», «arg.compile»«ENDFOR»): Promise<«method.returnType.fullyQualifiedName»«method.array»> {
 					//To do «method.name»
 				}
 			«ENDFOR»
