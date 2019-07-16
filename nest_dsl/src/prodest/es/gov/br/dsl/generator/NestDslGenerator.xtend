@@ -34,6 +34,7 @@ class NestDslGenerator extends AbstractGenerator {
     def compile(Entity e) 
 	    ''' 
 	    	import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, JoinTable, OneToOne, OneToMany, ManyToMany, ManyToOne } from 'typeorm';
+	    	import { ApiModelProperty } from "@nestjs/swagger";
 	    	
 	    	@Entity()
 	    	export class «e.name» «IF e.superType !== null
@@ -47,6 +48,7 @@ class NestDslGenerator extends AbstractGenerator {
  
 	def compile(Property p) 
 		'''
+		@ApiModelProperty()
 		«IF p.name == 'id' || p.name == 'ID'»
 				@PrimaryGeneratedColumn()
 		«ELSE»
@@ -73,8 +75,10 @@ class NestDslGenerator extends AbstractGenerator {
 	def compileController(Entity e)
 	'''
 		import { Controller, Get, Post, Put, Delete, Param, Res, HttpStatus, Body } from '@nestjs/common';
+		import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
 		import{ «e.name»Service } from './«e.name.toLowerCase».service'
 		
+		@ApiUseTags('Insert your description')
 		@Controller('«e.name.toLowerCase»')
 		export class «e.name»Controller{
 			constructor(
@@ -82,6 +86,17 @@ class NestDslGenerator extends AbstractGenerator {
 			){}
 			
 			@Get()
+			@ApiOperation({
+		        title: 'Insert your operation title',
+		        description: 'Insert your operation description'
+		    })
+		    @ApiResponse({
+		        status: 200,
+		        description: 'Insert your response description',
+		        type: «e.name»,
+		        isArray: true
+		    })
+		    
 			public async findAll(@Res() res): Promise<«e.name»[]> {
 				try{
 					res
@@ -96,6 +111,23 @@ class NestDslGenerator extends AbstractGenerator {
 			}
 			
 			@Get('/:id')
+			@ApiOperation({
+		        title: 'Insert your operation title',
+		        description: 'Insert your operation description'
+		    })
+		    @ApiResponse({
+		        status: 200,
+		        description: 'Insert your response description',
+		        type: «e.name»,
+		        isArray: false
+		    })
+		    @ApiImplicitParam({
+		        name: 'id',
+		        description: 'Insert your param description',
+		        required: true, //or false
+		        type: 'number'
+		    })
+			
 			public async findOne(@Res() res, @Param('id') id): Promise<«e.name»> {
 				try{
 					res
@@ -110,6 +142,17 @@ class NestDslGenerator extends AbstractGenerator {
 			}
 			
 			@Post()
+			@ApiOperation({
+		        title: 'Insert your operation title',
+		        description: 'Insert your operation description'
+		    })
+		    @ApiResponse({
+		        status: 200,
+		        description: 'Insert your response description',
+		        type: «e.name»,
+		        isArray: flase // or true
+		    })
+		    
 			public async createOne(@Res() res, @Body() «e.name.toLowerCase»: «e.name»): Promise<void> {
 				try{
 					res
@@ -124,6 +167,23 @@ class NestDslGenerator extends AbstractGenerator {
 			}
 			
 			@Put('/:id')
+			@ApiOperation({
+		        title: 'Insert your operation title',
+		        description: 'Insert your operation description'
+		    })
+		    @ApiResponse({
+		        status: 200,
+		        description: 'Insert your response description',
+		        type: «e.name»,
+		        isArray: false
+		    })
+		    @ApiImplicitParam({
+		        name: 'id',
+		        description: 'Insert your param description',
+		        required: true, //or false
+		        type: 'number'
+		    })
+					    
 			public async updateOne(@Res() res, @Param('id') id, @Body() «e.name.toLowerCase»: «e.name»): Promise<void> {
 				try{
 					«e.name.toLowerCase».id = Number(id);
@@ -137,7 +197,25 @@ class NestDslGenerator extends AbstractGenerator {
 					 .send({error.message, HttpStatus.BAD_GATEWAY});
 				}
 			}
+			
 			@Delete('/:id')
+			@ApiOperation({
+		        title: 'Insert your operation title',
+		        description: 'Insert your operation description'
+		    })
+		    @ApiResponse({
+		        status: 200,
+		        description: 'Insert your response description',
+		        type: «e.name»,
+		        isArray: false
+		    })
+		    @ApiImplicitParam({
+		        name: 'id',
+		        description: 'Insert your param description',
+		        required: true, //or false
+		        type: 'number'
+		    })
+					    
 			public async deleteOne(@Res() res, @Param('id') id): Promise<void> {
 				try{
 					res
@@ -151,7 +229,19 @@ class NestDslGenerator extends AbstractGenerator {
 				}
 			}
 			«FOR method: e.methods»
+			
 			@«method.verb»('/«method.name»')
+			@ApiOperation({
+				title: 'Insert your operation title',
+				description: 'Insert your operation description'
+			})
+			@ApiResponse({
+				status: 200,
+				description: 'Insert your response description',
+				type: «e.name»,
+				isArray: false // or true
+			})
+			
 			public async «method.name»(@Res() res): Promise<«method.returnType.fullyQualifiedName»> {
 				try{
 					res
@@ -197,13 +287,12 @@ class NestDslGenerator extends AbstractGenerator {
 				await this.«e.name.toLowerCase»Repository.update(«e.name.toLowerCase».id, «e.name.toLowerCase»);
 			}
 			
-			async delete(id: number): Promise<void> {
+			async deleteOne(id: number): Promise<void> {
 				await this.«e.name.toLowerCase»Repository.delete(id)
 			}
 			
-			«FOR method: e.methods»
-				
-				async «method.name»(«method.args.remove(0).compile»«FOR arg: method.args», «arg.compile»«ENDFOR»): Promise<«method.returnType.fullyQualifiedName»«method.array»> {
+			«FOR method: e.methods»	
+				async «method.name»(«IF method.args.size()>0»«method.args.remove(0).compile»«FOR arg: method.args», «arg.compile»«ENDFOR»«ENDIF»): Promise<«method.returnType.fullyQualifiedName»«method.array»> {
 					//To do «method.name»
 				}
 			«ENDFOR»
