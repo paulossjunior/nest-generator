@@ -17,16 +17,16 @@ class NestDslGenerator extends AbstractGenerator {
     override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
         for (e : resource.allContents.toIterable.filter(Entity)) {
             fsa.generateFile(
-                e.fullyQualifiedName.toString("/").toLowerCase + ".entity.ts",
+                e.name+'/'+e.fullyQualifiedName.toString("/").toLowerCase + ".entity.ts",
                 e.compile)
            fsa.generateFile(
-                e.fullyQualifiedName.toString("/").toLowerCase + ".controller.ts",
+                 e.name+'/'+e.fullyQualifiedName.toString("/").toLowerCase + ".controller.ts",
                 e.compileController)
            fsa.generateFile(
-                e.fullyQualifiedName.toString("/").toLowerCase + ".service.ts",
+                e.name+'/'+e.fullyQualifiedName.toString("/").toLowerCase + ".service.ts",
                 e.compileService)
             fsa.generateFile(
-                e.fullyQualifiedName.toString("/").toLowerCase + ".providers.ts",
+                e.name+'/'+e.fullyQualifiedName.toString("/").toLowerCase + ".providers.ts",
                 e.compileProviders)
         }
     }

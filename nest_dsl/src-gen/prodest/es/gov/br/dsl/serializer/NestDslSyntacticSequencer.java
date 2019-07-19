@@ -10,6 +10,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
@@ -20,6 +21,7 @@ import prodest.es.gov.br.dsl.services.NestDslGrammarAccess;
 public class NestDslSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected NestDslGrammarAccess grammarAccess;
+	protected AbstractElementAlias match_DataType_BooleanKeyword_1_2_or_NumberKeyword_1_1_or_StringKeyword_1_0;
 	protected AbstractElementAlias match_DataType_LeftSquareBracketRightSquareBracketKeyword_2_q;
 	protected AbstractElementAlias match_DataType_SemicolonKeyword_3_q;
 	protected AbstractElementAlias match_Method_CommaKeyword_3_1_q;
@@ -29,6 +31,7 @@ public class NestDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (NestDslGrammarAccess) access;
+		match_DataType_BooleanKeyword_1_2_or_NumberKeyword_1_1_or_StringKeyword_1_0 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getDataTypeAccess().getBooleanKeyword_1_2()), new TokenAlias(false, false, grammarAccess.getDataTypeAccess().getNumberKeyword_1_1()), new TokenAlias(false, false, grammarAccess.getDataTypeAccess().getStringKeyword_1_0()));
 		match_DataType_LeftSquareBracketRightSquareBracketKeyword_2_q = new TokenAlias(false, true, grammarAccess.getDataTypeAccess().getLeftSquareBracketRightSquareBracketKeyword_2());
 		match_DataType_SemicolonKeyword_3_q = new TokenAlias(false, true, grammarAccess.getDataTypeAccess().getSemicolonKeyword_3());
 		match_Method_CommaKeyword_3_1_q = new TokenAlias(false, true, grammarAccess.getMethodAccess().getCommaKeyword_3_1());
@@ -48,7 +51,9 @@ public class NestDslSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_DataType_LeftSquareBracketRightSquareBracketKeyword_2_q.equals(syntax))
+			if (match_DataType_BooleanKeyword_1_2_or_NumberKeyword_1_1_or_StringKeyword_1_0.equals(syntax))
+				emit_DataType_BooleanKeyword_1_2_or_NumberKeyword_1_1_or_StringKeyword_1_0(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_DataType_LeftSquareBracketRightSquareBracketKeyword_2_q.equals(syntax))
 				emit_DataType_LeftSquareBracketRightSquareBracketKeyword_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_DataType_SemicolonKeyword_3_q.equals(syntax))
 				emit_DataType_SemicolonKeyword_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
@@ -64,10 +69,21 @@ public class NestDslSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	/**
 	 * Ambiguous syntax:
+	 *     'string' | 'number' | 'boolean'
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     name=ID (ambiguity) '[]'? ';'? (rule end)
+	 */
+	protected void emit_DataType_BooleanKeyword_1_2_or_NumberKeyword_1_1_or_StringKeyword_1_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
 	 *     '[]'?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     name=ID (ambiguity) ';'? (rule end)
+	 *     name=ID ('string' | 'number' | 'boolean') (ambiguity) ';'? (rule end)
 	 */
 	protected void emit_DataType_LeftSquareBracketRightSquareBracketKeyword_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -78,7 +94,7 @@ public class NestDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     ';'?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     name=ID '[]'? (ambiguity) (rule end)
+	 *     name=ID ('string' | 'number' | 'boolean') '[]'? (ambiguity) (rule end)
 	 */
 	protected void emit_DataType_SemicolonKeyword_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

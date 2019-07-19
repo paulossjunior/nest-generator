@@ -87,7 +87,7 @@ public class NestDslSemanticSequencer extends AbstractDelegatingSemanticSequence
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, NestdslPackage.Literals.TYPE__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getDataTypeAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getDataTypeAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	

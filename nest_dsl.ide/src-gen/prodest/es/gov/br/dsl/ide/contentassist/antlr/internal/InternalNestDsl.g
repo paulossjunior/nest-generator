@@ -370,6 +370,33 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+rule__DataType__Alternatives_1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getDataTypeAccess().getStringKeyword_1_0()); }
+		'string'
+		{ after(grammarAccess.getDataTypeAccess().getStringKeyword_1_0()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getDataTypeAccess().getNumberKeyword_1_1()); }
+		'number'
+		{ after(grammarAccess.getDataTypeAccess().getNumberKeyword_1_1()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getDataTypeAccess().getBooleanKeyword_1_2()); }
+		'boolean'
+		{ after(grammarAccess.getDataTypeAccess().getBooleanKeyword_1_2()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 rule__Relation__Alternatives
 	@init {
 		int stackSize = keepStackSize();
@@ -727,9 +754,9 @@ rule__DataType__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getDataTypeAccess().getTypeKeyword_0()); }
-	'type'
-	{ after(grammarAccess.getDataTypeAccess().getTypeKeyword_0()); }
+	{ before(grammarAccess.getDataTypeAccess().getNameAssignment_0()); }
+	(rule__DataType__NameAssignment_0)
+	{ after(grammarAccess.getDataTypeAccess().getNameAssignment_0()); }
 )
 ;
 finally {
@@ -754,9 +781,9 @@ rule__DataType__Group__1__Impl
 	}
 :
 (
-	{ before(grammarAccess.getDataTypeAccess().getNameAssignment_1()); }
-	(rule__DataType__NameAssignment_1)
-	{ after(grammarAccess.getDataTypeAccess().getNameAssignment_1()); }
+	{ before(grammarAccess.getDataTypeAccess().getAlternatives_1()); }
+	(rule__DataType__Alternatives_1)
+	{ after(grammarAccess.getDataTypeAccess().getAlternatives_1()); }
 )
 ;
 finally {
@@ -1598,15 +1625,15 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__DataType__NameAssignment_1
+rule__DataType__NameAssignment_0
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getDataTypeAccess().getNameIDTerminalRuleCall_1_0()); }
+		{ before(grammarAccess.getDataTypeAccess().getNameIDTerminalRuleCall_0_0()); }
 		RULE_ID
-		{ after(grammarAccess.getDataTypeAccess().getNameIDTerminalRuleCall_1_0()); }
+		{ after(grammarAccess.getDataTypeAccess().getNameIDTerminalRuleCall_0_0()); }
 	)
 ;
 finally {

@@ -33,21 +33,33 @@ public class NestDslGenerator extends AbstractGenerator {
     Iterable<Entity> _filter = Iterables.<Entity>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Entity.class);
     for (final Entity e : _filter) {
       {
+        String _name = e.getName();
+        String _plus = (_name + "/");
         String _lowerCase = this._iQualifiedNameProvider.getFullyQualifiedName(e).toString("/").toLowerCase();
-        String _plus = (_lowerCase + ".entity.ts");
-        fsa.generateFile(_plus, 
-          this.compile(e));
-        String _lowerCase_1 = this._iQualifiedNameProvider.getFullyQualifiedName(e).toString("/").toLowerCase();
-        String _plus_1 = (_lowerCase_1 + ".controller.ts");
-        fsa.generateFile(_plus_1, 
-          this.compileController(e));
-        String _lowerCase_2 = this._iQualifiedNameProvider.getFullyQualifiedName(e).toString("/").toLowerCase();
-        String _plus_2 = (_lowerCase_2 + ".service.ts");
+        String _plus_1 = (_plus + _lowerCase);
+        String _plus_2 = (_plus_1 + ".entity.ts");
         fsa.generateFile(_plus_2, 
+          this.compile(e));
+        String _name_1 = e.getName();
+        String _plus_3 = (_name_1 + "/");
+        String _lowerCase_1 = this._iQualifiedNameProvider.getFullyQualifiedName(e).toString("/").toLowerCase();
+        String _plus_4 = (_plus_3 + _lowerCase_1);
+        String _plus_5 = (_plus_4 + ".controller.ts");
+        fsa.generateFile(_plus_5, 
+          this.compileController(e));
+        String _name_2 = e.getName();
+        String _plus_6 = (_name_2 + "/");
+        String _lowerCase_2 = this._iQualifiedNameProvider.getFullyQualifiedName(e).toString("/").toLowerCase();
+        String _plus_7 = (_plus_6 + _lowerCase_2);
+        String _plus_8 = (_plus_7 + ".service.ts");
+        fsa.generateFile(_plus_8, 
           this.compileService(e));
+        String _name_3 = e.getName();
+        String _plus_9 = (_name_3 + "/");
         String _lowerCase_3 = this._iQualifiedNameProvider.getFullyQualifiedName(e).toString("/").toLowerCase();
-        String _plus_3 = (_lowerCase_3 + ".providers.ts");
-        fsa.generateFile(_plus_3, 
+        String _plus_10 = (_plus_9 + _lowerCase_3);
+        String _plus_11 = (_plus_10 + ".providers.ts");
+        fsa.generateFile(_plus_11, 
           this.compileProviders(e));
       }
     }

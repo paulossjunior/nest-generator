@@ -32,6 +32,7 @@ public class NestDslParser extends AbstractContentAssistParser {
 		
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, NestDslGrammarAccess grammarAccess) {
 			builder.put(grammarAccess.getTypeAccess().getAlternatives(), "rule__Type__Alternatives");
+			builder.put(grammarAccess.getDataTypeAccess().getAlternatives_1(), "rule__DataType__Alternatives_1");
 			builder.put(grammarAccess.getRelationAccess().getAlternatives(), "rule__Relation__Alternatives");
 			builder.put(grammarAccess.getOneArgumentRelationAccess().getArgumentAlternatives_0_0(), "rule__OneArgumentRelation__ArgumentAlternatives_0_0");
 			builder.put(grammarAccess.getMultipleArgumentRelationAccess().getArgumentAlternatives_0_0(), "rule__MultipleArgumentRelation__ArgumentAlternatives_0_0");
@@ -50,7 +51,7 @@ public class NestDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEntityAccess().getSuperTypeAssignment_2_1(), "rule__Entity__SuperTypeAssignment_2_1");
 			builder.put(grammarAccess.getEntityAccess().getPropertiesAssignment_4(), "rule__Entity__PropertiesAssignment_4");
 			builder.put(grammarAccess.getEntityAccess().getMethodsAssignment_5(), "rule__Entity__MethodsAssignment_5");
-			builder.put(grammarAccess.getDataTypeAccess().getNameAssignment_1(), "rule__DataType__NameAssignment_1");
+			builder.put(grammarAccess.getDataTypeAccess().getNameAssignment_0(), "rule__DataType__NameAssignment_0");
 			builder.put(grammarAccess.getPropertyAccess().getRelationAssignment_0(), "rule__Property__RelationAssignment_0");
 			builder.put(grammarAccess.getPropertyAccess().getNameAssignment_1(), "rule__Property__NameAssignment_1");
 			builder.put(grammarAccess.getPropertyAccess().getTypeAssignment_3(), "rule__Property__TypeAssignment_3");
