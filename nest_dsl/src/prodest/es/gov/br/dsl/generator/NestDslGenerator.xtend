@@ -28,6 +28,9 @@ class NestDslGenerator extends AbstractGenerator {
             fsa.generateFile(
                 e.name+'/'+e.fullyQualifiedName.toString("/").toLowerCase + ".providers.ts",
                 e.compileProviders)
+            fsa.generateFile(
+                e.name+'/'+e.fullyQualifiedName.toString("/").toLowerCase + ".module.ts",
+                e.compileModule)
         }
     }
  
@@ -35,6 +38,15 @@ class NestDslGenerator extends AbstractGenerator {
 	    ''' 
 	    	import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, JoinTable, OneToOne, OneToMany, ManyToMany, ManyToOne } from 'typeorm';
 	    	import { ApiModelProperty } from "@nestjs/swagger";
+	    	«FOR p: e.properties»
+	    		«IF p.relation !== null»
+		    		«IF p.relation.oneArgument !== null»
+		    			import { «p.relation.oneArgument.type.name» } from '../«p.relation.oneArgument.type.name»/«p.relation.oneArgument.type.name.toLowerCase».entity'
+		    		«ELSEIF p.relation.multipleArgument !== null»
+		    			import { «p.relation.multipleArgument.type.name» } from '../«p.relation.multipleArgument.type.name»/«p.relation.multipleArgument.type.name.toLowerCase».entity'
+		    		«ENDIF»
+		    	«ENDIF»   	
+	    	«ENDFOR»
 	    	
 	    	@Entity()
 	    	export class «e.name» «IF e.superType !== null
@@ -77,6 +89,7 @@ class NestDslGenerator extends AbstractGenerator {
 		import { Controller, Get, Post, Put, Delete, Param, Res, HttpStatus, Body } from '@nestjs/common';
 		import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
 		import{ «e.name»Service } from './«e.name.toLowerCase».service'
+		import { «e.name» } from './«e.name.toLowerCase».entity'
 		
 		@ApiUseTags('Insert your description')
 		@Controller('«e.name.toLowerCase»')
@@ -99,14 +112,15 @@ class NestDslGenerator extends AbstractGenerator {
 		    
 			public async findAll(@Res() res): Promise<«e.name»[]> {
 				try{
-					res
-					 .status(HttpStatus.OK)
-					 .send(await this.service.findAll());
+					return res
+				 			.status(HttpStatus.OK)
+					 		.send(await this.service.findAll());
 				}
 				catch(error){
+					const badGateWay = HttpStatus.BAD_GATEWAY;
 					res
-					 .status(HttpStatus.BAD_GATEWAY)
-					 .send({error.message, HttpStatus.BAD_GATEWAY});
+						.status(badGateWay)
+			 			.send({error, badGateWay});
 				}
 			}
 			
@@ -130,14 +144,15 @@ class NestDslGenerator extends AbstractGenerator {
 			
 			public async findOne(@Res() res, @Param('id') id): Promise<«e.name»> {
 				try{
-					res
-					 .status(HttpStatus.OK)
-					 .send(await this.service.findOne(id));
+					return res
+					 	.status(HttpStatus.OK)
+					 	.send(await this.service.findOne(id));
 				}
 				catch(error){
+					const badGateWay = HttpStatus.BAD_GATEWAY;
 					res
-					 .status(HttpStatus.BAD_GATEWAY)
-					 .send({error.message, HttpStatus.BAD_GATEWAY});
+						 .status(badGateWay)
+						 .send({error, badGateWay});
 				}
 			}
 			
@@ -150,7 +165,7 @@ class NestDslGenerator extends AbstractGenerator {
 		        status: 200,
 		        description: 'Insert your response description',
 		        type: «e.name»,
-		        isArray: flase // or true
+		        isArray: false // or true
 		    })
 		    
 			public async createOne(@Res() res, @Body() «e.name.toLowerCase»: «e.name»): Promise<void> {
@@ -160,9 +175,10 @@ class NestDslGenerator extends AbstractGenerator {
 					 .send(await this.service.createOne(«e.name.toLowerCase»));
 				}
 				catch(error){
+					const badGateWay = HttpStatus.BAD_GATEWAY;
 					res
-					 .status(HttpStatus.BAD_GATEWAY)
-					 .send({error.message, HttpStatus.BAD_GATEWAY});
+						 .status(badGateWay)
+						 .send({error, badGateWay});
 				}
 			}
 			
@@ -192,9 +208,10 @@ class NestDslGenerator extends AbstractGenerator {
 					 .send(await this.service.updateOne(«e.name.toLowerCase»));
 				}
 				catch(error){
+					const badGateWay = HttpStatus.BAD_GATEWAY;
 					res
-					 .status(HttpStatus.BAD_GATEWAY)
-					 .send({error.message, HttpStatus.BAD_GATEWAY});
+					 .status(badGateWay)
+					 .send({error, badGateWay});
 				}
 			}
 			
@@ -220,12 +237,13 @@ class NestDslGenerator extends AbstractGenerator {
 				try{
 					res
 					 .status(HttpStatus.OK)
-					 .send(await this.service.delete(id));
+					 .send(await this.service.deleteOne(id));
 				}
 				catch(error){
+					const badGateWay = HttpStatus.BAD_GATEWAY;
 					res
-					 .status(HttpStatus.BAD_GATEWAY)
-					 .send({error.message, HttpStatus.BAD_GATEWAY});
+					 .status(badGateWay)
+					 .send({error, badGateWay});
 				}
 			}
 			«FOR method: e.methods»
@@ -249,9 +267,10 @@ class NestDslGenerator extends AbstractGenerator {
 					.send(await this.service.«method.name»(//Parameters));
 				}
 				catch(error){
+					const badGateWay = HttpStatus.BAD_GATEWAY;
 					res
-					.status(HttpStatus.BAD_GATEWAY)
-					.send({error.message, HttpStatus.BAD_GATEWAY});
+						 .status(badGateWay)
+						 .send({error, badGateWay});
 				}
 			}
 			«ENDFOR»
@@ -276,11 +295,11 @@ class NestDslGenerator extends AbstractGenerator {
 			}
 			
 			async findOne(id: number): Promise<«e.name»> {
-				return await this.«e.name.toLowerCase»Repository.find({id: id});
+				return await this.«e.name.toLowerCase»Repository.findOne({id: id});
 			}
 			
 			async createOne(«e.name.toLowerCase»: «e.name»): Promise<void> {
-				await this.«e.name.toLowerCase»Repository.find(«e.name.toLowerCase»);
+				await this.«e.name.toLowerCase»Repository.save(«e.name.toLowerCase»);
 			}
 			
 			async updateOne(«e.name.toLowerCase»: «e.name»): Promise<void> {
@@ -313,6 +332,22 @@ class NestDslGenerator extends AbstractGenerator {
 				inject: ['DATABASE_CONNECTION'],
 			}
 		];
+	'''
+	
+	def compileModule (Entity e)
+	'''
+		import { Module } from '@nestjs/common';
+		import { «e.name»Controller } from './«e.name.toLowerCase».controller';
+		import { «e.name»Service } from './«e.name.toLowerCase».service';
+		import { «e.name.toLowerCase»Providers } from './«e.name.toLowerCase».providers'
+		import { DatabaseModule } from '../Database/database.module';
+		
+		@Module({
+		  imports: [ DatabaseModule ],
+		  controllers: [«e.name»Controller],
+		  providers: [«e.name»Service, ...«e.name.toLowerCase»Providers],
+		})
+		export class «e.name»Module {}
 	'''
   
 }

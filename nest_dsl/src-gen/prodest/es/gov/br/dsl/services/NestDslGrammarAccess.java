@@ -138,41 +138,27 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 	public class DataTypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "prodest.es.gov.br.dsl.NestDsl.DataType");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
-		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
-		private final Keyword cStringKeyword_1_0 = (Keyword)cAlternatives_1.eContents().get(0);
-		private final Keyword cNumberKeyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
-		private final Keyword cBooleanKeyword_1_2 = (Keyword)cAlternatives_1.eContents().get(2);
+		private final Keyword cTypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cLeftSquareBracketRightSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//DataType:
-		//	name=ID ('string' | 'number' | 'boolean') '[]'? ';'?;
+		//	'type' name=ID '[]'? ';'?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		////'type' name=ID('[]')?(';')?
-		// name=ID ('string' | 'number' | 'boolean') '[]'? ';'?
+		//'type' name=ID '[]'? ';'?
 		public Group getGroup() { return cGroup; }
 		
-		////'type' name=ID('[]')?(';')?
-		// name=ID
-		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+		//'type'
+		public Keyword getTypeKeyword_0() { return cTypeKeyword_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
-		
-		//'string' | 'number' | 'boolean'
-		public Alternatives getAlternatives_1() { return cAlternatives_1; }
-		
-		//'string'
-		public Keyword getStringKeyword_1_0() { return cStringKeyword_1_0; }
-		
-		//'number'
-		public Keyword getNumberKeyword_1_1() { return cNumberKeyword_1_1; }
-		
-		//'boolean'
-		public Keyword getBooleanKeyword_1_2() { return cBooleanKeyword_1_2; }
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
 		//'[]'?
 		public Keyword getLeftSquareBracketRightSquareBracketKeyword_2() { return cLeftSquareBracketRightSquareBracketKeyword_2; }
@@ -607,7 +593,7 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//DataType:
-	//	name=ID ('string' | 'number' | 'boolean') '[]'? ';'?;
+	//	'type' name=ID '[]'? ';'?;
 	public DataTypeElements getDataTypeAccess() {
 		return pDataType;
 	}

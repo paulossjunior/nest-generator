@@ -282,11 +282,15 @@ ruleDataType returns [EObject current=null]
 	leaveRule();
 }:
 	(
+		otherlv_0='type'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getDataTypeAccess().getTypeKeyword_0());
+		}
 		(
 			(
-				lv_name_0_0=RULE_ID
+				lv_name_1_0=RULE_ID
 				{
-					newLeafNode(lv_name_0_0, grammarAccess.getDataTypeAccess().getNameIDTerminalRuleCall_0_0());
+					newLeafNode(lv_name_1_0, grammarAccess.getDataTypeAccess().getNameIDTerminalRuleCall_1_0());
 				}
 				{
 					if ($current==null) {
@@ -295,37 +299,21 @@ ruleDataType returns [EObject current=null]
 					setWithLastConsumed(
 						$current,
 						"name",
-						lv_name_0_0,
+						lv_name_1_0,
 						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)
 		)
 		(
-			otherlv_1='string'
+			otherlv_2='[]'
 			{
-				newLeafNode(otherlv_1, grammarAccess.getDataTypeAccess().getStringKeyword_1_0());
-			}
-			    |
-			otherlv_2='number'
-			{
-				newLeafNode(otherlv_2, grammarAccess.getDataTypeAccess().getNumberKeyword_1_1());
-			}
-			    |
-			otherlv_3='boolean'
-			{
-				newLeafNode(otherlv_3, grammarAccess.getDataTypeAccess().getBooleanKeyword_1_2());
-			}
-		)
-		(
-			otherlv_4='[]'
-			{
-				newLeafNode(otherlv_4, grammarAccess.getDataTypeAccess().getLeftSquareBracketRightSquareBracketKeyword_2());
+				newLeafNode(otherlv_2, grammarAccess.getDataTypeAccess().getLeftSquareBracketRightSquareBracketKeyword_2());
 			}
 		)?
 		(
-			otherlv_5=';'
+			otherlv_3=';'
 			{
-				newLeafNode(otherlv_5, grammarAccess.getDataTypeAccess().getSemicolonKeyword_3());
+				newLeafNode(otherlv_3, grammarAccess.getDataTypeAccess().getSemicolonKeyword_3());
 			}
 		)?
 	)

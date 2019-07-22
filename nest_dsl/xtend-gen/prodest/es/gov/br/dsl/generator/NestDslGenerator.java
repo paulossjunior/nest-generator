@@ -61,6 +61,13 @@ public class NestDslGenerator extends AbstractGenerator {
         String _plus_11 = (_plus_10 + ".providers.ts");
         fsa.generateFile(_plus_11, 
           this.compileProviders(e));
+        String _name_4 = e.getName();
+        String _plus_12 = (_name_4 + "/");
+        String _lowerCase_4 = this._iQualifiedNameProvider.getFullyQualifiedName(e).toString("/").toLowerCase();
+        String _plus_13 = (_plus_12 + _lowerCase_4);
+        String _plus_14 = (_plus_13 + ".module.ts");
+        fsa.generateFile(_plus_14, 
+          this.compileModule(e));
       }
     }
   }
@@ -71,17 +78,61 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("import { ApiModelProperty } from \"@nestjs/swagger\";");
     _builder.newLine();
+    {
+      EList<Property> _properties = e.getProperties();
+      for(final Property p : _properties) {
+        {
+          Relation _relation = p.getRelation();
+          boolean _tripleNotEquals = (_relation != null);
+          if (_tripleNotEquals) {
+            {
+              OneArgumentRelation _oneArgument = p.getRelation().getOneArgument();
+              boolean _tripleNotEquals_1 = (_oneArgument != null);
+              if (_tripleNotEquals_1) {
+                _builder.append("import { ");
+                String _name = p.getRelation().getOneArgument().getType().getName();
+                _builder.append(_name);
+                _builder.append(" } from \'../");
+                String _name_1 = p.getRelation().getOneArgument().getType().getName();
+                _builder.append(_name_1);
+                _builder.append("/");
+                String _lowerCase = p.getRelation().getOneArgument().getType().getName().toLowerCase();
+                _builder.append(_lowerCase);
+                _builder.append(".entity\'");
+                _builder.newLineIfNotEmpty();
+              } else {
+                MultipleArgumentRelation _multipleArgument = p.getRelation().getMultipleArgument();
+                boolean _tripleNotEquals_2 = (_multipleArgument != null);
+                if (_tripleNotEquals_2) {
+                  _builder.append("import { ");
+                  String _name_2 = p.getRelation().getMultipleArgument().getType().getName();
+                  _builder.append(_name_2);
+                  _builder.append(" } from \'../");
+                  String _name_3 = p.getRelation().getMultipleArgument().getType().getName();
+                  _builder.append(_name_3);
+                  _builder.append("/");
+                  String _lowerCase_1 = p.getRelation().getMultipleArgument().getType().getName().toLowerCase();
+                  _builder.append(_lowerCase_1);
+                  _builder.append(".entity\'");
+                  _builder.newLineIfNotEmpty();
+                }
+              }
+            }
+          }
+        }
+      }
+    }
     _builder.newLine();
     _builder.append("@Entity()");
     _builder.newLine();
     _builder.append("export class ");
-    String _name = e.getName();
-    _builder.append(_name);
+    String _name_4 = e.getName();
+    _builder.append(_name_4);
     _builder.append(" ");
     {
       Entity _superType = e.getSuperType();
-      boolean _tripleNotEquals = (_superType != null);
-      if (_tripleNotEquals) {
+      boolean _tripleNotEquals_3 = (_superType != null);
+      if (_tripleNotEquals_3) {
         _builder.append("extends ");
         QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(e.getSuperType());
         _builder.append(_fullyQualifiedName);
@@ -91,11 +142,11 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.append("{");
     _builder.newLineIfNotEmpty();
     {
-      EList<Property> _properties = e.getProperties();
-      for(final Property p : _properties) {
+      EList<Property> _properties_1 = e.getProperties();
+      for(final Property p_1 : _properties_1) {
         _builder.newLine();
         _builder.append("\t");
-        CharSequence _compile = this.compile(p);
+        CharSequence _compile = this.compile(p_1);
         _builder.append(_compile, "\t");
         _builder.newLineIfNotEmpty();
       }
@@ -196,17 +247,25 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.append(_lowerCase);
     _builder.append(".service\'");
     _builder.newLineIfNotEmpty();
+    _builder.append("import { ");
+    String _name_1 = e.getName();
+    _builder.append(_name_1);
+    _builder.append(" } from \'./");
+    String _lowerCase_1 = e.getName().toLowerCase();
+    _builder.append(_lowerCase_1);
+    _builder.append(".entity\'");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("@ApiUseTags(\'Insert your description\')");
     _builder.newLine();
     _builder.append("@Controller(\'");
-    String _lowerCase_1 = e.getName().toLowerCase();
-    _builder.append(_lowerCase_1);
+    String _lowerCase_2 = e.getName().toLowerCase();
+    _builder.append(_lowerCase_2);
     _builder.append("\')");
     _builder.newLineIfNotEmpty();
     _builder.append("export class ");
-    String _name_1 = e.getName();
-    _builder.append(_name_1);
+    String _name_2 = e.getName();
+    _builder.append(_name_2);
     _builder.append("Controller{");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -214,8 +273,8 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("private readonly service: ");
-    String _name_2 = e.getName();
-    _builder.append(_name_2, "\t\t");
+    String _name_3 = e.getName();
+    _builder.append(_name_3, "\t\t");
     _builder.append("Service,");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -249,8 +308,8 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("type: ");
-    String _name_3 = e.getName();
-    _builder.append(_name_3, "        ");
+    String _name_4 = e.getName();
+    _builder.append(_name_4, "        ");
     _builder.append(",");
     _builder.newLineIfNotEmpty();
     _builder.append("        ");
@@ -263,20 +322,20 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public async findAll(@Res() res): Promise<");
-    String _name_4 = e.getName();
-    _builder.append(_name_4, "\t");
+    String _name_5 = e.getName();
+    _builder.append(_name_5, "\t");
     _builder.append("[]> {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("try{");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("res");
+    _builder.append("return res");
     _builder.newLine();
-    _builder.append("\t\t\t ");
+    _builder.append("\t\t \t\t\t");
     _builder.append(".status(HttpStatus.OK)");
     _builder.newLine();
-    _builder.append("\t\t\t ");
+    _builder.append("\t\t\t \t\t");
     _builder.append(".send(await this.service.findAll());");
     _builder.newLine();
     _builder.append("\t\t");
@@ -286,13 +345,16 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.append("catch(error){");
     _builder.newLine();
     _builder.append("\t\t\t");
+    _builder.append("const badGateWay = HttpStatus.BAD_GATEWAY;");
+    _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("res");
     _builder.newLine();
-    _builder.append("\t\t\t ");
-    _builder.append(".status(HttpStatus.BAD_GATEWAY)");
+    _builder.append("\t\t\t\t");
+    _builder.append(".status(badGateWay)");
     _builder.newLine();
-    _builder.append("\t\t\t ");
-    _builder.append(".send({error.message, HttpStatus.BAD_GATEWAY});");
+    _builder.append("\t \t\t\t");
+    _builder.append(".send({error, badGateWay});");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("}");
@@ -328,8 +390,8 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("type: ");
-    String _name_5 = e.getName();
-    _builder.append(_name_5, "        ");
+    String _name_6 = e.getName();
+    _builder.append(_name_6, "        ");
     _builder.append(",");
     _builder.newLineIfNotEmpty();
     _builder.append("        ");
@@ -360,20 +422,20 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public async findOne(@Res() res, @Param(\'id\') id): Promise<");
-    String _name_6 = e.getName();
-    _builder.append(_name_6, "\t");
+    String _name_7 = e.getName();
+    _builder.append(_name_7, "\t");
     _builder.append("> {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("try{");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("res");
+    _builder.append("return res");
     _builder.newLine();
-    _builder.append("\t\t\t ");
+    _builder.append("\t\t\t \t");
     _builder.append(".status(HttpStatus.OK)");
     _builder.newLine();
-    _builder.append("\t\t\t ");
+    _builder.append("\t\t\t \t");
     _builder.append(".send(await this.service.findOne(id));");
     _builder.newLine();
     _builder.append("\t\t");
@@ -383,13 +445,16 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.append("catch(error){");
     _builder.newLine();
     _builder.append("\t\t\t");
+    _builder.append("const badGateWay = HttpStatus.BAD_GATEWAY;");
+    _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("res");
     _builder.newLine();
-    _builder.append("\t\t\t ");
-    _builder.append(".status(HttpStatus.BAD_GATEWAY)");
+    _builder.append("\t\t\t\t ");
+    _builder.append(".status(badGateWay)");
     _builder.newLine();
-    _builder.append("\t\t\t ");
-    _builder.append(".send({error.message, HttpStatus.BAD_GATEWAY});");
+    _builder.append("\t\t\t\t ");
+    _builder.append(".send({error, badGateWay});");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("}");
@@ -425,12 +490,12 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("type: ");
-    String _name_7 = e.getName();
-    _builder.append(_name_7, "        ");
+    String _name_8 = e.getName();
+    _builder.append(_name_8, "        ");
     _builder.append(",");
     _builder.newLineIfNotEmpty();
     _builder.append("        ");
-    _builder.append("isArray: flase // or true");
+    _builder.append("isArray: false // or true");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("})");
@@ -439,11 +504,11 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public async createOne(@Res() res, @Body() ");
-    String _lowerCase_2 = e.getName().toLowerCase();
-    _builder.append(_lowerCase_2, "\t");
+    String _lowerCase_3 = e.getName().toLowerCase();
+    _builder.append(_lowerCase_3, "\t");
     _builder.append(": ");
-    String _name_8 = e.getName();
-    _builder.append(_name_8, "\t");
+    String _name_9 = e.getName();
+    _builder.append(_name_9, "\t");
     _builder.append("): Promise<void> {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
@@ -457,8 +522,8 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t\t\t ");
     _builder.append(".send(await this.service.createOne(");
-    String _lowerCase_3 = e.getName().toLowerCase();
-    _builder.append(_lowerCase_3, "\t\t\t ");
+    String _lowerCase_4 = e.getName().toLowerCase();
+    _builder.append(_lowerCase_4, "\t\t\t ");
     _builder.append("));");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
@@ -468,13 +533,16 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.append("catch(error){");
     _builder.newLine();
     _builder.append("\t\t\t");
+    _builder.append("const badGateWay = HttpStatus.BAD_GATEWAY;");
+    _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("res");
     _builder.newLine();
-    _builder.append("\t\t\t ");
-    _builder.append(".status(HttpStatus.BAD_GATEWAY)");
+    _builder.append("\t\t\t\t ");
+    _builder.append(".status(badGateWay)");
     _builder.newLine();
-    _builder.append("\t\t\t ");
-    _builder.append(".send({error.message, HttpStatus.BAD_GATEWAY});");
+    _builder.append("\t\t\t\t ");
+    _builder.append(".send({error, badGateWay});");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("}");
@@ -510,8 +578,8 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("type: ");
-    String _name_9 = e.getName();
-    _builder.append(_name_9, "        ");
+    String _name_10 = e.getName();
+    _builder.append(_name_10, "        ");
     _builder.append(",");
     _builder.newLineIfNotEmpty();
     _builder.append("        ");
@@ -542,19 +610,19 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public async updateOne(@Res() res, @Param(\'id\') id, @Body() ");
-    String _lowerCase_4 = e.getName().toLowerCase();
-    _builder.append(_lowerCase_4, "\t");
+    String _lowerCase_5 = e.getName().toLowerCase();
+    _builder.append(_lowerCase_5, "\t");
     _builder.append(": ");
-    String _name_10 = e.getName();
-    _builder.append(_name_10, "\t");
+    String _name_11 = e.getName();
+    _builder.append(_name_11, "\t");
     _builder.append("): Promise<void> {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("try{");
     _builder.newLine();
     _builder.append("\t\t\t");
-    String _lowerCase_5 = e.getName().toLowerCase();
-    _builder.append(_lowerCase_5, "\t\t\t");
+    String _lowerCase_6 = e.getName().toLowerCase();
+    _builder.append(_lowerCase_6, "\t\t\t");
     _builder.append(".id = Number(id);");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
@@ -565,8 +633,8 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t\t\t ");
     _builder.append(".send(await this.service.updateOne(");
-    String _lowerCase_6 = e.getName().toLowerCase();
-    _builder.append(_lowerCase_6, "\t\t\t ");
+    String _lowerCase_7 = e.getName().toLowerCase();
+    _builder.append(_lowerCase_7, "\t\t\t ");
     _builder.append("));");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
@@ -576,13 +644,16 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.append("catch(error){");
     _builder.newLine();
     _builder.append("\t\t\t");
+    _builder.append("const badGateWay = HttpStatus.BAD_GATEWAY;");
+    _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("res");
     _builder.newLine();
     _builder.append("\t\t\t ");
-    _builder.append(".status(HttpStatus.BAD_GATEWAY)");
+    _builder.append(".status(badGateWay)");
     _builder.newLine();
     _builder.append("\t\t\t ");
-    _builder.append(".send({error.message, HttpStatus.BAD_GATEWAY});");
+    _builder.append(".send({error, badGateWay});");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("}");
@@ -618,8 +689,8 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("type: ");
-    String _name_11 = e.getName();
-    _builder.append(_name_11, "        ");
+    String _name_12 = e.getName();
+    _builder.append(_name_12, "        ");
     _builder.append(",");
     _builder.newLineIfNotEmpty();
     _builder.append("        ");
@@ -661,7 +732,7 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.append(".status(HttpStatus.OK)");
     _builder.newLine();
     _builder.append("\t\t\t ");
-    _builder.append(".send(await this.service.delete(id));");
+    _builder.append(".send(await this.service.deleteOne(id));");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("}");
@@ -670,13 +741,16 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.append("catch(error){");
     _builder.newLine();
     _builder.append("\t\t\t");
+    _builder.append("const badGateWay = HttpStatus.BAD_GATEWAY;");
+    _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("res");
     _builder.newLine();
     _builder.append("\t\t\t ");
-    _builder.append(".status(HttpStatus.BAD_GATEWAY)");
+    _builder.append(".status(badGateWay)");
     _builder.newLine();
     _builder.append("\t\t\t ");
-    _builder.append(".send({error.message, HttpStatus.BAD_GATEWAY});");
+    _builder.append(".send({error, badGateWay});");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("}");
@@ -694,8 +768,8 @@ public class NestDslGenerator extends AbstractGenerator {
         String _verb = method.getVerb();
         _builder.append(_verb, "\t");
         _builder.append("(\'/");
-        String _name_12 = method.getName();
-        _builder.append(_name_12, "\t");
+        String _name_13 = method.getName();
+        _builder.append(_name_13, "\t");
         _builder.append("\')");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -726,8 +800,8 @@ public class NestDslGenerator extends AbstractGenerator {
         _builder.append("\t");
         _builder.append("\t");
         _builder.append("type: ");
-        String _name_13 = e.getName();
-        _builder.append(_name_13, "\t\t");
+        String _name_14 = e.getName();
+        _builder.append(_name_14, "\t\t");
         _builder.append(",");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -741,8 +815,8 @@ public class NestDslGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("public async ");
-        String _name_14 = method.getName();
-        _builder.append(_name_14, "\t");
+        String _name_15 = method.getName();
+        _builder.append(_name_15, "\t");
         _builder.append("(@Res() res): Promise<");
         QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(method.getReturnType());
         _builder.append(_fullyQualifiedName, "\t");
@@ -763,8 +837,8 @@ public class NestDslGenerator extends AbstractGenerator {
         _builder.append("\t");
         _builder.append("\t\t");
         _builder.append(".send(await this.service.");
-        String _name_15 = method.getName();
-        _builder.append(_name_15, "\t\t\t");
+        String _name_16 = method.getName();
+        _builder.append(_name_16, "\t\t\t");
         _builder.append("(//Parameters));");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -777,15 +851,19 @@ public class NestDslGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("\t\t");
+        _builder.append("const badGateWay = HttpStatus.BAD_GATEWAY;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("\t\t");
         _builder.append("res");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("\t\t");
-        _builder.append(".status(HttpStatus.BAD_GATEWAY)");
+        _builder.append("\t\t\t ");
+        _builder.append(".status(badGateWay)");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("\t\t");
-        _builder.append(".send({error.message, HttpStatus.BAD_GATEWAY});");
+        _builder.append("\t\t\t ");
+        _builder.append(".send({error, badGateWay});");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("\t");
@@ -875,7 +953,7 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.append("return await this.");
     String _lowerCase_3 = e.getName().toLowerCase();
     _builder.append(_lowerCase_3, "\t\t");
-    _builder.append("Repository.find({id: id});");
+    _builder.append("Repository.findOne({id: id});");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("}");
@@ -895,7 +973,7 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.append("await this.");
     String _lowerCase_5 = e.getName().toLowerCase();
     _builder.append(_lowerCase_5, "\t\t");
-    _builder.append("Repository.find(");
+    _builder.append("Repository.save(");
     String _lowerCase_6 = e.getName().toLowerCase();
     _builder.append(_lowerCase_6, "\t\t");
     _builder.append(");");
@@ -1045,6 +1123,67 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("];");
     _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence compileModule(final Entity e) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import { Module } from \'@nestjs/common\';");
+    _builder.newLine();
+    _builder.append("import { ");
+    String _name = e.getName();
+    _builder.append(_name);
+    _builder.append("Controller } from \'./");
+    String _lowerCase = e.getName().toLowerCase();
+    _builder.append(_lowerCase);
+    _builder.append(".controller\';");
+    _builder.newLineIfNotEmpty();
+    _builder.append("import { ");
+    String _name_1 = e.getName();
+    _builder.append(_name_1);
+    _builder.append("Service } from \'./");
+    String _lowerCase_1 = e.getName().toLowerCase();
+    _builder.append(_lowerCase_1);
+    _builder.append(".service\';");
+    _builder.newLineIfNotEmpty();
+    _builder.append("import { ");
+    String _lowerCase_2 = e.getName().toLowerCase();
+    _builder.append(_lowerCase_2);
+    _builder.append("Providers } from \'./");
+    String _lowerCase_3 = e.getName().toLowerCase();
+    _builder.append(_lowerCase_3);
+    _builder.append(".providers\'");
+    _builder.newLineIfNotEmpty();
+    _builder.append("import { DatabaseModule } from \'../Database/database.module\';");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Module({");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("imports: [ DatabaseModule ],");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("controllers: [");
+    String _name_2 = e.getName();
+    _builder.append(_name_2, "  ");
+    _builder.append("Controller],");
+    _builder.newLineIfNotEmpty();
+    _builder.append("  ");
+    _builder.append("providers: [");
+    String _name_3 = e.getName();
+    _builder.append(_name_3, "  ");
+    _builder.append("Service, ...");
+    String _lowerCase_4 = e.getName().toLowerCase();
+    _builder.append(_lowerCase_4, "  ");
+    _builder.append("Providers],");
+    _builder.newLineIfNotEmpty();
+    _builder.append("})");
+    _builder.newLine();
+    _builder.append("export class ");
+    String _name_4 = e.getName();
+    _builder.append(_name_4);
+    _builder.append("Module {}");
+    _builder.newLineIfNotEmpty();
     return _builder;
   }
 }
