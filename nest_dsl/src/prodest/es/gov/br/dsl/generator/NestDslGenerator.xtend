@@ -9,12 +9,17 @@ import com.google.inject.Inject
 import prodest.es.gov.br.dsl.nestdsl.Entity
 import prodest.es.gov.br.dsl.nestdsl.Property
 import prodest.es.gov.br.dsl.nestdsl.MethodArg
+import java.util.List
+import java.util.ArrayList
 
 class NestDslGenerator extends AbstractGenerator {
  
     @Inject extension IQualifiedNameProvider
- 
+ 	
+ 	var List<String> modules = new ArrayList();
+ 	
     override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
+        
         for (e : resource.allContents.toIterable.filter(Entity)) {
             fsa.generateFile(
                 e.name+'/'+e.fullyQualifiedName.toString("/").toLowerCase + ".entity.ts",
@@ -31,6 +36,7 @@ class NestDslGenerator extends AbstractGenerator {
             fsa.generateFile(
                 e.name+'/'+e.fullyQualifiedName.toString("/").toLowerCase + ".module.ts",
                 e.compileModule)
+        	modules.add(e.name);
         }
      // Database
         fsa.generateFile(
@@ -39,6 +45,14 @@ class NestDslGenerator extends AbstractGenerator {
         fsa.generateFile(
            "Database/database.providers.ts",
             dbProvidersCompile)
+            
+     // Auxiliares
+     	fsa.generateFile(
+           "main.ts",
+            mainCompile)
+        fsa.generateFile(
+           "app.module.ts",
+            appModuleCompile(modules))
     }
  
     def compile(Entity e) 
@@ -391,5 +405,54 @@ class NestDslGenerator extends AbstractGenerator {
 		  },
 		];
 	'''
-  
+	
+	def mainCompile()
+	'''
+		import { NestFactory } from '@nestjs/core';
+		import { AppModule } from './app.module';
+		import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+		const pacote = require( '../package.json' );
+		const fs = require( 'fs' );
+		
+		async function bootstrap() {
+		  const app = await NestFactory.create(AppModule);
+		
+		  const options = new DocumentBuilder()
+		    .setTitle( pacote.name )
+		    .setDescription( pacote.description )
+		    .setVersion( pacote.version )
+		    .setSchemes( 'http', 'https' )
+		    .build();
+		
+		  const document = SwaggerModule.createDocument( app, options );
+		
+		  fs.writeFileSync( 'swagger.json', JSON.stringify( document, null, 2 ) );
+		
+		  SwaggerModule.setup( `/`, app, document );
+		
+		
+		  await app.listen(3000);
+		}
+		bootstrap();
+	'''
+	
+	def appModuleCompile(List<String> modules)
+	'''
+	import { Module } from '@nestjs/common';
+	«FOR module: modules»
+		import { «module»Module } from './«module»/«module.toLowerCase».module';
+	«ENDFOR»
+	
+	@Module({
+		imports: [
+		«FOR module: modules»		«module»Module,
+		«ENDFOR»
+		],
+		controllers: [],
+		providers: [],
+	})
+	
+	export class AppModule {}
+	'''
+	
 }

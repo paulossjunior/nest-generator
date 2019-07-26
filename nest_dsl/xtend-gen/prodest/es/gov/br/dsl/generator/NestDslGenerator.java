@@ -3,6 +3,8 @@ package prodest.es.gov.br.dsl.generator;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -27,6 +29,8 @@ public class NestDslGenerator extends AbstractGenerator {
   @Inject
   @Extension
   private IQualifiedNameProvider _iQualifiedNameProvider;
+  
+  private List<String> modules = new ArrayList<String>();
   
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
@@ -68,6 +72,7 @@ public class NestDslGenerator extends AbstractGenerator {
         String _plus_14 = (_plus_13 + ".module.ts");
         fsa.generateFile(_plus_14, 
           this.compileModule(e));
+        this.modules.add(e.getName());
       }
     }
     fsa.generateFile(
@@ -76,6 +81,12 @@ public class NestDslGenerator extends AbstractGenerator {
     fsa.generateFile(
       "Database/database.providers.ts", 
       this.dbProvidersCompile());
+    fsa.generateFile(
+      "main.ts", 
+      this.mainCompile());
+    fsa.generateFile(
+      "app.module.ts", 
+      this.appModuleCompile(this.modules));
   }
   
   public CharSequence compile(final Entity e) {
@@ -1268,6 +1279,116 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.append("},");
     _builder.newLine();
     _builder.append("];");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence mainCompile() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import { NestFactory } from \'@nestjs/core\';");
+    _builder.newLine();
+    _builder.append("import { AppModule } from \'./app.module\';");
+    _builder.newLine();
+    _builder.append("import { SwaggerModule, DocumentBuilder } from \'@nestjs/swagger\';");
+    _builder.newLine();
+    _builder.append("const pacote = require( \'../package.json\' );");
+    _builder.newLine();
+    _builder.append("const fs = require( \'fs\' );");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("async function bootstrap() {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("const app = await NestFactory.create(AppModule);");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("const options = new DocumentBuilder()");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append(".setTitle( pacote.name )");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append(".setDescription( pacote.description )");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append(".setVersion( pacote.version )");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append(".setSchemes( \'http\', \'https\' )");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append(".build();");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("const document = SwaggerModule.createDocument( app, options );");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("fs.writeFileSync( \'swagger.json\', JSON.stringify( document, null, 2 ) );");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("SwaggerModule.setup( `/`, app, document );");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("await app.listen(3000);");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("bootstrap();");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence appModuleCompile(final List<String> modules) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import { Module } from \'@nestjs/common\';");
+    _builder.newLine();
+    {
+      for(final String module : modules) {
+        _builder.append("import { ");
+        _builder.append(module);
+        _builder.append("Module } from \'./");
+        _builder.append(module);
+        _builder.append("/");
+        String _lowerCase = module.toLowerCase();
+        _builder.append(_lowerCase);
+        _builder.append(".module\';");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.newLine();
+    _builder.append("@Module({");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("imports: [");
+    _builder.newLine();
+    _builder.append("\t");
+    {
+      for(final String module_1 : modules) {
+        _builder.append("\t\t");
+        _builder.append(module_1, "\t");
+        _builder.append("Module,");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("\t");
+    _builder.append("],");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("controllers: [],");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("providers: [],");
+    _builder.newLine();
+    _builder.append("})");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("export class AppModule {}");
     _builder.newLine();
     return _builder;
   }
