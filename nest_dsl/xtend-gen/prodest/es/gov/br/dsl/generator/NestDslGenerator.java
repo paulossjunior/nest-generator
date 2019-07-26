@@ -70,6 +70,12 @@ public class NestDslGenerator extends AbstractGenerator {
           this.compileModule(e));
       }
     }
+    fsa.generateFile(
+      "Database/database.module.ts", 
+      this.dbModuleCompile());
+    fsa.generateFile(
+      "Database/database.providers.ts", 
+      this.dbProvidersCompile());
   }
   
   public CharSequence compile(final Entity e) {
@@ -1184,6 +1190,85 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.append(_name_4);
     _builder.append("Module {}");
     _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  public CharSequence dbModuleCompile() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import { Module } from \'@nestjs/common\';");
+    _builder.newLine();
+    _builder.append("import { databaseProviders } from \'./database.providers\';");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Module({");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("providers: [...databaseProviders],");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("exports: [...databaseProviders],");
+    _builder.newLine();
+    _builder.append("})");
+    _builder.newLine();
+    _builder.append("export class DatabaseModule {}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence dbProvidersCompile() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import { createConnection } from \'typeorm\';");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("export const databaseProviders = [");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("provide: \'DATABASE_CONNECTION\',");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("useFactory: async () => await createConnection({");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("type: \'postgres\',");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("host: \'localhost\',");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("port: 5432,");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("username: \'postgres\',");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("password: \'senha\',");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("database: \'postgres\',");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("entities: [");
+    _builder.newLine();
+    _builder.append("          ");
+    _builder.append("__dirname + \'/../**/*.entity{.ts,.js}\',");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("],");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("synchronize: true,");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}),");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("},");
+    _builder.newLine();
+    _builder.append("];");
+    _builder.newLine();
     return _builder;
   }
 }

@@ -32,6 +32,13 @@ class NestDslGenerator extends AbstractGenerator {
                 e.name+'/'+e.fullyQualifiedName.toString("/").toLowerCase + ".module.ts",
                 e.compileModule)
         }
+     // Database
+        fsa.generateFile(
+           "Database/database.module.ts",
+            dbModuleCompile)
+        fsa.generateFile(
+           "Database/database.providers.ts",
+            dbProvidersCompile)
     }
  
     def compile(Entity e) 
@@ -348,6 +355,41 @@ class NestDslGenerator extends AbstractGenerator {
 		  providers: [前.name艋ervice, ...前.name.toLowerCase與roviders],
 		})
 		export class 前.name膂odule {}
+	'''
+	
+	def dbModuleCompile()
+	'''
+		import { Module } from '@nestjs/common';
+		import { databaseProviders } from './database.providers';
+		
+		@Module({
+		  providers: [...databaseProviders],
+		  exports: [...databaseProviders],
+		})
+		export class DatabaseModule {}
+	'''
+	
+	def dbProvidersCompile()
+	'''
+		import { createConnection } from 'typeorm';
+		
+		export const databaseProviders = [
+		  {
+		    provide: 'DATABASE_CONNECTION',
+		    useFactory: async () => await createConnection({
+		      type: 'postgres',
+		      host: 'localhost',
+		      port: 5432,
+		      username: 'postgres',
+		      password: 'senha',
+		      database: 'postgres',
+		      entities: [
+		          __dirname + '/../**/*.entity{.ts,.js}',
+		      ],
+		      synchronize: true,
+		    }),
+		  },
+		];
 	'''
   
 }
