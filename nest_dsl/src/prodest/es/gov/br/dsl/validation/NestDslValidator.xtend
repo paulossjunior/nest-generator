@@ -14,7 +14,7 @@ import prodest.es.gov.br.dsl.nestdsl.Property
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 class NestDslValidator extends AbstractNestDslValidator {
-	
+	/*
 //	@Check
 	def void checkNameStartsWithCapital(Entity entity) {
 	    if (!Character.isUpperCase(entity.name.charAt(0))) {
@@ -38,5 +38,5 @@ class NestDslValidator extends AbstractNestDslValidator {
 	    }
 	}
 
-	
+	 */
 }

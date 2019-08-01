@@ -112,7 +112,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getType()
    * @generated
    */
-  int TYPE = 3;
+  int TYPE = 2;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -140,7 +140,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getEntity()
    * @generated
    */
-  int ENTITY = 2;
+  int ENTITY = 3;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -188,6 +188,52 @@ public interface NestdslPackage extends EPackage
   int ENTITY_FEATURE_COUNT = TYPE_FEATURE_COUNT + 3;
 
   /**
+   * The meta object id for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.DtoImpl <em>Dto</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see prodest.es.gov.br.dsl.nestdsl.impl.DtoImpl
+   * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getDto()
+   * @generated
+   */
+  int DTO = 4;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DTO__NAME = TYPE__NAME;
+
+  /**
+   * The feature id for the '<em><b>Super Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DTO__SUPER_TYPE = TYPE_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Properties</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DTO__PROPERTIES = TYPE_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Dto</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DTO_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
+
+  /**
    * The meta object id for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.DataTypeImpl <em>Data Type</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -195,7 +241,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getDataType()
    * @generated
    */
-  int DATA_TYPE = 4;
+  int DATA_TYPE = 5;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -223,7 +269,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getProperty()
    * @generated
    */
-  int PROPERTY = 5;
+  int PROPERTY = 6;
 
   /**
    * The feature id for the '<em><b>Relation</b></em>' containment reference.
@@ -278,7 +324,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getRelation()
    * @generated
    */
-  int RELATION = 6;
+  int RELATION = 7;
 
   /**
    * The feature id for the '<em><b>One Argument</b></em>' containment reference.
@@ -315,7 +361,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getOneArgumentRelation()
    * @generated
    */
-  int ONE_ARGUMENT_RELATION = 7;
+  int ONE_ARGUMENT_RELATION = 8;
 
   /**
    * The feature id for the '<em><b>Argument</b></em>' attribute.
@@ -352,7 +398,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getMultipleArgumentRelation()
    * @generated
    */
-  int MULTIPLE_ARGUMENT_RELATION = 8;
+  int MULTIPLE_ARGUMENT_RELATION = 9;
 
   /**
    * The feature id for the '<em><b>Argument</b></em>' attribute.
@@ -398,7 +444,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getMethod()
    * @generated
    */
-  int METHOD = 9;
+  int METHOD = 10;
 
   /**
    * The feature id for the '<em><b>Verb</b></em>' attribute.
@@ -462,7 +508,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getMethodArg()
    * @generated
    */
-  int METHOD_ARG = 10;
+  int METHOD_ARG = 11;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -533,6 +579,27 @@ public interface NestdslPackage extends EPackage
   EClass getAbstractElement();
 
   /**
+   * Returns the meta object for class '{@link prodest.es.gov.br.dsl.nestdsl.Type <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Type</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.Type
+   * @generated
+   */
+  EClass getType();
+
+  /**
+   * Returns the meta object for the attribute '{@link prodest.es.gov.br.dsl.nestdsl.Type#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.Type#getName()
+   * @see #getType()
+   * @generated
+   */
+  EAttribute getType_Name();
+
+  /**
    * Returns the meta object for class '{@link prodest.es.gov.br.dsl.nestdsl.Entity <em>Entity</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -576,25 +643,36 @@ public interface NestdslPackage extends EPackage
   EReference getEntity_Methods();
 
   /**
-   * Returns the meta object for class '{@link prodest.es.gov.br.dsl.nestdsl.Type <em>Type</em>}'.
+   * Returns the meta object for class '{@link prodest.es.gov.br.dsl.nestdsl.Dto <em>Dto</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Type</em>'.
-   * @see prodest.es.gov.br.dsl.nestdsl.Type
+   * @return the meta object for class '<em>Dto</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.Dto
    * @generated
    */
-  EClass getType();
+  EClass getDto();
 
   /**
-   * Returns the meta object for the attribute '{@link prodest.es.gov.br.dsl.nestdsl.Type#getName <em>Name</em>}'.
+   * Returns the meta object for the reference '{@link prodest.es.gov.br.dsl.nestdsl.Dto#getSuperType <em>Super Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see prodest.es.gov.br.dsl.nestdsl.Type#getName()
-   * @see #getType()
+   * @return the meta object for the reference '<em>Super Type</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.Dto#getSuperType()
+   * @see #getDto()
    * @generated
    */
-  EAttribute getType_Name();
+  EReference getDto_SuperType();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link prodest.es.gov.br.dsl.nestdsl.Dto#getProperties <em>Properties</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Properties</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.Dto#getProperties()
+   * @see #getDto()
+   * @generated
+   */
+  EReference getDto_Properties();
 
   /**
    * Returns the meta object for class '{@link prodest.es.gov.br.dsl.nestdsl.DataType <em>Data Type</em>}'.
@@ -927,6 +1005,24 @@ public interface NestdslPackage extends EPackage
     EClass ABSTRACT_ELEMENT = eINSTANCE.getAbstractElement();
 
     /**
+     * The meta object literal for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.TypeImpl <em>Type</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see prodest.es.gov.br.dsl.nestdsl.impl.TypeImpl
+     * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getType()
+     * @generated
+     */
+    EClass TYPE = eINSTANCE.getType();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TYPE__NAME = eINSTANCE.getType_Name();
+
+    /**
      * The meta object literal for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.EntityImpl <em>Entity</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -961,22 +1057,30 @@ public interface NestdslPackage extends EPackage
     EReference ENTITY__METHODS = eINSTANCE.getEntity_Methods();
 
     /**
-     * The meta object literal for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.TypeImpl <em>Type</em>}' class.
+     * The meta object literal for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.DtoImpl <em>Dto</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see prodest.es.gov.br.dsl.nestdsl.impl.TypeImpl
-     * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getType()
+     * @see prodest.es.gov.br.dsl.nestdsl.impl.DtoImpl
+     * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getDto()
      * @generated
      */
-    EClass TYPE = eINSTANCE.getType();
+    EClass DTO = eINSTANCE.getDto();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Super Type</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute TYPE__NAME = eINSTANCE.getType_Name();
+    EReference DTO__SUPER_TYPE = eINSTANCE.getDto_SuperType();
+
+    /**
+     * The meta object literal for the '<em><b>Properties</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference DTO__PROPERTIES = eINSTANCE.getDto_Properties();
 
     /**
      * The meta object literal for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.DataTypeImpl <em>Data Type</em>}' class.

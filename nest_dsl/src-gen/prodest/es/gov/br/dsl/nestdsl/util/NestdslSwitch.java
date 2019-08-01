@@ -87,6 +87,14 @@ public class NestdslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case NestdslPackage.TYPE:
+      {
+        Type type = (Type)theEObject;
+        T result = caseType(type);
+        if (result == null) result = caseAbstractElement(type);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case NestdslPackage.ENTITY:
       {
         Entity entity = (Entity)theEObject;
@@ -96,11 +104,12 @@ public class NestdslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case NestdslPackage.TYPE:
+      case NestdslPackage.DTO:
       {
-        Type type = (Type)theEObject;
-        T result = caseType(type);
-        if (result == null) result = caseAbstractElement(type);
+        Dto dto = (Dto)theEObject;
+        T result = caseDto(dto);
+        if (result == null) result = caseType(dto);
+        if (result == null) result = caseAbstractElement(dto);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -192,6 +201,22 @@ public class NestdslSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Type</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseType(Type object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Entity</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -208,17 +233,17 @@ public class NestdslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Dto</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Dto</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseType(Type object)
+  public T caseDto(Dto object)
   {
     return null;
   }

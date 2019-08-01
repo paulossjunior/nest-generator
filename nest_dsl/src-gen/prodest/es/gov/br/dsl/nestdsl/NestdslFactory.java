@@ -42,6 +42,15 @@ public interface NestdslFactory extends EFactory
   AbstractElement createAbstractElement();
 
   /**
+   * Returns a new object of class '<em>Type</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Type</em>'.
+   * @generated
+   */
+  Type createType();
+
+  /**
    * Returns a new object of class '<em>Entity</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -51,13 +60,13 @@ public interface NestdslFactory extends EFactory
   Entity createEntity();
 
   /**
-   * Returns a new object of class '<em>Type</em>'.
+   * Returns a new object of class '<em>Dto</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Type</em>'.
+   * @return a new object of class '<em>Dto</em>'.
    * @generated
    */
-  Type createType();
+  Dto createDto();
 
   /**
    * Returns a new object of class '<em>Data Type</em>'.

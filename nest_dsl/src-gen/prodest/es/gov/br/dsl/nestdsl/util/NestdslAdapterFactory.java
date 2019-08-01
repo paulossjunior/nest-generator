@@ -86,14 +86,19 @@ public class NestdslAdapterFactory extends AdapterFactoryImpl
         return createAbstractElementAdapter();
       }
       @Override
+      public Adapter caseType(Type object)
+      {
+        return createTypeAdapter();
+      }
+      @Override
       public Adapter caseEntity(Entity object)
       {
         return createEntityAdapter();
       }
       @Override
-      public Adapter caseType(Type object)
+      public Adapter caseDto(Dto object)
       {
-        return createTypeAdapter();
+        return createDtoAdapter();
       }
       @Override
       public Adapter caseDataType(DataType object)
@@ -183,6 +188,21 @@ public class NestdslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link prodest.es.gov.br.dsl.nestdsl.Type <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see prodest.es.gov.br.dsl.nestdsl.Type
+   * @generated
+   */
+  public Adapter createTypeAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link prodest.es.gov.br.dsl.nestdsl.Entity <em>Entity</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -198,16 +218,16 @@ public class NestdslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link prodest.es.gov.br.dsl.nestdsl.Type <em>Type</em>}'.
+   * Creates a new adapter for an object of class '{@link prodest.es.gov.br.dsl.nestdsl.Dto <em>Dto</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see prodest.es.gov.br.dsl.nestdsl.Type
+   * @see prodest.es.gov.br.dsl.nestdsl.Dto
    * @generated
    */
-  public Adapter createTypeAdapter()
+  public Adapter createDtoAdapter()
   {
     return null;
   }

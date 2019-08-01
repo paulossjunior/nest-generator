@@ -11,6 +11,7 @@ import prodest.es.gov.br.dsl.nestdsl.Property
 import prodest.es.gov.br.dsl.nestdsl.MethodArg
 import java.util.List
 import java.util.ArrayList
+import prodest.es.gov.br.dsl.nestdsl.Dto
 
 class NestDslGenerator extends AbstractGenerator {
  
@@ -38,6 +39,12 @@ class NestDslGenerator extends AbstractGenerator {
                 e.compileModule)
         	modules.add(e.name);
         }
+     //Dto
+     for (dto : resource.allContents.toIterable.filter(Dto)) {
+     	fsa.generateFile(
+                'DTOs/'+dto.fullyQualifiedName.toString("/").toLowerCase + ".dto.ts",
+                dto.compile)
+     }
      // Database
         fsa.generateFile(
            "Database/database.module.ts",
@@ -368,6 +375,7 @@ class NestDslGenerator extends AbstractGenerator {
 		  controllers: [«e.name»Controller],
 		  providers: [«e.name»Service, ...«e.name.toLowerCase»Providers],
 		})
+		
 		export class «e.name»Module {}
 	'''
 	
@@ -380,6 +388,7 @@ class NestDslGenerator extends AbstractGenerator {
 		  providers: [...databaseProviders],
 		  exports: [...databaseProviders],
 		})
+		
 		export class DatabaseModule {}
 	'''
 	
@@ -455,4 +464,32 @@ class NestDslGenerator extends AbstractGenerator {
 	export class AppModule {}
 	'''
 	
+	def compile(Dto dto)
+	'''
+	export class «dto.name»Dto «IF dto.superType !== null
+	»extends «dto.superType.fullyQualifiedName» «ENDIF» {
+    constructor(		
+    «FOR p : dto.properties»
+		«compileDtoProperty(p, true)»
+	«ENDFOR»
+   	) {
+	«FOR p : dto.properties»
+		«compileDtoConstructor(p)»
+	«ENDFOR»
+		}
+	«FOR p : dto.properties»
+		«compileDtoProperty(p, false)»
+	«ENDFOR»
+	}
+	'''
+	
+	def compileDtoProperty(Property p, Boolean constructor)
+	'''
+		«IF constructor == false»	readonly «p.name»«ELSE»		«p.name»«ENDIF»: «p.type.fullyQualifiedName»«p.array»«IF constructor == true»,«ELSE»;«ENDIF»
+	'''
+	
+	def compileDtoConstructor(Property p)
+	'''
+		«IF p !== null»		this.«p.name» = «p.name»«ENDIF»;
+	'''
 }

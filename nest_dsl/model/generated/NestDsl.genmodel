@@ -10,13 +10,17 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference NestDsl.ecore#//Domainmodel/elements"/>
     </genClasses>
     <genClasses ecoreClass="NestDsl.ecore#//AbstractElement"/>
+    <genClasses ecoreClass="NestDsl.ecore#//Type">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NestDsl.ecore#//Type/name"/>
+    </genClasses>
     <genClasses ecoreClass="NestDsl.ecore#//Entity">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NestDsl.ecore#//Entity/superType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference NestDsl.ecore#//Entity/properties"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference NestDsl.ecore#//Entity/methods"/>
     </genClasses>
-    <genClasses ecoreClass="NestDsl.ecore#//Type">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NestDsl.ecore#//Type/name"/>
+    <genClasses ecoreClass="NestDsl.ecore#//Dto">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NestDsl.ecore#//Dto/superType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference NestDsl.ecore#//Dto/properties"/>
     </genClasses>
     <genClasses ecoreClass="NestDsl.ecore#//DataType"/>
     <genClasses ecoreClass="NestDsl.ecore#//Property">

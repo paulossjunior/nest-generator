@@ -16,6 +16,7 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import prodest.es.gov.br.dsl.nestdsl.Dto;
 import prodest.es.gov.br.dsl.nestdsl.Entity;
 import prodest.es.gov.br.dsl.nestdsl.Method;
 import prodest.es.gov.br.dsl.nestdsl.MethodArg;
@@ -74,6 +75,14 @@ public class NestDslGenerator extends AbstractGenerator {
           this.compileModule(e));
         this.modules.add(e.getName());
       }
+    }
+    Iterable<Dto> _filter_1 = Iterables.<Dto>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Dto.class);
+    for (final Dto dto : _filter_1) {
+      String _lowerCase = this._iQualifiedNameProvider.getFullyQualifiedName(dto).toString("/").toLowerCase();
+      String _plus = ("DTOs/" + _lowerCase);
+      String _plus_1 = (_plus + ".dto.ts");
+      fsa.generateFile(_plus_1, 
+        this.compile(dto));
     }
     fsa.generateFile(
       "Database/database.module.ts", 
@@ -1196,6 +1205,7 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.newLineIfNotEmpty();
     _builder.append("})");
     _builder.newLine();
+    _builder.newLine();
     _builder.append("export class ");
     String _name_4 = e.getName();
     _builder.append(_name_4);
@@ -1220,6 +1230,7 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.append("exports: [...databaseProviders],");
     _builder.newLine();
     _builder.append("})");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("export class DatabaseModule {}");
     _builder.newLine();
@@ -1390,6 +1401,108 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("export class AppModule {}");
     _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence compile(final Dto dto) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("export class ");
+    String _name = dto.getName();
+    _builder.append(_name);
+    _builder.append("Dto ");
+    {
+      Dto _superType = dto.getSuperType();
+      boolean _tripleNotEquals = (_superType != null);
+      if (_tripleNotEquals) {
+        _builder.append("extends ");
+        QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(dto.getSuperType());
+        _builder.append(_fullyQualifiedName);
+        _builder.append(" ");
+      }
+    }
+    _builder.append(" {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("    ");
+    _builder.append("constructor(\t\t");
+    _builder.newLine();
+    {
+      EList<Property> _properties = dto.getProperties();
+      for(final Property p : _properties) {
+        CharSequence _compileDtoProperty = this.compileDtoProperty(p, Boolean.valueOf(true));
+        _builder.append(_compileDtoProperty);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("   \t");
+    _builder.append(") {");
+    _builder.newLine();
+    {
+      EList<Property> _properties_1 = dto.getProperties();
+      for(final Property p_1 : _properties_1) {
+        CharSequence _compileDtoConstructor = this.compileDtoConstructor(p_1);
+        _builder.append(_compileDtoConstructor);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    {
+      EList<Property> _properties_2 = dto.getProperties();
+      for(final Property p_2 : _properties_2) {
+        CharSequence _compileDtoProperty_1 = this.compileDtoProperty(p_2, Boolean.valueOf(false));
+        _builder.append(_compileDtoProperty_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence compileDtoProperty(final Property p, final Boolean constructor) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      if (((constructor).booleanValue() == false)) {
+        _builder.append("\treadonly ");
+        String _name = p.getName();
+        _builder.append(_name);
+      } else {
+        _builder.append("\t\t");
+        String _name_1 = p.getName();
+        _builder.append(_name_1);
+      }
+    }
+    _builder.append(": ");
+    QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(p.getType());
+    _builder.append(_fullyQualifiedName);
+    String _array = p.getArray();
+    _builder.append(_array);
+    {
+      if (((constructor).booleanValue() == true)) {
+        _builder.append(",");
+      } else {
+        _builder.append(";");
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  public CharSequence compileDtoConstructor(final Property p) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      if ((p != null)) {
+        _builder.append("\t\tthis.");
+        String _name = p.getName();
+        _builder.append(_name);
+        _builder.append(" = ");
+        String _name_1 = p.getName();
+        _builder.append(_name_1);
+      }
+    }
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
     return _builder;
   }
 }

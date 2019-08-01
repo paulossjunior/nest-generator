@@ -11,15 +11,21 @@ AbstractElement:
     Type
     ;
  
+Type:
+	DataType | Entity | Dto
+	;
+
 Entity:
     'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'
         (properties += Property)*
         (methods += Method)*
     '}'
     ;
-    
-Type:
-	DataType | Entity
+	
+Dto:
+	'dto' name=ID  ('extends' superType=[Dto|QualifiedName])? '{'
+		(properties += Property)*
+	'}'
 	;
 	
 DataType:

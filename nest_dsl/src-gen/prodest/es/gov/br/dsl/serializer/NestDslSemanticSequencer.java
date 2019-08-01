@@ -16,6 +16,7 @@ import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequence
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import prodest.es.gov.br.dsl.nestdsl.DataType;
 import prodest.es.gov.br.dsl.nestdsl.Domainmodel;
+import prodest.es.gov.br.dsl.nestdsl.Dto;
 import prodest.es.gov.br.dsl.nestdsl.Entity;
 import prodest.es.gov.br.dsl.nestdsl.Method;
 import prodest.es.gov.br.dsl.nestdsl.MethodArg;
@@ -45,6 +46,9 @@ public class NestDslSemanticSequencer extends AbstractDelegatingSemanticSequence
 				return; 
 			case NestdslPackage.DOMAINMODEL:
 				sequence_Domainmodel(context, (Domainmodel) semanticObject); 
+				return; 
+			case NestdslPackage.DTO:
+				sequence_Dto(context, (Dto) semanticObject); 
 				return; 
 			case NestdslPackage.ENTITY:
 				sequence_Entity(context, (Entity) semanticObject); 
@@ -106,9 +110,23 @@ public class NestDslSemanticSequencer extends AbstractDelegatingSemanticSequence
 	
 	/**
 	 * Contexts:
+	 *     AbstractElement returns Dto
+	 *     Type returns Dto
+	 *     Dto returns Dto
+	 *
+	 * Constraint:
+	 *     (name=ID superType=[Dto|QualifiedName]? properties+=Property*)
+	 */
+	protected void sequence_Dto(ISerializationContext context, Dto semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     AbstractElement returns Entity
-	 *     Entity returns Entity
 	 *     Type returns Entity
+	 *     Entity returns Entity
 	 *
 	 * Constraint:
 	 *     (name=ID superType=[Entity|QualifiedName]? properties+=Property* methods+=Method*)
