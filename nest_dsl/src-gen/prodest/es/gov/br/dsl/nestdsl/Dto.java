@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Dto extends Type
+public interface Dto extends DtoType
 {
   /**
    * Returns the value of the '<em><b>Super Type</b></em>' reference.
@@ -48,7 +48,7 @@ public interface Dto extends Type
 
   /**
    * Returns the value of the '<em><b>Properties</b></em>' containment reference list.
-   * The list contents are of type {@link prodest.es.gov.br.dsl.nestdsl.Property}.
+   * The list contents are of type {@link prodest.es.gov.br.dsl.nestdsl.DtoProperty}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Properties</em>' containment reference list.
@@ -56,6 +56,6 @@ public interface Dto extends Type
    * @model containment="true"
    * @generated
    */
-  EList<Property> getProperties();
+  EList<DtoProperty> getProperties();
 
 } // Dto

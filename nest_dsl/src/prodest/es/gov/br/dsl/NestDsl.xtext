@@ -8,11 +8,15 @@ Domainmodel:
     ;
     
 AbstractElement:
-    Type
+    Type | DtoType
     ;
  
 Type:
-	DataType | Entity | Dto
+	DataType | Entity
+	;
+
+DtoType:
+	DataType | Dto
 	;
 
 Entity:
@@ -24,7 +28,7 @@ Entity:
 	
 Dto:
 	'dto' name=ID  ('extends' superType=[Dto|QualifiedName])? '{'
-		(properties += Property)*
+		(properties += DtoProperty)*
 	'}'
 	;
 	
@@ -39,6 +43,10 @@ QualifiedName:
 Property:
 	relation = (Relation)?
     name=ID ':' type=[Type|QualifiedName](array='[]')?(';')?
+    ;
+    
+DtoProperty:
+    name=ID ':' type=[DtoType|QualifiedName](array='[]')?(';')?
     ;
     
 Relation:

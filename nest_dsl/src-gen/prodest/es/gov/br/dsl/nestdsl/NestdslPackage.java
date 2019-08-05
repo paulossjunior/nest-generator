@@ -96,13 +96,22 @@ public interface NestdslPackage extends EPackage
   int ABSTRACT_ELEMENT = 1;
 
   /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ABSTRACT_ELEMENT__NAME = 0;
+
+  /**
    * The number of structural features of the '<em>Abstract Element</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ABSTRACT_ELEMENT_FEATURE_COUNT = 0;
+  int ABSTRACT_ELEMENT_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.TypeImpl <em>Type</em>}' class.
@@ -121,7 +130,7 @@ public interface NestdslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPE__NAME = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+  int TYPE__NAME = ABSTRACT_ELEMENT__NAME;
 
   /**
    * The number of structural features of the '<em>Type</em>' class.
@@ -130,7 +139,35 @@ public interface NestdslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPE_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+  int TYPE_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.DtoTypeImpl <em>Dto Type</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see prodest.es.gov.br.dsl.nestdsl.impl.DtoTypeImpl
+   * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getDtoType()
+   * @generated
+   */
+  int DTO_TYPE = 3;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DTO_TYPE__NAME = ABSTRACT_ELEMENT__NAME;
+
+  /**
+   * The number of structural features of the '<em>Dto Type</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DTO_TYPE_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.EntityImpl <em>Entity</em>}' class.
@@ -140,7 +177,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getEntity()
    * @generated
    */
-  int ENTITY = 3;
+  int ENTITY = 4;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -195,7 +232,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getDto()
    * @generated
    */
-  int DTO = 4;
+  int DTO = 5;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -204,7 +241,7 @@ public interface NestdslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DTO__NAME = TYPE__NAME;
+  int DTO__NAME = DTO_TYPE__NAME;
 
   /**
    * The feature id for the '<em><b>Super Type</b></em>' reference.
@@ -213,7 +250,7 @@ public interface NestdslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DTO__SUPER_TYPE = TYPE_FEATURE_COUNT + 0;
+  int DTO__SUPER_TYPE = DTO_TYPE_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -222,7 +259,7 @@ public interface NestdslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DTO__PROPERTIES = TYPE_FEATURE_COUNT + 1;
+  int DTO__PROPERTIES = DTO_TYPE_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Dto</em>' class.
@@ -231,7 +268,7 @@ public interface NestdslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DTO_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
+  int DTO_FEATURE_COUNT = DTO_TYPE_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.DataTypeImpl <em>Data Type</em>}' class.
@@ -241,7 +278,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getDataType()
    * @generated
    */
-  int DATA_TYPE = 5;
+  int DATA_TYPE = 6;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -269,7 +306,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getProperty()
    * @generated
    */
-  int PROPERTY = 6;
+  int PROPERTY = 7;
 
   /**
    * The feature id for the '<em><b>Relation</b></em>' containment reference.
@@ -317,6 +354,52 @@ public interface NestdslPackage extends EPackage
   int PROPERTY_FEATURE_COUNT = 4;
 
   /**
+   * The meta object id for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.DtoPropertyImpl <em>Dto Property</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see prodest.es.gov.br.dsl.nestdsl.impl.DtoPropertyImpl
+   * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getDtoProperty()
+   * @generated
+   */
+  int DTO_PROPERTY = 8;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DTO_PROPERTY__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DTO_PROPERTY__TYPE = 1;
+
+  /**
+   * The feature id for the '<em><b>Array</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DTO_PROPERTY__ARRAY = 2;
+
+  /**
+   * The number of structural features of the '<em>Dto Property</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DTO_PROPERTY_FEATURE_COUNT = 3;
+
+  /**
    * The meta object id for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.RelationImpl <em>Relation</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -324,7 +407,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getRelation()
    * @generated
    */
-  int RELATION = 7;
+  int RELATION = 9;
 
   /**
    * The feature id for the '<em><b>One Argument</b></em>' containment reference.
@@ -361,7 +444,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getOneArgumentRelation()
    * @generated
    */
-  int ONE_ARGUMENT_RELATION = 8;
+  int ONE_ARGUMENT_RELATION = 10;
 
   /**
    * The feature id for the '<em><b>Argument</b></em>' attribute.
@@ -398,7 +481,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getMultipleArgumentRelation()
    * @generated
    */
-  int MULTIPLE_ARGUMENT_RELATION = 9;
+  int MULTIPLE_ARGUMENT_RELATION = 11;
 
   /**
    * The feature id for the '<em><b>Argument</b></em>' attribute.
@@ -444,7 +527,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getMethod()
    * @generated
    */
-  int METHOD = 10;
+  int METHOD = 12;
 
   /**
    * The feature id for the '<em><b>Verb</b></em>' attribute.
@@ -508,7 +591,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getMethodArg()
    * @generated
    */
-  int METHOD_ARG = 11;
+  int METHOD_ARG = 13;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -579,6 +662,17 @@ public interface NestdslPackage extends EPackage
   EClass getAbstractElement();
 
   /**
+   * Returns the meta object for the attribute '{@link prodest.es.gov.br.dsl.nestdsl.AbstractElement#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.AbstractElement#getName()
+   * @see #getAbstractElement()
+   * @generated
+   */
+  EAttribute getAbstractElement_Name();
+
+  /**
    * Returns the meta object for class '{@link prodest.es.gov.br.dsl.nestdsl.Type <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -589,15 +683,14 @@ public interface NestdslPackage extends EPackage
   EClass getType();
 
   /**
-   * Returns the meta object for the attribute '{@link prodest.es.gov.br.dsl.nestdsl.Type#getName <em>Name</em>}'.
+   * Returns the meta object for class '{@link prodest.es.gov.br.dsl.nestdsl.DtoType <em>Dto Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see prodest.es.gov.br.dsl.nestdsl.Type#getName()
-   * @see #getType()
+   * @return the meta object for class '<em>Dto Type</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.DtoType
    * @generated
    */
-  EAttribute getType_Name();
+  EClass getDtoType();
 
   /**
    * Returns the meta object for class '{@link prodest.es.gov.br.dsl.nestdsl.Entity <em>Entity</em>}'.
@@ -737,6 +830,49 @@ public interface NestdslPackage extends EPackage
    * @generated
    */
   EAttribute getProperty_Array();
+
+  /**
+   * Returns the meta object for class '{@link prodest.es.gov.br.dsl.nestdsl.DtoProperty <em>Dto Property</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Dto Property</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.DtoProperty
+   * @generated
+   */
+  EClass getDtoProperty();
+
+  /**
+   * Returns the meta object for the attribute '{@link prodest.es.gov.br.dsl.nestdsl.DtoProperty#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.DtoProperty#getName()
+   * @see #getDtoProperty()
+   * @generated
+   */
+  EAttribute getDtoProperty_Name();
+
+  /**
+   * Returns the meta object for the reference '{@link prodest.es.gov.br.dsl.nestdsl.DtoProperty#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Type</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.DtoProperty#getType()
+   * @see #getDtoProperty()
+   * @generated
+   */
+  EReference getDtoProperty_Type();
+
+  /**
+   * Returns the meta object for the attribute '{@link prodest.es.gov.br.dsl.nestdsl.DtoProperty#getArray <em>Array</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Array</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.DtoProperty#getArray()
+   * @see #getDtoProperty()
+   * @generated
+   */
+  EAttribute getDtoProperty_Array();
 
   /**
    * Returns the meta object for class '{@link prodest.es.gov.br.dsl.nestdsl.Relation <em>Relation</em>}'.
@@ -1005,6 +1141,14 @@ public interface NestdslPackage extends EPackage
     EClass ABSTRACT_ELEMENT = eINSTANCE.getAbstractElement();
 
     /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ABSTRACT_ELEMENT__NAME = eINSTANCE.getAbstractElement_Name();
+
+    /**
      * The meta object literal for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.TypeImpl <em>Type</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1015,12 +1159,14 @@ public interface NestdslPackage extends EPackage
     EClass TYPE = eINSTANCE.getType();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * The meta object literal for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.DtoTypeImpl <em>Dto Type</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see prodest.es.gov.br.dsl.nestdsl.impl.DtoTypeImpl
+     * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getDtoType()
      * @generated
      */
-    EAttribute TYPE__NAME = eINSTANCE.getType_Name();
+    EClass DTO_TYPE = eINSTANCE.getDtoType();
 
     /**
      * The meta object literal for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.EntityImpl <em>Entity</em>}' class.
@@ -1133,6 +1279,40 @@ public interface NestdslPackage extends EPackage
      * @generated
      */
     EAttribute PROPERTY__ARRAY = eINSTANCE.getProperty_Array();
+
+    /**
+     * The meta object literal for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.DtoPropertyImpl <em>Dto Property</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see prodest.es.gov.br.dsl.nestdsl.impl.DtoPropertyImpl
+     * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getDtoProperty()
+     * @generated
+     */
+    EClass DTO_PROPERTY = eINSTANCE.getDtoProperty();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DTO_PROPERTY__NAME = eINSTANCE.getDtoProperty_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference DTO_PROPERTY__TYPE = eINSTANCE.getDtoProperty_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Array</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DTO_PROPERTY__ARRAY = eINSTANCE.getDtoProperty_Array();
 
     /**
      * The meta object literal for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.RelationImpl <em>Relation</em>}' class.

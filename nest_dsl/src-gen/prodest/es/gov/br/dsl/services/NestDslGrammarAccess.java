@@ -40,27 +40,34 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	public class AbstractElementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "prodest.es.gov.br.dsl.NestDsl.AbstractElement");
-		private final RuleCall cTypeParserRuleCall = (RuleCall)rule.eContents().get(1);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cTypeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cDtoTypeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//AbstractElement:
-		//	Type;
+		//	Type | DtoType;
 		@Override public ParserRule getRule() { return rule; }
 		
+		//Type | DtoType
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
 		//Type
-		public RuleCall getTypeParserRuleCall() { return cTypeParserRuleCall; }
+		public RuleCall getTypeParserRuleCall_0() { return cTypeParserRuleCall_0; }
+		
+		//DtoType
+		public RuleCall getDtoTypeParserRuleCall_1() { return cDtoTypeParserRuleCall_1; }
 	}
 	public class TypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "prodest.es.gov.br.dsl.NestDsl.Type");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cDataTypeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cEntityParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cDtoParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//Type:
-		//	DataType | Entity | Dto;
+		//	DataType | Entity;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//DataType | Entity | Dto
+		//DataType | Entity
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//DataType
@@ -68,9 +75,25 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Entity
 		public RuleCall getEntityParserRuleCall_1() { return cEntityParserRuleCall_1; }
+	}
+	public class DtoTypeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "prodest.es.gov.br.dsl.NestDsl.DtoType");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cDataTypeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cDtoParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//DtoType:
+		//	DataType | Dto;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//DataType | Dto
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//DataType
+		public RuleCall getDataTypeParserRuleCall_0() { return cDataTypeParserRuleCall_0; }
 		
 		//Dto
-		public RuleCall getDtoParserRuleCall_2() { return cDtoParserRuleCall_2; }
+		public RuleCall getDtoParserRuleCall_1() { return cDtoParserRuleCall_1; }
 	}
 	public class EntityElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "prodest.es.gov.br.dsl.NestDsl.Entity");
@@ -152,14 +175,14 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSuperTypeDtoQualifiedNameParserRuleCall_2_1_0_1 = (RuleCall)cSuperTypeDtoCrossReference_2_1_0.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cPropertiesAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cPropertiesPropertyParserRuleCall_4_0 = (RuleCall)cPropertiesAssignment_4.eContents().get(0);
+		private final RuleCall cPropertiesDtoPropertyParserRuleCall_4_0 = (RuleCall)cPropertiesAssignment_4.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Dto:
-		//	'dto' name=ID ('extends' superType=[Dto|QualifiedName])? '{' properties+=Property* '}';
+		//	'dto' name=ID ('extends' superType=[Dto|QualifiedName])? '{' properties+=DtoProperty* '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'dto' name=ID ('extends' superType=[Dto|QualifiedName])? '{' properties+=Property* '}'
+		//'dto' name=ID ('extends' superType=[Dto|QualifiedName])? '{' properties+=DtoProperty* '}'
 		public Group getGroup() { return cGroup; }
 		
 		//'dto'
@@ -189,11 +212,11 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//properties+=Property*
+		//properties+=DtoProperty*
 		public Assignment getPropertiesAssignment_4() { return cPropertiesAssignment_4; }
 		
-		//Property
-		public RuleCall getPropertiesPropertyParserRuleCall_4_0() { return cPropertiesPropertyParserRuleCall_4_0; }
+		//DtoProperty
+		public RuleCall getPropertiesDtoPropertyParserRuleCall_4_0() { return cPropertiesDtoPropertyParserRuleCall_4_0; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
@@ -294,6 +317,53 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//';'?
 		public Keyword getSemicolonKeyword_5() { return cSemicolonKeyword_5; }
+	}
+	public class DtoPropertyElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "prodest.es.gov.br.dsl.NestDsl.DtoProperty");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cTypeDtoTypeCrossReference_2_0 = (CrossReference)cTypeAssignment_2.eContents().get(0);
+		private final RuleCall cTypeDtoTypeQualifiedNameParserRuleCall_2_0_1 = (RuleCall)cTypeDtoTypeCrossReference_2_0.eContents().get(1);
+		private final Assignment cArrayAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final Keyword cArrayLeftSquareBracketRightSquareBracketKeyword_3_0 = (Keyword)cArrayAssignment_3.eContents().get(0);
+		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		//DtoProperty:
+		//	name=ID ':' type=[DtoType|QualifiedName] array='[]'? ';'?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//name=ID ':' type=[DtoType|QualifiedName] array='[]'? ';'?
+		public Group getGroup() { return cGroup; }
+		
+		//name=ID
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
+		
+		//':'
+		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
+		
+		//type=[DtoType|QualifiedName]
+		public Assignment getTypeAssignment_2() { return cTypeAssignment_2; }
+		
+		//[DtoType|QualifiedName]
+		public CrossReference getTypeDtoTypeCrossReference_2_0() { return cTypeDtoTypeCrossReference_2_0; }
+		
+		//QualifiedName
+		public RuleCall getTypeDtoTypeQualifiedNameParserRuleCall_2_0_1() { return cTypeDtoTypeQualifiedNameParserRuleCall_2_0_1; }
+		
+		//array='[]'?
+		public Assignment getArrayAssignment_3() { return cArrayAssignment_3; }
+		
+		//'[]'
+		public Keyword getArrayLeftSquareBracketRightSquareBracketKeyword_3_0() { return cArrayLeftSquareBracketRightSquareBracketKeyword_3_0; }
+		
+		//';'?
+		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 	public class RelationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "prodest.es.gov.br.dsl.NestDsl.Relation");
@@ -553,11 +623,13 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 	private final DomainmodelElements pDomainmodel;
 	private final AbstractElementElements pAbstractElement;
 	private final TypeElements pType;
+	private final DtoTypeElements pDtoType;
 	private final EntityElements pEntity;
 	private final DtoElements pDto;
 	private final DataTypeElements pDataType;
 	private final QualifiedNameElements pQualifiedName;
 	private final PropertyElements pProperty;
+	private final DtoPropertyElements pDtoProperty;
 	private final RelationElements pRelation;
 	private final OneArgumentRelationElements pOneArgumentRelation;
 	private final MultipleArgumentRelationElements pMultipleArgumentRelation;
@@ -577,11 +649,13 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 		this.pDomainmodel = new DomainmodelElements();
 		this.pAbstractElement = new AbstractElementElements();
 		this.pType = new TypeElements();
+		this.pDtoType = new DtoTypeElements();
 		this.pEntity = new EntityElements();
 		this.pDto = new DtoElements();
 		this.pDataType = new DataTypeElements();
 		this.pQualifiedName = new QualifiedNameElements();
 		this.pProperty = new PropertyElements();
+		this.pDtoProperty = new DtoPropertyElements();
 		this.pRelation = new RelationElements();
 		this.pOneArgumentRelation = new OneArgumentRelationElements();
 		this.pMultipleArgumentRelation = new MultipleArgumentRelationElements();
@@ -628,7 +702,7 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//AbstractElement:
-	//	Type;
+	//	Type | DtoType;
 	public AbstractElementElements getAbstractElementAccess() {
 		return pAbstractElement;
 	}
@@ -638,13 +712,23 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Type:
-	//	DataType | Entity | Dto;
+	//	DataType | Entity;
 	public TypeElements getTypeAccess() {
 		return pType;
 	}
 	
 	public ParserRule getTypeRule() {
 		return getTypeAccess().getRule();
+	}
+	
+	//DtoType:
+	//	DataType | Dto;
+	public DtoTypeElements getDtoTypeAccess() {
+		return pDtoType;
+	}
+	
+	public ParserRule getDtoTypeRule() {
+		return getDtoTypeAccess().getRule();
 	}
 	
 	//Entity:
@@ -658,7 +742,7 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Dto:
-	//	'dto' name=ID ('extends' superType=[Dto|QualifiedName])? '{' properties+=Property* '}';
+	//	'dto' name=ID ('extends' superType=[Dto|QualifiedName])? '{' properties+=DtoProperty* '}';
 	public DtoElements getDtoAccess() {
 		return pDto;
 	}
@@ -695,6 +779,16 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getPropertyRule() {
 		return getPropertyAccess().getRule();
+	}
+	
+	//DtoProperty:
+	//	name=ID ':' type=[DtoType|QualifiedName] array='[]'? ';'?;
+	public DtoPropertyElements getDtoPropertyAccess() {
+		return pDtoProperty;
+	}
+	
+	public ParserRule getDtoPropertyRule() {
+		return getDtoPropertyAccess().getRule();
 	}
 	
 	//Relation:

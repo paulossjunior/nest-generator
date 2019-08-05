@@ -17,6 +17,7 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransi
 import prodest.es.gov.br.dsl.nestdsl.DataType;
 import prodest.es.gov.br.dsl.nestdsl.Domainmodel;
 import prodest.es.gov.br.dsl.nestdsl.Dto;
+import prodest.es.gov.br.dsl.nestdsl.DtoProperty;
 import prodest.es.gov.br.dsl.nestdsl.Entity;
 import prodest.es.gov.br.dsl.nestdsl.Method;
 import prodest.es.gov.br.dsl.nestdsl.MethodArg;
@@ -50,6 +51,9 @@ public class NestDslSemanticSequencer extends AbstractDelegatingSemanticSequence
 			case NestdslPackage.DTO:
 				sequence_Dto(context, (Dto) semanticObject); 
 				return; 
+			case NestdslPackage.DTO_PROPERTY:
+				sequence_DtoProperty(context, (DtoProperty) semanticObject); 
+				return; 
 			case NestdslPackage.ENTITY:
 				sequence_Entity(context, (Entity) semanticObject); 
 				return; 
@@ -80,6 +84,7 @@ public class NestDslSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 * Contexts:
 	 *     AbstractElement returns DataType
 	 *     Type returns DataType
+	 *     DtoType returns DataType
 	 *     DataType returns DataType
 	 *
 	 * Constraint:
@@ -87,8 +92,8 @@ public class NestDslSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 */
 	protected void sequence_DataType(ISerializationContext context, DataType semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, NestdslPackage.Literals.TYPE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, NestdslPackage.Literals.TYPE__NAME));
+			if (transientValues.isValueTransient(semanticObject, NestdslPackage.Literals.ABSTRACT_ELEMENT__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, NestdslPackage.Literals.ABSTRACT_ELEMENT__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getDataTypeAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
@@ -110,12 +115,24 @@ public class NestDslSemanticSequencer extends AbstractDelegatingSemanticSequence
 	
 	/**
 	 * Contexts:
+	 *     DtoProperty returns DtoProperty
+	 *
+	 * Constraint:
+	 *     (name=ID type=[DtoType|QualifiedName] array='[]'?)
+	 */
+	protected void sequence_DtoProperty(ISerializationContext context, DtoProperty semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     AbstractElement returns Dto
-	 *     Type returns Dto
+	 *     DtoType returns Dto
 	 *     Dto returns Dto
 	 *
 	 * Constraint:
-	 *     (name=ID superType=[Dto|QualifiedName]? properties+=Property*)
+	 *     (name=ID superType=[Dto|QualifiedName]? properties+=DtoProperty*)
 	 */
 	protected void sequence_Dto(ISerializationContext context, Dto semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

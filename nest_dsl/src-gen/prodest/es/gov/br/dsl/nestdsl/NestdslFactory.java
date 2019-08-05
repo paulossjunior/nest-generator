@@ -51,6 +51,15 @@ public interface NestdslFactory extends EFactory
   Type createType();
 
   /**
+   * Returns a new object of class '<em>Dto Type</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Dto Type</em>'.
+   * @generated
+   */
+  DtoType createDtoType();
+
+  /**
    * Returns a new object of class '<em>Entity</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -85,6 +94,15 @@ public interface NestdslFactory extends EFactory
    * @generated
    */
   Property createProperty();
+
+  /**
+   * Returns a new object of class '<em>Dto Property</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Dto Property</em>'.
+   * @generated
+   */
+  DtoProperty createDtoProperty();
 
   /**
    * Returns a new object of class '<em>Relation</em>'.

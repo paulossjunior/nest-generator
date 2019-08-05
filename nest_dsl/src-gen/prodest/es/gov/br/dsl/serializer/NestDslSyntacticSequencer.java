@@ -22,6 +22,7 @@ public class NestDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected NestDslGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_DataType_LeftSquareBracketRightSquareBracketKeyword_2_q;
 	protected AbstractElementAlias match_DataType_SemicolonKeyword_3_q;
+	protected AbstractElementAlias match_DtoProperty_SemicolonKeyword_4_q;
 	protected AbstractElementAlias match_Method_CommaKeyword_3_1_q;
 	protected AbstractElementAlias match_Method_SemicolonKeyword_7_q;
 	protected AbstractElementAlias match_Property_SemicolonKeyword_5_q;
@@ -31,6 +32,7 @@ public class NestDslSyntacticSequencer extends AbstractSyntacticSequencer {
 		grammarAccess = (NestDslGrammarAccess) access;
 		match_DataType_LeftSquareBracketRightSquareBracketKeyword_2_q = new TokenAlias(false, true, grammarAccess.getDataTypeAccess().getLeftSquareBracketRightSquareBracketKeyword_2());
 		match_DataType_SemicolonKeyword_3_q = new TokenAlias(false, true, grammarAccess.getDataTypeAccess().getSemicolonKeyword_3());
+		match_DtoProperty_SemicolonKeyword_4_q = new TokenAlias(false, true, grammarAccess.getDtoPropertyAccess().getSemicolonKeyword_4());
 		match_Method_CommaKeyword_3_1_q = new TokenAlias(false, true, grammarAccess.getMethodAccess().getCommaKeyword_3_1());
 		match_Method_SemicolonKeyword_7_q = new TokenAlias(false, true, grammarAccess.getMethodAccess().getSemicolonKeyword_7());
 		match_Property_SemicolonKeyword_5_q = new TokenAlias(false, true, grammarAccess.getPropertyAccess().getSemicolonKeyword_5());
@@ -52,6 +54,8 @@ public class NestDslSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_DataType_LeftSquareBracketRightSquareBracketKeyword_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_DataType_SemicolonKeyword_3_q.equals(syntax))
 				emit_DataType_SemicolonKeyword_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_DtoProperty_SemicolonKeyword_4_q.equals(syntax))
+				emit_DtoProperty_SemicolonKeyword_4_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Method_CommaKeyword_3_1_q.equals(syntax))
 				emit_Method_CommaKeyword_3_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Method_SemicolonKeyword_7_q.equals(syntax))
@@ -81,6 +85,18 @@ public class NestDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     name=ID '[]'? (ambiguity) (rule end)
 	 */
 	protected void emit_DataType_SemicolonKeyword_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ';'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     array='[]' (ambiguity) (rule end)
+	 *     type=[DtoType|QualifiedName] (ambiguity) (rule end)
+	 */
+	protected void emit_DtoProperty_SemicolonKeyword_4_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

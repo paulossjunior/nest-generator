@@ -19,8 +19,8 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import prodest.es.gov.br.dsl.nestdsl.Dto;
+import prodest.es.gov.br.dsl.nestdsl.DtoProperty;
 import prodest.es.gov.br.dsl.nestdsl.NestdslPackage;
-import prodest.es.gov.br.dsl.nestdsl.Property;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +36,7 @@ import prodest.es.gov.br.dsl.nestdsl.Property;
  *
  * @generated
  */
-public class DtoImpl extends TypeImpl implements Dto
+public class DtoImpl extends DtoTypeImpl implements Dto
 {
   /**
    * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference.
@@ -56,7 +56,7 @@ public class DtoImpl extends TypeImpl implements Dto
    * @generated
    * @ordered
    */
-  protected EList<Property> properties;
+  protected EList<DtoProperty> properties;
 
   /**
    * <!-- begin-user-doc -->
@@ -130,11 +130,11 @@ public class DtoImpl extends TypeImpl implements Dto
    * @generated
    */
   @Override
-  public EList<Property> getProperties()
+  public EList<DtoProperty> getProperties()
   {
     if (properties == null)
     {
-      properties = new EObjectContainmentEList<Property>(Property.class, this, NestdslPackage.DTO__PROPERTIES);
+      properties = new EObjectContainmentEList<DtoProperty>(DtoProperty.class, this, NestdslPackage.DTO__PROPERTIES);
     }
     return properties;
   }
@@ -190,7 +190,7 @@ public class DtoImpl extends TypeImpl implements Dto
         return;
       case NestdslPackage.DTO__PROPERTIES:
         getProperties().clear();
-        getProperties().addAll((Collection<? extends Property>)newValue);
+        getProperties().addAll((Collection<? extends DtoProperty>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

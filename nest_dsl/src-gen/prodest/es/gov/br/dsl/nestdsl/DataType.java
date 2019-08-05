@@ -14,6 +14,6 @@ package prodest.es.gov.br.dsl.nestdsl;
  * @model
  * @generated
  */
-public interface DataType extends Type
+public interface DataType extends Type, DtoType
 {
 } // DataType

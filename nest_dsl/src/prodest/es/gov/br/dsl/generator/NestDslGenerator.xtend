@@ -12,6 +12,7 @@ import prodest.es.gov.br.dsl.nestdsl.MethodArg
 import java.util.List
 import java.util.ArrayList
 import prodest.es.gov.br.dsl.nestdsl.Dto
+import prodest.es.gov.br.dsl.nestdsl.DtoProperty
 
 class NestDslGenerator extends AbstractGenerator {
  
@@ -60,6 +61,15 @@ class NestDslGenerator extends AbstractGenerator {
         fsa.generateFile(
            "app.module.ts",
             appModuleCompile(modules))
+        fsa.generateFile(
+           "Dockerfile",
+            dockerfileCompile)
+        fsa.generateFile(
+           " .gitlab-ci.yml",
+            ciCompile)
+        fsa.generateFile(
+           "sonar-project.properties",
+            sonarCompile)
     }
  
     def compile(Entity e) 
@@ -466,6 +476,10 @@ class NestDslGenerator extends AbstractGenerator {
 	
 	def compile(Dto dto)
 	'''
+	«FOR p : dto.properties»
+		«IF p.type.eClass.name.equals('Dto')»import { «p.type.fullyQualifiedName» } from './«p.type.fullyQualifiedName.toLowerCase».dto'«ENDIF»
+	«ENDFOR»
+	
 	export class «dto.name»Dto «IF dto.superType !== null
 	»extends «dto.superType.fullyQualifiedName» «ENDIF» {
     constructor(		
@@ -483,13 +497,123 @@ class NestDslGenerator extends AbstractGenerator {
 	}
 	'''
 	
-	def compileDtoProperty(Property p, Boolean constructor)
+	def compileDtoProperty(DtoProperty p, Boolean constructor)
 	'''
 		«IF constructor == false»	readonly «p.name»«ELSE»		«p.name»«ENDIF»: «p.type.fullyQualifiedName»«p.array»«IF constructor == true»,«ELSE»;«ENDIF»
 	'''
 	
-	def compileDtoConstructor(Property p)
+	def compileDtoConstructor(DtoProperty p)
 	'''
 		«IF p !== null»		this.«p.name» = «p.name»«ENDIF»;
 	'''
+	
+	def dockerfileCompile()
+	'''
+		FROM registry.es.gov.br/espm/infraestrutura/containers/node:10.15.3
+		
+		WORKDIR /app
+		RUN mkdir /src
+		
+		COPY package.json .
+		COPY tsconfig.json .
+		RUN npm install
+		COPY src/ /app/src
+		
+		EXPOSE 3000
+		
+		CMD ["npm","run", "start"]
+		
+	'''
+	
+	def ciCompile()
+	'''
+		stages:
+		  - test
+		  - quality
+		  - build
+		  - deploy
+		  #- stress
+		
+		cache:
+		  key: 'YOUR-KEY'
+		  paths:
+		  - node_modules/
+		  
+		test_job:
+		  image: registry.es.gov.br/espm/infraestrutura/containers/node:10.15.3
+		  stage: test
+		  script:
+		     - npm install #--registry http://verdaccio.10.243.9.12.xip.io
+		     - npm run test
+		     - npm run test:e2e
+		  retry: 2   
+		
+		quality_job:
+		  image: registry.es.gov.br/espm/infraestrutura/containers/sonar-scanner:3.3.0.1492
+		  stage: quality
+		  dependencies:
+		      - test_job    
+		  script:
+		   - npm install #--registry http://verdaccio.10.243.9.12.xip.io
+		   - npm run test:cov
+		   - sonar-scanner
+		
+		build_job:
+		  stage: build
+		  image: docker:stable
+		
+		  services:
+		    - docker:dind
+		  only:
+		    - tags
+		  script:
+		    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+		    - docker build -t $CI_REGISTRY_IMAGE:$CI_BUILD_TAG .
+		    - docker push $CI_REGISTRY_IMAGE:$CI_BUILD_TAG
+		    - docker tag $CI_REGISTRY_IMAGE:$CI_BUILD_TAG $CI_REGISTRY_IMAGE:latest
+		    - docker push $CI_REGISTRY_IMAGE:latest
+		   
+		deploy_job:
+		  stage: deploy
+		  image: registry.es.gov.br/espm/infraestrutura/containers/node:10.15.3
+		  
+		  only:
+		    - tags
+		  script:
+		    - npm i upgrade-rancher
+		    - ./node_modules/.bin/upgrade-rancher --IMAGE $CI_REGISTRY_IMAGE:$CI_BUILD_TAG --SERVICE_ID RANCHER_SERVICE_ID
+		  dependencies:
+		    - build_job
+		    
+		#stress_job:
+		#  stage: stress
+		#  image: docker:stable
+		#  dependencies:
+		#    - deploy_job
+		#  only:
+		#    - tags
+		#  services:
+		#    - docker:dind
+		#  script:
+		#    - docker run -i --rm -v $(pwd)/stress:/bzt-configs -v $(pwd)/stress/artifacts:/tmp/artifacts blazemeter/taurus quick_test.yml 2>&1
+		#  artifacts:
+		#    paths:
+		#      - $(pwd)/stress/artifacts
+		#    expire_in: 2 week
+		'''
+		
+		def sonarCompile()
+		'''
+			sonar.projectKey = YOUR KEY
+			sonar.projectName = YOUR PROJECT NAME
+			sonar.projectVersion = 3.0
+			sonar.sources = src
+			sonar.language = ts
+			sonar.sourceEncoding = UTF-8
+			sonar.typescript.lcov.reportPaths=coverage/lcov.info
+			sonar.exclusions= **/__mocks__/**
+			sonar.host.url = http://sonarqube.dcpr.es.gov.br
+			sonar.login = YOUR SONAR LOGIN HASH
+			
+		'''
 }

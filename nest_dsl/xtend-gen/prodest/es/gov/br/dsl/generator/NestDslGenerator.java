@@ -17,6 +17,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import prodest.es.gov.br.dsl.nestdsl.Dto;
+import prodest.es.gov.br.dsl.nestdsl.DtoProperty;
 import prodest.es.gov.br.dsl.nestdsl.Entity;
 import prodest.es.gov.br.dsl.nestdsl.Method;
 import prodest.es.gov.br.dsl.nestdsl.MethodArg;
@@ -96,6 +97,15 @@ public class NestDslGenerator extends AbstractGenerator {
     fsa.generateFile(
       "app.module.ts", 
       this.appModuleCompile(this.modules));
+    fsa.generateFile(
+      "Dockerfile", 
+      this.dockerfileCompile());
+    fsa.generateFile(
+      " .gitlab-ci.yml", 
+      this.ciCompile());
+    fsa.generateFile(
+      "sonar-project.properties", 
+      this.sonarCompile());
   }
   
   public CharSequence compile(final Entity e) {
@@ -1406,6 +1416,25 @@ public class NestDslGenerator extends AbstractGenerator {
   
   public CharSequence compile(final Dto dto) {
     StringConcatenation _builder = new StringConcatenation();
+    {
+      EList<DtoProperty> _properties = dto.getProperties();
+      for(final DtoProperty p : _properties) {
+        {
+          boolean _equals = p.getType().eClass().getName().equals("Dto");
+          if (_equals) {
+            _builder.append("import { ");
+            QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(p.getType());
+            _builder.append(_fullyQualifiedName);
+            _builder.append(" } from \'./");
+            QualifiedName _lowerCase = this._iQualifiedNameProvider.getFullyQualifiedName(p.getType()).toLowerCase();
+            _builder.append(_lowerCase);
+            _builder.append(".dto\'");
+          }
+        }
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.newLine();
     _builder.append("export class ");
     String _name = dto.getName();
     _builder.append(_name);
@@ -1415,8 +1444,8 @@ public class NestDslGenerator extends AbstractGenerator {
       boolean _tripleNotEquals = (_superType != null);
       if (_tripleNotEquals) {
         _builder.append("extends ");
-        QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(dto.getSuperType());
-        _builder.append(_fullyQualifiedName);
+        QualifiedName _fullyQualifiedName_1 = this._iQualifiedNameProvider.getFullyQualifiedName(dto.getSuperType());
+        _builder.append(_fullyQualifiedName_1);
         _builder.append(" ");
       }
     }
@@ -1426,9 +1455,9 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.append("constructor(\t\t");
     _builder.newLine();
     {
-      EList<Property> _properties = dto.getProperties();
-      for(final Property p : _properties) {
-        CharSequence _compileDtoProperty = this.compileDtoProperty(p, Boolean.valueOf(true));
+      EList<DtoProperty> _properties_1 = dto.getProperties();
+      for(final DtoProperty p_1 : _properties_1) {
+        CharSequence _compileDtoProperty = this.compileDtoProperty(p_1, Boolean.valueOf(true));
         _builder.append(_compileDtoProperty);
         _builder.newLineIfNotEmpty();
       }
@@ -1437,9 +1466,9 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.append(") {");
     _builder.newLine();
     {
-      EList<Property> _properties_1 = dto.getProperties();
-      for(final Property p_1 : _properties_1) {
-        CharSequence _compileDtoConstructor = this.compileDtoConstructor(p_1);
+      EList<DtoProperty> _properties_2 = dto.getProperties();
+      for(final DtoProperty p_2 : _properties_2) {
+        CharSequence _compileDtoConstructor = this.compileDtoConstructor(p_2);
         _builder.append(_compileDtoConstructor);
         _builder.newLineIfNotEmpty();
       }
@@ -1448,9 +1477,9 @@ public class NestDslGenerator extends AbstractGenerator {
     _builder.append("}");
     _builder.newLine();
     {
-      EList<Property> _properties_2 = dto.getProperties();
-      for(final Property p_2 : _properties_2) {
-        CharSequence _compileDtoProperty_1 = this.compileDtoProperty(p_2, Boolean.valueOf(false));
+      EList<DtoProperty> _properties_3 = dto.getProperties();
+      for(final DtoProperty p_3 : _properties_3) {
+        CharSequence _compileDtoProperty_1 = this.compileDtoProperty(p_3, Boolean.valueOf(false));
         _builder.append(_compileDtoProperty_1);
         _builder.newLineIfNotEmpty();
       }
@@ -1460,7 +1489,7 @@ public class NestDslGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence compileDtoProperty(final Property p, final Boolean constructor) {
+  public CharSequence compileDtoProperty(final DtoProperty p, final Boolean constructor) {
     StringConcatenation _builder = new StringConcatenation();
     {
       if (((constructor).booleanValue() == false)) {
@@ -1489,7 +1518,7 @@ public class NestDslGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence compileDtoConstructor(final Property p) {
+  public CharSequence compileDtoConstructor(final DtoProperty p) {
     StringConcatenation _builder = new StringConcatenation();
     {
       if ((p != null)) {
@@ -1503,6 +1532,251 @@ public class NestDslGenerator extends AbstractGenerator {
     }
     _builder.append(";");
     _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  public CharSequence dockerfileCompile() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("FROM registry.es.gov.br/espm/infraestrutura/containers/node:10.15.3");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("WORKDIR /app");
+    _builder.newLine();
+    _builder.append("RUN mkdir /src");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("COPY package.json .");
+    _builder.newLine();
+    _builder.append("COPY tsconfig.json .");
+    _builder.newLine();
+    _builder.append("RUN npm install");
+    _builder.newLine();
+    _builder.append("COPY src/ /app/src");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("EXPOSE 3000");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("CMD [\"npm\",\"run\", \"start\"]");
+    _builder.newLine();
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence ciCompile() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("stages:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("- test");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("- quality");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("- build");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("- deploy");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("#- stress");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("cache:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("key: \'YOUR-KEY\'");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("paths:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("- node_modules/");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.newLine();
+    _builder.append("test_job:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("image: registry.es.gov.br/espm/infraestrutura/containers/node:10.15.3");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("stage: test");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("script:");
+    _builder.newLine();
+    _builder.append("     ");
+    _builder.append("- npm install #--registry http://verdaccio.10.243.9.12.xip.io");
+    _builder.newLine();
+    _builder.append("     ");
+    _builder.append("- npm run test");
+    _builder.newLine();
+    _builder.append("     ");
+    _builder.append("- npm run test:e2e");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("retry: 2   ");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("quality_job:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("image: registry.es.gov.br/espm/infraestrutura/containers/sonar-scanner:3.3.0.1492");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("stage: quality");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("dependencies:");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("- test_job    ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("script:");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("- npm install #--registry http://verdaccio.10.243.9.12.xip.io");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("- npm run test:cov");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("- sonar-scanner");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("build_job:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("stage: build");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("image: docker:stable");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("services:");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("- docker:dind");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("only:");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("- tags");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("script:");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("- docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("- docker build -t $CI_REGISTRY_IMAGE:$CI_BUILD_TAG .");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("- docker push $CI_REGISTRY_IMAGE:$CI_BUILD_TAG");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("- docker tag $CI_REGISTRY_IMAGE:$CI_BUILD_TAG $CI_REGISTRY_IMAGE:latest");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("- docker push $CI_REGISTRY_IMAGE:latest");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.newLine();
+    _builder.append("deploy_job:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("stage: deploy");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("image: registry.es.gov.br/espm/infraestrutura/containers/node:10.15.3");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("only:");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("- tags");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("script:");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("- npm i upgrade-rancher");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("- ./node_modules/.bin/upgrade-rancher --IMAGE $CI_REGISTRY_IMAGE:$CI_BUILD_TAG --SERVICE_ID RANCHER_SERVICE_ID");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("dependencies:");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("- build_job");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.newLine();
+    _builder.append("#stress_job:");
+    _builder.newLine();
+    _builder.append("#  stage: stress");
+    _builder.newLine();
+    _builder.append("#  image: docker:stable");
+    _builder.newLine();
+    _builder.append("#  dependencies:");
+    _builder.newLine();
+    _builder.append("#    - deploy_job");
+    _builder.newLine();
+    _builder.append("#  only:");
+    _builder.newLine();
+    _builder.append("#    - tags");
+    _builder.newLine();
+    _builder.append("#  services:");
+    _builder.newLine();
+    _builder.append("#    - docker:dind");
+    _builder.newLine();
+    _builder.append("#  script:");
+    _builder.newLine();
+    _builder.append("#    - docker run -i --rm -v $(pwd)/stress:/bzt-configs -v $(pwd)/stress/artifacts:/tmp/artifacts blazemeter/taurus quick_test.yml 2>&1");
+    _builder.newLine();
+    _builder.append("#  artifacts:");
+    _builder.newLine();
+    _builder.append("#    paths:");
+    _builder.newLine();
+    _builder.append("#      - $(pwd)/stress/artifacts");
+    _builder.newLine();
+    _builder.append("#    expire_in: 2 week");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence sonarCompile() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("sonar.projectKey = YOUR KEY");
+    _builder.newLine();
+    _builder.append("sonar.projectName = YOUR PROJECT NAME");
+    _builder.newLine();
+    _builder.append("sonar.projectVersion = 3.0");
+    _builder.newLine();
+    _builder.append("sonar.sources = src");
+    _builder.newLine();
+    _builder.append("sonar.language = ts");
+    _builder.newLine();
+    _builder.append("sonar.sourceEncoding = UTF-8");
+    _builder.newLine();
+    _builder.append("sonar.typescript.lcov.reportPaths=coverage/lcov.info");
+    _builder.newLine();
+    _builder.append("sonar.exclusions= **/__mocks__/**");
+    _builder.newLine();
+    _builder.append("sonar.host.url = http://sonarqube.dcpr.es.gov.br");
+    _builder.newLine();
+    _builder.append("sonar.login = YOUR SONAR LOGIN HASH");
+    _builder.newLine();
+    _builder.newLine();
     return _builder;
   }
 }

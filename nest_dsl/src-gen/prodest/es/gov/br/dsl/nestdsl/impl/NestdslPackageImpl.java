@@ -14,6 +14,8 @@ import prodest.es.gov.br.dsl.nestdsl.AbstractElement;
 import prodest.es.gov.br.dsl.nestdsl.DataType;
 import prodest.es.gov.br.dsl.nestdsl.Domainmodel;
 import prodest.es.gov.br.dsl.nestdsl.Dto;
+import prodest.es.gov.br.dsl.nestdsl.DtoProperty;
+import prodest.es.gov.br.dsl.nestdsl.DtoType;
 import prodest.es.gov.br.dsl.nestdsl.Entity;
 import prodest.es.gov.br.dsl.nestdsl.Method;
 import prodest.es.gov.br.dsl.nestdsl.MethodArg;
@@ -59,6 +61,13 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass dtoTypeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass entityEClass = null;
 
   /**
@@ -81,6 +90,13 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
    * @generated
    */
   private EClass propertyEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass dtoPropertyEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -219,6 +235,17 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
    * @generated
    */
   @Override
+  public EAttribute getAbstractElement_Name()
+  {
+    return (EAttribute)abstractElementEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getType()
   {
     return typeEClass;
@@ -230,9 +257,9 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
    * @generated
    */
   @Override
-  public EAttribute getType_Name()
+  public EClass getDtoType()
   {
-    return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
+    return dtoTypeEClass;
   }
 
   /**
@@ -376,6 +403,50 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
   public EAttribute getProperty_Array()
   {
     return (EAttribute)propertyEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getDtoProperty()
+  {
+    return dtoPropertyEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getDtoProperty_Name()
+  {
+    return (EAttribute)dtoPropertyEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getDtoProperty_Type()
+  {
+    return (EReference)dtoPropertyEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getDtoProperty_Array()
+  {
+    return (EAttribute)dtoPropertyEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -633,9 +704,11 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
     createEReference(domainmodelEClass, DOMAINMODEL__ELEMENTS);
 
     abstractElementEClass = createEClass(ABSTRACT_ELEMENT);
+    createEAttribute(abstractElementEClass, ABSTRACT_ELEMENT__NAME);
 
     typeEClass = createEClass(TYPE);
-    createEAttribute(typeEClass, TYPE__NAME);
+
+    dtoTypeEClass = createEClass(DTO_TYPE);
 
     entityEClass = createEClass(ENTITY);
     createEReference(entityEClass, ENTITY__SUPER_TYPE);
@@ -653,6 +726,11 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
     createEAttribute(propertyEClass, PROPERTY__NAME);
     createEReference(propertyEClass, PROPERTY__TYPE);
     createEAttribute(propertyEClass, PROPERTY__ARRAY);
+
+    dtoPropertyEClass = createEClass(DTO_PROPERTY);
+    createEAttribute(dtoPropertyEClass, DTO_PROPERTY__NAME);
+    createEReference(dtoPropertyEClass, DTO_PROPERTY__TYPE);
+    createEAttribute(dtoPropertyEClass, DTO_PROPERTY__ARRAY);
 
     relationEClass = createEClass(RELATION);
     createEReference(relationEClass, RELATION__ONE_ARGUMENT);
@@ -710,18 +788,22 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
 
     // Add supertypes to classes
     typeEClass.getESuperTypes().add(this.getAbstractElement());
+    dtoTypeEClass.getESuperTypes().add(this.getAbstractElement());
     entityEClass.getESuperTypes().add(this.getType());
-    dtoEClass.getESuperTypes().add(this.getType());
+    dtoEClass.getESuperTypes().add(this.getDtoType());
     dataTypeEClass.getESuperTypes().add(this.getType());
+    dataTypeEClass.getESuperTypes().add(this.getDtoType());
 
     // Initialize classes and features; add operations and parameters
     initEClass(domainmodelEClass, Domainmodel.class, "Domainmodel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getDomainmodel_Elements(), this.getAbstractElement(), null, "elements", null, 0, -1, Domainmodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(abstractElementEClass, AbstractElement.class, "AbstractElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAbstractElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getType_Name(), ecorePackage.getEString(), "name", null, 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(dtoTypeEClass, DtoType.class, "DtoType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEntity_SuperType(), this.getEntity(), null, "superType", null, 0, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -730,7 +812,7 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
 
     initEClass(dtoEClass, Dto.class, "Dto", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getDto_SuperType(), this.getDto(), null, "superType", null, 0, 1, Dto.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getDto_Properties(), this.getProperty(), null, "properties", null, 0, -1, Dto.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getDto_Properties(), this.getDtoProperty(), null, "properties", null, 0, -1, Dto.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -739,6 +821,11 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
     initEAttribute(getProperty_Name(), ecorePackage.getEString(), "name", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getProperty_Type(), this.getType(), null, "type", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getProperty_Array(), ecorePackage.getEString(), "array", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(dtoPropertyEClass, DtoProperty.class, "DtoProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getDtoProperty_Name(), ecorePackage.getEString(), "name", null, 0, 1, DtoProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getDtoProperty_Type(), this.getDtoType(), null, "type", null, 0, 1, DtoProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDtoProperty_Array(), ecorePackage.getEString(), "array", null, 0, 1, DtoProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(relationEClass, Relation.class, "Relation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getRelation_OneArgument(), this.getOneArgumentRelation(), null, "oneArgument", null, 0, 1, Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
