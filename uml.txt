@@ -1,0 +1,19 @@
+@startuml
+class Pessoa{
+ String nome
+ Integer idade
+}
+
+class Cliente{
+ Integer cartaoCredito
+ void comprar()
+}
+
+class Funcionario{
+ Integer vender()
+}
+
+Pessoa <|-- Cliente
+Pessoa <|-- Funcionario
+
+@enduml
