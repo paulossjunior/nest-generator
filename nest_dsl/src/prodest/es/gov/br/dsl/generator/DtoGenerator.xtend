@@ -17,7 +17,7 @@ class DtoGenerator extends AbstractGenerator {
 		
 		for (dto : resource.allContents.toIterable.filter(Dto)) {
  				fsa.generateFile(
-            		'DTOs/'+dto.fullyQualifiedName.toString("/").toLowerCase + ".dto.ts",
+            		'src/DTOs/'+dto.fullyQualifiedName.toString("/").toLowerCase + ".dto.ts",
             		dto.compile)
  		}
 	}

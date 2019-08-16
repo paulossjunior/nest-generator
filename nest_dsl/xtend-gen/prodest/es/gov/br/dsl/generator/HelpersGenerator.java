@@ -14,19 +14,21 @@ import prodest.es.gov.br.dsl.nestdsl.Entity;
 
 @SuppressWarnings("all")
 public class HelpersGenerator extends AbstractGenerator {
-  private List<String> modules = new ArrayList<String>();
+  private List<String> modules;
   
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+    ArrayList<String> _arrayList = new ArrayList<String>();
+    this.modules = _arrayList;
     Iterable<Entity> _filter = Iterables.<Entity>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Entity.class);
     for (final Entity e : _filter) {
       this.modules.add(e.getName());
     }
     fsa.generateFile(
-      "main.ts", 
+      "src/main.ts", 
       this.mainCompile());
     fsa.generateFile(
-      "app.module.ts", 
+      "src/app.module.ts", 
       this.appModuleCompile(this.modules));
     fsa.generateFile(
       "Dockerfile", 
@@ -37,6 +39,9 @@ public class HelpersGenerator extends AbstractGenerator {
     fsa.generateFile(
       "sonar-project.properties", 
       this.sonarCompile());
+    fsa.generateFile(
+      "package.json", 
+      this.packageCompile());
   }
   
   public CharSequence mainCompile() {
@@ -390,6 +395,201 @@ public class HelpersGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("sonar.login = YOUR SONAR LOGIN HASH");
     _builder.newLine();
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence packageCompile() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("\"name\": \"your_application_name\",");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("\"version\": \"0.0.1\",");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("\"description\": \"\",");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("\"author\": \"\",");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("\"license\": \"MIT\",");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("\"scripts\": {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"build\": \"rimraf dist && tsc -p tsconfig.build.json\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"format\": \"prettier --write \\\"src/**/*.ts\\\"\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"start\": \"ts-node -r tsconfig-paths/register src/main.ts\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"start:dev\": \"tsc-watch -p tsconfig.build.json --onSuccess \\\"node dist/main.js\\\"\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"start:debug\": \"tsc-watch -p tsconfig.build.json --onSuccess \\\"node --inspect-brk dist/main.js\\\"\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"start:prod\": \"node dist/main.js\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"lint\": \"tslint -p tsconfig.json -c tslint.json\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"test\": \"jest\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"test:watch\": \"jest --watch\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"test:cov\": \"jest --coverage\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"test:debug\": \"node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"test:e2e\": \"jest --config ./test/jest-e2e.json\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"classDiagram\": \"mmdc -i classDiagram.mmd -o classDiagram.png\"");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("},");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("\"dependencies\": {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"@nestjs/common\": \"^6.0.0\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"@nestjs/core\": \"^6.0.0\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"@nestjs/platform-express\": \"^6.0.0\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"@nestjs/swagger\": \"^3.1.0\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"pg\": \"^7.11.0\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"reflect-metadata\": \"^0.1.12\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"rimraf\": \"^2.6.2\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"rxjs\": \"^6.3.3\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"swagger-ui-express\": \"^4.0.7\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"typeorm\": \"^0.2.18\"");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("},");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("\"devDependencies\": {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"@nestjs/testing\": \"6.1.1\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"@types/express\": \"4.16.1\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"@types/jest\": \"24.0.11\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"@types/node\": \"11.13.4\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"@types/supertest\": \"2.0.7\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"jest\": \"24.7.1\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"prettier\": \"1.17.0\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"supertest\": \"4.0.2\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"ts-jest\": \"24.0.2\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"ts-node\": \"8.1.0\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"tsc-watch\": \"2.2.1\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"tsconfig-paths\": \"3.8.0\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"tslint\": \"5.16.0\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"typescript\": \"3.4.3\"");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("},");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("\"jest\": {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"moduleFileExtensions\": [");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("\"js\",");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("\"json\",");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("\"ts\"");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("],");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"rootDir\": \"src\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"testRegex\": \".spec.ts$\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"transform\": {");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("\"^.+\\\\.(t|j)s$\": \"ts-jest\"");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("},");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"coverageDirectory\": \"../coverage\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"testEnvironment\": \"node\"");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
     _builder.newLine();
     return _builder;
   }

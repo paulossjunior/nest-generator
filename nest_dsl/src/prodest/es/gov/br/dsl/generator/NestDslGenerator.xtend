@@ -12,12 +12,14 @@ class NestDslGenerator extends AbstractGenerator {
     @Inject HelpersGenerator helperGenerator
     @Inject DtoGenerator dtoGenerator
     @Inject DatabaseGenerator dbGenerator
+    @Inject ClassDiagramGenerator classDiagramGenerator
  	
     override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
         coreGenerator.doGenerate(resource, fsa, context);
      	helperGenerator.doGenerate(resource, fsa, context);
      	dtoGenerator.doGenerate(resource, fsa, context);
      	dbGenerator.doGenerate(resource, fsa, context);
+     	classDiagramGenerator.doGenerate(resource, fsa, context);
     }
 	
 }

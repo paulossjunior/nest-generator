@@ -27,7 +27,7 @@ public class DtoGenerator extends AbstractGenerator {
     Iterable<Dto> _filter = Iterables.<Dto>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Dto.class);
     for (final Dto dto : _filter) {
       String _lowerCase = this._iQualifiedNameProvider.getFullyQualifiedName(dto).toString("/").toLowerCase();
-      String _plus = ("DTOs/" + _lowerCase);
+      String _plus = ("src/DTOs/" + _lowerCase);
       String _plus_1 = (_plus + ".dto.ts");
       fsa.generateFile(_plus_1, 
         this.compile(dto));

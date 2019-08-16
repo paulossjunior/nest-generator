@@ -9,10 +9,10 @@ class DatabaseGenerator extends AbstractGenerator {
 				
 	override doGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		 fsa.generateFile(
-           "Database/database.module.ts",
+           "src/Database/database.module.ts",
             moduleCompile)
         fsa.generateFile(
-           "Database/database.providers.ts",
+           "src/Database/database.providers.ts",
             providersCompile)
 	}
 	

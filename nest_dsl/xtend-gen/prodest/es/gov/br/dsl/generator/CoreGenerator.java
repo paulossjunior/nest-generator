@@ -34,39 +34,44 @@ public class CoreGenerator extends AbstractGenerator {
     for (final Entity e : _filter) {
       {
         String _name = e.getName();
-        String _plus = (_name + "/");
+        String _plus = ("src/" + _name);
+        String _plus_1 = (_plus + "/");
         String _lowerCase = this._iQualifiedNameProvider.getFullyQualifiedName(e).toString("/").toLowerCase();
-        String _plus_1 = (_plus + _lowerCase);
-        String _plus_2 = (_plus_1 + ".entity.ts");
-        fsa.generateFile(_plus_2, 
+        String _plus_2 = (_plus_1 + _lowerCase);
+        String _plus_3 = (_plus_2 + ".entity.ts");
+        fsa.generateFile(_plus_3, 
           this.compile(e));
         String _name_1 = e.getName();
-        String _plus_3 = (_name_1 + "/");
+        String _plus_4 = ("src/" + _name_1);
+        String _plus_5 = (_plus_4 + "/");
         String _lowerCase_1 = this._iQualifiedNameProvider.getFullyQualifiedName(e).toString("/").toLowerCase();
-        String _plus_4 = (_plus_3 + _lowerCase_1);
-        String _plus_5 = (_plus_4 + ".controller.ts");
-        fsa.generateFile(_plus_5, 
+        String _plus_6 = (_plus_5 + _lowerCase_1);
+        String _plus_7 = (_plus_6 + ".controller.ts");
+        fsa.generateFile(_plus_7, 
           this.controllerCompile(e));
         String _name_2 = e.getName();
-        String _plus_6 = (_name_2 + "/");
+        String _plus_8 = ("src/" + _name_2);
+        String _plus_9 = (_plus_8 + "/");
         String _lowerCase_2 = this._iQualifiedNameProvider.getFullyQualifiedName(e).toString("/").toLowerCase();
-        String _plus_7 = (_plus_6 + _lowerCase_2);
-        String _plus_8 = (_plus_7 + ".service.ts");
-        fsa.generateFile(_plus_8, 
+        String _plus_10 = (_plus_9 + _lowerCase_2);
+        String _plus_11 = (_plus_10 + ".service.ts");
+        fsa.generateFile(_plus_11, 
           this.serviceCompile(e));
         String _name_3 = e.getName();
-        String _plus_9 = (_name_3 + "/");
+        String _plus_12 = ("src/" + _name_3);
+        String _plus_13 = (_plus_12 + "/");
         String _lowerCase_3 = this._iQualifiedNameProvider.getFullyQualifiedName(e).toString("/").toLowerCase();
-        String _plus_10 = (_plus_9 + _lowerCase_3);
-        String _plus_11 = (_plus_10 + ".providers.ts");
-        fsa.generateFile(_plus_11, 
+        String _plus_14 = (_plus_13 + _lowerCase_3);
+        String _plus_15 = (_plus_14 + ".providers.ts");
+        fsa.generateFile(_plus_15, 
           this.providersCompile(e));
         String _name_4 = e.getName();
-        String _plus_12 = (_name_4 + "/");
+        String _plus_16 = ("src/" + _name_4);
+        String _plus_17 = (_plus_16 + "/");
         String _lowerCase_4 = this._iQualifiedNameProvider.getFullyQualifiedName(e).toString("/").toLowerCase();
-        String _plus_13 = (_plus_12 + _lowerCase_4);
-        String _plus_14 = (_plus_13 + ".module.ts");
-        fsa.generateFile(_plus_14, 
+        String _plus_18 = (_plus_17 + _lowerCase_4);
+        String _plus_19 = (_plus_18 + ".module.ts");
+        fsa.generateFile(_plus_19, 
           this.moduleCompile(e));
       }
     }

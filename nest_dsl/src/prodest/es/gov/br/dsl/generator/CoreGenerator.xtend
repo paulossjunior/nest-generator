@@ -17,19 +17,19 @@ class CoreGenerator extends AbstractGenerator {
 	override doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		for (e : resource.allContents.toIterable.filter(Entity)) {
             fsa.generateFile(
-                e.name+'/'+e.fullyQualifiedName.toString("/").toLowerCase + ".entity.ts",
+                "src/"+e.name+'/'+e.fullyQualifiedName.toString("/").toLowerCase + ".entity.ts",
                 e.compile)
            fsa.generateFile(
-                 e.name+'/'+e.fullyQualifiedName.toString("/").toLowerCase + ".controller.ts",
+                 "src/"+e.name+'/'+e.fullyQualifiedName.toString("/").toLowerCase + ".controller.ts",
                 e.controllerCompile)
            fsa.generateFile(
-                e.name+'/'+e.fullyQualifiedName.toString("/").toLowerCase + ".service.ts",
+                "src/"+e.name+'/'+e.fullyQualifiedName.toString("/").toLowerCase + ".service.ts",
                 e.serviceCompile)
             fsa.generateFile(
-                e.name+'/'+e.fullyQualifiedName.toString("/").toLowerCase + ".providers.ts",
+                "src/"+e.name+'/'+e.fullyQualifiedName.toString("/").toLowerCase + ".providers.ts",
                 e.providersCompile)
             fsa.generateFile(
-                e.name+'/'+e.fullyQualifiedName.toString("/").toLowerCase + ".module.ts",
+                "src/"+e.name+'/'+e.fullyQualifiedName.toString("/").toLowerCase + ".module.ts",
                 e.moduleCompile)
         }    
 	}

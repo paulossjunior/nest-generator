@@ -11,10 +11,10 @@ public class DatabaseGenerator extends AbstractGenerator {
   @Override
   public void doGenerate(final Resource input, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     fsa.generateFile(
-      "Database/database.module.ts", 
+      "src/Database/database.module.ts", 
       this.moduleCompile());
     fsa.generateFile(
-      "Database/database.providers.ts", 
+      "src/Database/database.providers.ts", 
       this.providersCompile());
   }
   
