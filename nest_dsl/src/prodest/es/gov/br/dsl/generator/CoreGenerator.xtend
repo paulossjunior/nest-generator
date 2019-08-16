@@ -37,7 +37,7 @@ class CoreGenerator extends AbstractGenerator {
 	def compile(Entity e) 
 	    ''' 
 	    	import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, JoinTable, OneToOne, OneToMany, ManyToMany, ManyToOne } from 'typeorm';
-	    	import { ApiModelProperty } from "@nestjs/swagger";
+	    	import { ApiModelProperty } from '@nestjs/swagger';
 	    	«FOR p: e.properties»
 	    		«IF p.relation !== null»
 		    		«IF p.relation.oneArgument !== null»

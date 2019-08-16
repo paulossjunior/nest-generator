@@ -81,7 +81,7 @@ public class CoreGenerator extends AbstractGenerator {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, JoinTable, OneToOne, OneToMany, ManyToMany, ManyToOne } from \'typeorm\';");
     _builder.newLine();
-    _builder.append("import { ApiModelProperty } from \"@nestjs/swagger\";");
+    _builder.append("import { ApiModelProperty } from \'@nestjs/swagger\';");
     _builder.newLine();
     {
       EList<Property> _properties = e.getProperties();
