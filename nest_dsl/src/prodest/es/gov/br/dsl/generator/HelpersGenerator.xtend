@@ -38,6 +38,9 @@ class HelpersGenerator extends AbstractGenerator {
     	fsa.generateFile(
        		"package.json",
     		packageCompile)
+		fsa.generateFile(
+       		" .env.example",
+    		envCompile)
 	}
 	
 	def mainCompile()
@@ -227,6 +230,7 @@ class HelpersGenerator extends AbstractGenerator {
 			    "@nestjs/core": "^6.0.0",
 			    "@nestjs/platform-express": "^6.0.0",
 			    "@nestjs/swagger": "^3.1.0",
+			    "@types/dotenv": "^6.1.1",
 			    "pg": "^7.11.0",
 			    "reflect-metadata": "^0.1.12",
 			    "rimraf": "^2.6.2",
@@ -266,5 +270,14 @@ class HelpersGenerator extends AbstractGenerator {
 			  }
 			}
 		'''
-   
+		def envCompile()
+		'''
+			HOST=localhost
+			PORT=5432
+			USER=admin
+			PASSWORD=admin123
+			SCHEMA=master
+			ORM_SYNC=false
+			
+		'''
 }

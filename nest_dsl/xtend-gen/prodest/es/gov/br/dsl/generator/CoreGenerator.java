@@ -3,6 +3,8 @@ package prodest.es.gov.br.dsl.generator;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -1032,24 +1034,16 @@ public class CoreGenerator extends AbstractGenerator {
       EList<Method> _methods = e.getMethods();
       for(final Method method : _methods) {
         _builder.append("\t");
+        List<String> newArgs = this.generateArgList(method);
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
         _builder.append("async ");
         String _name_7 = method.getName();
         _builder.append(_name_7, "\t");
         _builder.append("(");
         {
-          int _size = method.getArgs().size();
-          boolean _greaterThan = (_size > 0);
-          if (_greaterThan) {
-            CharSequence _compile = this.compile(method.getArgs().remove(0));
-            _builder.append(_compile, "\t");
-            {
-              EList<MethodArg> _args = method.getArgs();
-              for(final MethodArg arg : _args) {
-                _builder.append(", ");
-                CharSequence _compile_1 = this.compile(arg);
-                _builder.append(_compile_1, "\t");
-              }
-            }
+          for(final String arg : newArgs) {
+            _builder.append(arg, "\t");
           }
         }
         _builder.append("): Promise<");
@@ -1068,6 +1062,8 @@ public class CoreGenerator extends AbstractGenerator {
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
+        _builder.append("\t");
+        _builder.newLine();
       }
     }
     _builder.append("}");
@@ -1075,16 +1071,36 @@ public class CoreGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence compile(final MethodArg arg) {
-    StringConcatenation _builder = new StringConcatenation();
-    String _name = arg.getName();
-    _builder.append(_name);
-    _builder.append(": ");
-    QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(arg.getType());
-    _builder.append(_fullyQualifiedName);
+  public List<String> generateArgList(final Method m) {
+    List<String> newArgs = new ArrayList<String>();
+    for (int i = 0; (i < m.getArgs().size()); i++) {
+      {
+        newArgs.add(this.compile(m.getArgs().get(i)));
+        int _size = m.getArgs().size();
+        boolean _lessThan = ((i + 1) < _size);
+        if (_lessThan) {
+          newArgs.add(", ");
+        }
+      }
+    }
+    return newArgs;
+  }
+  
+  public String compile(final MethodArg arg) {
     String _array = arg.getArray();
-    _builder.append(_array);
-    return _builder;
+    boolean _tripleNotEquals = (_array != null);
+    if (_tripleNotEquals) {
+      String _name = arg.getName();
+      String _plus = (_name + ": ");
+      QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(arg.getType());
+      String _plus_1 = (_plus + _fullyQualifiedName);
+      String _array_1 = arg.getArray();
+      return (_plus_1 + _array_1);
+    }
+    String _name_1 = arg.getName();
+    String _plus_2 = (_name_1 + ": ");
+    QualifiedName _fullyQualifiedName_1 = this._iQualifiedNameProvider.getFullyQualifiedName(arg.getType());
+    return (_plus_2 + _fullyQualifiedName_1);
   }
   
   public CharSequence providersCompile(final Entity e) {

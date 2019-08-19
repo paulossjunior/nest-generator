@@ -10,6 +10,8 @@ import prodest.es.gov.br.dsl.nestdsl.Entity
 import prodest.es.gov.br.dsl.nestdsl.Property
 import prodest.es.gov.br.dsl.nestdsl.Method
 import prodest.es.gov.br.dsl.nestdsl.MethodArg
+import java.util.List
+import java.util.ArrayList
 
 class ClassDiagramGenerator extends AbstractGenerator {
 	
@@ -35,7 +37,7 @@ class ClassDiagramGenerator extends AbstractGenerator {
 		«FOR e : resource.allContents.toIterable.filter(Entity)»
 			«FOR p: e.properties»«relationCompile(e, p)»«ENDFOR»
 			«FOR p: e.properties»«propertyCompile(e, p)»«ENDFOR»
-			«FOR m: e.methods»«methodCompile(e, m)»«ENDFOR»
+			«methodCompile(e)»
 		«ENDFOR»
 	'''
    
@@ -55,11 +57,30 @@ class ClassDiagramGenerator extends AbstractGenerator {
 	«e.name»: «p.type.fullyQualifiedName»«p.array» «p.name»
    '''
    
-   def methodCompile(Entity e, Method m)
+   def methodCompile(Entity e)
    '''
-   	«e.name»: «m.returnType.fullyQualifiedName» «m.name»(«IF m.args.size()>0»«m.args.get(0).compile»«ENDIF»)
+   	«FOR method: e.methods»
+   		«var newArgs = generateArgList(method)»
+   		«e.name»: «method.returnType.fullyQualifiedName» «method.name»(«FOR arg: newArgs»«arg»«ENDFOR»)
+   	«ENDFOR»
    '''
    
-   def compile(MethodArg arg)
-   '''«arg.type.fullyQualifiedName»«arg.array» «arg.name»'''
+   def generateArgList(Method m){
+		var List<String> newArgs = new ArrayList();
+		
+		for(var i = 0; i < m.args.size(); i++){
+			newArgs.add(m.args.get(i).compile)
+			if(i+1 < m.args.size()){
+				newArgs.add(', ')
+			}	
+		}
+		
+		return newArgs;
+	}
+	
+	def compile(MethodArg arg){
+		if(arg.array !== null)
+			return arg.name + ': ' + arg.type.fullyQualifiedName+arg.array
+		return arg.name + ': ' + arg.type.fullyQualifiedName
+	}
 }

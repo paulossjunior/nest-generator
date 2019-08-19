@@ -8,7 +8,10 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider
 import com.google.inject.Inject
 import prodest.es.gov.br.dsl.nestdsl.Entity
 import prodest.es.gov.br.dsl.nestdsl.MethodArg
+import prodest.es.gov.br.dsl.nestdsl.Method
 import prodest.es.gov.br.dsl.nestdsl.Property
+import java.util.ArrayList
+import java.util.List
 
 class CoreGenerator extends AbstractGenerator {
  
@@ -311,14 +314,32 @@ class CoreGenerator extends AbstractGenerator {
 			}
 			
 			«FOR method: e.methods»	
-				async «method.name»(«IF method.args.size()>0»«method.args.remove(0).compile»«FOR arg: method.args», «arg.compile»«ENDFOR»«ENDIF»): Promise<«method.returnType.fullyQualifiedName»«method.array»> {
+				«var newArgs = generateArgList(method)»
+				async «method.name»(«FOR arg: newArgs»«arg»«ENDFOR»): Promise<«method.returnType.fullyQualifiedName»«method.array»> {
 					//To do «method.name»
 				}
+				
 			«ENDFOR»
 		}
 	'''
-	def compile(MethodArg arg)
-	'''«arg.name»: «arg.type.fullyQualifiedName»«arg.array»'''
+	def generateArgList(Method m){
+		var List<String> newArgs = new ArrayList();
+		
+		for(var i = 0; i < m.args.size(); i++){
+			newArgs.add(m.args.get(i).compile)
+			if(i+1 < m.args.size()){
+				newArgs.add(', ')
+			}	
+		}
+		
+		return newArgs;
+	}
+	
+	def compile(MethodArg arg){
+		if(arg.array !== null)
+			return arg.name + ': ' + arg.type.fullyQualifiedName+arg.array
+		return arg.name + ': ' + arg.type.fullyQualifiedName
+	}
 	
 	def providersCompile(Entity e)
 	'''

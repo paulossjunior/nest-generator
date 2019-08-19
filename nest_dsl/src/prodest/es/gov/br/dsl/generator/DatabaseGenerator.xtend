@@ -14,6 +14,9 @@ class DatabaseGenerator extends AbstractGenerator {
         fsa.generateFile(
            "src/Database/database.providers.ts",
             providersCompile)
+        fsa.generateFile(
+           "src/common/configs/database.configs.ts",
+            configDatabaseCompile)
 	}
 	
 	def moduleCompile()
@@ -32,24 +35,52 @@ class DatabaseGenerator extends AbstractGenerator {
 	def providersCompile()
 	'''
 		import { createConnection } from 'typeorm';
+		import { DatabaseConfig } from '../common/configs/database.configs'
+		
+		const config: DatabaseConfig = new DatabaseConfig();
 		
 		export const databaseProviders = [
 		  {
 		    provide: 'DATABASE_CONNECTION',
 		    useFactory: async () => await createConnection({
-		      type: 'postgres',
-		      host: 'localhost',
-		      port: 5432,
-		      username: 'postgres',
-		      password: 'senha',
-		      database: 'postgres',
+		      type: config.type,
+		      host: config.host,
+		      port: config.port,
+		      username: config.user,
+		      password: config.password,
+		      database: config.schema,
 		      entities: [
 		          __dirname + '/../**/*.entity{.ts,.js}',
 		      ],
-		      synchronize: true,
+		      synchronize: config.sync,
 		    }),
 		  },
 		];
 	'''
    
+   def configDatabaseCompile()
+   '''
+	   	import * as dotenv from 'dotenv';
+	   	if ( process.env.NODE_ENV != 'production' ) {
+	   	    dotenv.config();
+	   	}
+	   	const db_host = process.env.HOST;
+	   	const db_port: number = Number( process.env.PORT );
+	   	const db_username = process.env.USER;
+	   	const db_password = process.env.PASSWORD;
+	   	const db_schema = process.env.SCHEMA;
+	   	const orm_sync: boolean = Boolean( process.env.ORM_SYNC == 'true' ) || false;
+	   	
+	   	export class DatabaseConfig {
+	   	    constructor(
+	   	        readonly type: 'postgres' = 'postgres',
+	   	        readonly host: string = db_host,
+	   	        readonly port: number = db_port,
+	   	        readonly user: string = db_username,
+	   	        readonly password = db_password,
+	   	        readonly schema = db_schema,
+	   	        readonly sync = orm_sync
+	   	    ) { }
+	   	}
+   '''
 }

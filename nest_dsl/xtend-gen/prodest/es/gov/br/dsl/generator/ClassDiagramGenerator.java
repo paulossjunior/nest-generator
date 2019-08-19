@@ -2,6 +2,8 @@ package prodest.es.gov.br.dsl.generator;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -67,13 +69,8 @@ public class ClassDiagramGenerator extends AbstractGenerator {
           }
         }
         _builder.newLineIfNotEmpty();
-        {
-          EList<Method> _methods = e.getMethods();
-          for(final Method m : _methods) {
-            CharSequence _methodCompile = this.methodCompile(e, m);
-            _builder.append(_methodCompile);
-          }
-        }
+        CharSequence _methodCompile = this.methodCompile(e);
+        _builder.append(_methodCompile);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -136,39 +133,63 @@ public class ClassDiagramGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence methodCompile(final Entity e, final Method m) {
+  public CharSequence methodCompile(final Entity e) {
     StringConcatenation _builder = new StringConcatenation();
-    String _name = e.getName();
-    _builder.append(_name);
-    _builder.append(": ");
-    QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(m.getReturnType());
-    _builder.append(_fullyQualifiedName);
-    _builder.append(" ");
-    String _name_1 = m.getName();
-    _builder.append(_name_1);
-    _builder.append("(");
     {
-      int _size = m.getArgs().size();
-      boolean _greaterThan = (_size > 0);
-      if (_greaterThan) {
-        CharSequence _compile = this.compile(m.getArgs().get(0));
-        _builder.append(_compile);
+      EList<Method> _methods = e.getMethods();
+      for(final Method method : _methods) {
+        List<String> newArgs = this.generateArgList(method);
+        _builder.newLineIfNotEmpty();
+        String _name = e.getName();
+        _builder.append(_name);
+        _builder.append(": ");
+        QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(method.getReturnType());
+        _builder.append(_fullyQualifiedName);
+        _builder.append(" ");
+        String _name_1 = method.getName();
+        _builder.append(_name_1);
+        _builder.append("(");
+        {
+          for(final String arg : newArgs) {
+            _builder.append(arg);
+          }
+        }
+        _builder.append(")");
+        _builder.newLineIfNotEmpty();
       }
     }
-    _builder.append(")");
-    _builder.newLineIfNotEmpty();
     return _builder;
   }
   
-  public CharSequence compile(final MethodArg arg) {
-    StringConcatenation _builder = new StringConcatenation();
-    QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(arg.getType());
-    _builder.append(_fullyQualifiedName);
+  public List<String> generateArgList(final Method m) {
+    List<String> newArgs = new ArrayList<String>();
+    for (int i = 0; (i < m.getArgs().size()); i++) {
+      {
+        newArgs.add(this.compile(m.getArgs().get(i)));
+        int _size = m.getArgs().size();
+        boolean _lessThan = ((i + 1) < _size);
+        if (_lessThan) {
+          newArgs.add(", ");
+        }
+      }
+    }
+    return newArgs;
+  }
+  
+  public String compile(final MethodArg arg) {
     String _array = arg.getArray();
-    _builder.append(_array);
-    _builder.append(" ");
-    String _name = arg.getName();
-    _builder.append(_name);
-    return _builder;
+    boolean _tripleNotEquals = (_array != null);
+    if (_tripleNotEquals) {
+      String _name = arg.getName();
+      String _plus = (_name + ": ");
+      QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(arg.getType());
+      String _plus_1 = (_plus + _fullyQualifiedName);
+      String _array_1 = arg.getArray();
+      return (_plus_1 + _array_1);
+    }
+    String _name_1 = arg.getName();
+    String _plus_2 = (_name_1 + ": ");
+    QualifiedName _fullyQualifiedName_1 = this._iQualifiedNameProvider.getFullyQualifiedName(arg.getType());
+    return (_plus_2 + _fullyQualifiedName_1);
   }
 }

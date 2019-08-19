@@ -42,6 +42,9 @@ public class HelpersGenerator extends AbstractGenerator {
     fsa.generateFile(
       "package.json", 
       this.packageCompile());
+    fsa.generateFile(
+      " .env.example", 
+      this.envCompile());
   }
   
   public CharSequence mainCompile() {
@@ -479,6 +482,9 @@ public class HelpersGenerator extends AbstractGenerator {
     _builder.append("\"@nestjs/swagger\": \"^3.1.0\",");
     _builder.newLine();
     _builder.append("    ");
+    _builder.append("\"@types/dotenv\": \"^6.1.1\",");
+    _builder.newLine();
+    _builder.append("    ");
     _builder.append("\"pg\": \"^7.11.0\",");
     _builder.newLine();
     _builder.append("    ");
@@ -590,6 +596,24 @@ public class HelpersGenerator extends AbstractGenerator {
     _builder.append("}");
     _builder.newLine();
     _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence envCompile() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("HOST=localhost");
+    _builder.newLine();
+    _builder.append("PORT=5432");
+    _builder.newLine();
+    _builder.append("USER=admin");
+    _builder.newLine();
+    _builder.append("PASSWORD=admin123");
+    _builder.newLine();
+    _builder.append("SCHEMA=master");
+    _builder.newLine();
+    _builder.append("ORM_SYNC=false");
+    _builder.newLine();
     _builder.newLine();
     return _builder;
   }
