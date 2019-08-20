@@ -32,8 +32,8 @@ public class NestDslParser extends AbstractContentAssistParser {
 		
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, NestDslGrammarAccess grammarAccess) {
 			builder.put(grammarAccess.getAbstractElementAccess().getAlternatives(), "rule__AbstractElement__Alternatives");
-			builder.put(grammarAccess.getTypeAccess().getAlternatives(), "rule__Type__Alternatives");
-			builder.put(grammarAccess.getDtoTypeAccess().getAlternatives(), "rule__DtoType__Alternatives");
+			builder.put(grammarAccess.getPropertyAccess().getAlternatives_3(), "rule__Property__Alternatives_3");
+			builder.put(grammarAccess.getDtoPropertyAccess().getAlternatives_2(), "rule__DtoProperty__Alternatives_2");
 			builder.put(grammarAccess.getRelationAccess().getAlternatives(), "rule__Relation__Alternatives");
 			builder.put(grammarAccess.getOneArgumentRelationAccess().getArgumentAlternatives_0_0(), "rule__OneArgumentRelation__ArgumentAlternatives_0_0");
 			builder.put(grammarAccess.getMultipleArgumentRelationAccess().getArgumentAlternatives_0_0(), "rule__MultipleArgumentRelation__ArgumentAlternatives_0_0");
@@ -42,7 +42,6 @@ public class NestDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEntityAccess().getGroup_2(), "rule__Entity__Group_2__0");
 			builder.put(grammarAccess.getDtoAccess().getGroup(), "rule__Dto__Group__0");
 			builder.put(grammarAccess.getDtoAccess().getGroup_2(), "rule__Dto__Group_2__0");
-			builder.put(grammarAccess.getDataTypeAccess().getGroup(), "rule__DataType__Group__0");
 			builder.put(grammarAccess.getPropertyAccess().getGroup(), "rule__Property__Group__0");
 			builder.put(grammarAccess.getDtoPropertyAccess().getGroup(), "rule__DtoProperty__Group__0");
 			builder.put(grammarAccess.getOneArgumentRelationAccess().getGroup(), "rule__OneArgumentRelation__Group__0");
@@ -58,13 +57,14 @@ public class NestDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getDtoAccess().getNameAssignment_1(), "rule__Dto__NameAssignment_1");
 			builder.put(grammarAccess.getDtoAccess().getSuperTypeAssignment_2_1(), "rule__Dto__SuperTypeAssignment_2_1");
 			builder.put(grammarAccess.getDtoAccess().getPropertiesAssignment_4(), "rule__Dto__PropertiesAssignment_4");
-			builder.put(grammarAccess.getDataTypeAccess().getNameAssignment_1(), "rule__DataType__NameAssignment_1");
 			builder.put(grammarAccess.getPropertyAccess().getRelationAssignment_0(), "rule__Property__RelationAssignment_0");
 			builder.put(grammarAccess.getPropertyAccess().getNameAssignment_1(), "rule__Property__NameAssignment_1");
-			builder.put(grammarAccess.getPropertyAccess().getTypeAssignment_3(), "rule__Property__TypeAssignment_3");
+			builder.put(grammarAccess.getPropertyAccess().getClassTypeAssignment_3_0(), "rule__Property__ClassTypeAssignment_3_0");
+			builder.put(grammarAccess.getPropertyAccess().getTypeAssignment_3_1(), "rule__Property__TypeAssignment_3_1");
 			builder.put(grammarAccess.getPropertyAccess().getArrayAssignment_4(), "rule__Property__ArrayAssignment_4");
 			builder.put(grammarAccess.getDtoPropertyAccess().getNameAssignment_0(), "rule__DtoProperty__NameAssignment_0");
-			builder.put(grammarAccess.getDtoPropertyAccess().getTypeAssignment_2(), "rule__DtoProperty__TypeAssignment_2");
+			builder.put(grammarAccess.getDtoPropertyAccess().getClassTypeAssignment_2_0(), "rule__DtoProperty__ClassTypeAssignment_2_0");
+			builder.put(grammarAccess.getDtoPropertyAccess().getTypeAssignment_2_1(), "rule__DtoProperty__TypeAssignment_2_1");
 			builder.put(grammarAccess.getDtoPropertyAccess().getArrayAssignment_3(), "rule__DtoProperty__ArrayAssignment_3");
 			builder.put(grammarAccess.getRelationAccess().getOneArgumentAssignment_0(), "rule__Relation__OneArgumentAssignment_0");
 			builder.put(grammarAccess.getRelationAccess().getMultipleArgumentAssignment_1(), "rule__Relation__MultipleArgumentAssignment_1");

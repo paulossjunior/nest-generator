@@ -36,7 +36,7 @@ import prodest.es.gov.br.dsl.nestdsl.NestdslPackage;
  *
  * @generated
  */
-public class DtoImpl extends DtoTypeImpl implements Dto
+public class DtoImpl extends AbstractElementImpl implements Dto
 {
   /**
    * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference.

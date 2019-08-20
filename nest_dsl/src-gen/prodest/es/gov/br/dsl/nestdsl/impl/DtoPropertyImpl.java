@@ -11,8 +11,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import prodest.es.gov.br.dsl.nestdsl.Dto;
 import prodest.es.gov.br.dsl.nestdsl.DtoProperty;
-import prodest.es.gov.br.dsl.nestdsl.DtoType;
 import prodest.es.gov.br.dsl.nestdsl.NestdslPackage;
 
 /**
@@ -24,6 +24,7 @@ import prodest.es.gov.br.dsl.nestdsl.NestdslPackage;
  * </p>
  * <ul>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.impl.DtoPropertyImpl#getName <em>Name</em>}</li>
+ *   <li>{@link prodest.es.gov.br.dsl.nestdsl.impl.DtoPropertyImpl#getClassType <em>Class Type</em>}</li>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.impl.DtoPropertyImpl#getType <em>Type</em>}</li>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.impl.DtoPropertyImpl#getArray <em>Array</em>}</li>
  * </ul>
@@ -53,14 +54,34 @@ public class DtoPropertyImpl extends MinimalEObjectImpl.Container implements Dto
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+   * The cached value of the '{@link #getClassType() <em>Class Type</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getClassType()
+   * @generated
+   * @ordered
+   */
+  protected Dto classType;
+
+  /**
+   * The default value of the '{@link #getType() <em>Type</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getType()
    * @generated
    * @ordered
    */
-  protected DtoType type;
+  protected static final String TYPE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getType()
+   * @generated
+   * @ordered
+   */
+  protected String type = TYPE_EDEFAULT;
 
   /**
    * The default value of the '{@link #getArray() <em>Array</em>}' attribute.
@@ -134,19 +155,19 @@ public class DtoPropertyImpl extends MinimalEObjectImpl.Container implements Dto
    * @generated
    */
   @Override
-  public DtoType getType()
+  public Dto getClassType()
   {
-    if (type != null && type.eIsProxy())
+    if (classType != null && classType.eIsProxy())
     {
-      InternalEObject oldType = (InternalEObject)type;
-      type = (DtoType)eResolveProxy(oldType);
-      if (type != oldType)
+      InternalEObject oldClassType = (InternalEObject)classType;
+      classType = (Dto)eResolveProxy(oldClassType);
+      if (classType != oldClassType)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, NestdslPackage.DTO_PROPERTY__TYPE, oldType, type));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, NestdslPackage.DTO_PROPERTY__CLASS_TYPE, oldClassType, classType));
       }
     }
-    return type;
+    return classType;
   }
 
   /**
@@ -154,7 +175,32 @@ public class DtoPropertyImpl extends MinimalEObjectImpl.Container implements Dto
    * <!-- end-user-doc -->
    * @generated
    */
-  public DtoType basicGetType()
+  public Dto basicGetClassType()
+  {
+    return classType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setClassType(Dto newClassType)
+  {
+    Dto oldClassType = classType;
+    classType = newClassType;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, NestdslPackage.DTO_PROPERTY__CLASS_TYPE, oldClassType, classType));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getType()
   {
     return type;
   }
@@ -165,9 +211,9 @@ public class DtoPropertyImpl extends MinimalEObjectImpl.Container implements Dto
    * @generated
    */
   @Override
-  public void setType(DtoType newType)
+  public void setType(String newType)
   {
-    DtoType oldType = type;
+    String oldType = type;
     type = newType;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, NestdslPackage.DTO_PROPERTY__TYPE, oldType, type));
@@ -210,9 +256,11 @@ public class DtoPropertyImpl extends MinimalEObjectImpl.Container implements Dto
     {
       case NestdslPackage.DTO_PROPERTY__NAME:
         return getName();
+      case NestdslPackage.DTO_PROPERTY__CLASS_TYPE:
+        if (resolve) return getClassType();
+        return basicGetClassType();
       case NestdslPackage.DTO_PROPERTY__TYPE:
-        if (resolve) return getType();
-        return basicGetType();
+        return getType();
       case NestdslPackage.DTO_PROPERTY__ARRAY:
         return getArray();
     }
@@ -232,8 +280,11 @@ public class DtoPropertyImpl extends MinimalEObjectImpl.Container implements Dto
       case NestdslPackage.DTO_PROPERTY__NAME:
         setName((String)newValue);
         return;
+      case NestdslPackage.DTO_PROPERTY__CLASS_TYPE:
+        setClassType((Dto)newValue);
+        return;
       case NestdslPackage.DTO_PROPERTY__TYPE:
-        setType((DtoType)newValue);
+        setType((String)newValue);
         return;
       case NestdslPackage.DTO_PROPERTY__ARRAY:
         setArray((String)newValue);
@@ -255,8 +306,11 @@ public class DtoPropertyImpl extends MinimalEObjectImpl.Container implements Dto
       case NestdslPackage.DTO_PROPERTY__NAME:
         setName(NAME_EDEFAULT);
         return;
+      case NestdslPackage.DTO_PROPERTY__CLASS_TYPE:
+        setClassType((Dto)null);
+        return;
       case NestdslPackage.DTO_PROPERTY__TYPE:
-        setType((DtoType)null);
+        setType(TYPE_EDEFAULT);
         return;
       case NestdslPackage.DTO_PROPERTY__ARRAY:
         setArray(ARRAY_EDEFAULT);
@@ -277,8 +331,10 @@ public class DtoPropertyImpl extends MinimalEObjectImpl.Container implements Dto
     {
       case NestdslPackage.DTO_PROPERTY__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case NestdslPackage.DTO_PROPERTY__CLASS_TYPE:
+        return classType != null;
       case NestdslPackage.DTO_PROPERTY__TYPE:
-        return type != null;
+        return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
       case NestdslPackage.DTO_PROPERTY__ARRAY:
         return ARRAY_EDEFAULT == null ? array != null : !ARRAY_EDEFAULT.equals(array);
     }
@@ -298,6 +354,8 @@ public class DtoPropertyImpl extends MinimalEObjectImpl.Container implements Dto
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
+    result.append(", type: ");
+    result.append(type);
     result.append(", array: ");
     result.append(array);
     result.append(')');

@@ -113,88 +113,16 @@ ruleAbstractElement returns [EObject current=null]
 }:
 	(
 		{
-			newCompositeNode(grammarAccess.getAbstractElementAccess().getTypeParserRuleCall_0());
+			newCompositeNode(grammarAccess.getAbstractElementAccess().getEntityParserRuleCall_0());
 		}
-		this_Type_0=ruleType
+		this_Entity_0=ruleEntity
 		{
-			$current = $this_Type_0.current;
+			$current = $this_Entity_0.current;
 			afterParserOrEnumRuleCall();
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getAbstractElementAccess().getDtoTypeParserRuleCall_1());
-		}
-		this_DtoType_1=ruleDtoType
-		{
-			$current = $this_DtoType_1.current;
-			afterParserOrEnumRuleCall();
-		}
-	)
-;
-
-// Entry rule entryRuleType
-entryRuleType returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getTypeRule()); }
-	iv_ruleType=ruleType
-	{ $current=$iv_ruleType.current; }
-	EOF;
-
-// Rule Type
-ruleType returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		{
-			newCompositeNode(grammarAccess.getTypeAccess().getDataTypeParserRuleCall_0());
-		}
-		this_DataType_0=ruleDataType
-		{
-			$current = $this_DataType_0.current;
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getTypeAccess().getEntityParserRuleCall_1());
-		}
-		this_Entity_1=ruleEntity
-		{
-			$current = $this_Entity_1.current;
-			afterParserOrEnumRuleCall();
-		}
-	)
-;
-
-// Entry rule entryRuleDtoType
-entryRuleDtoType returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getDtoTypeRule()); }
-	iv_ruleDtoType=ruleDtoType
-	{ $current=$iv_ruleDtoType.current; }
-	EOF;
-
-// Rule DtoType
-ruleDtoType returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		{
-			newCompositeNode(grammarAccess.getDtoTypeAccess().getDataTypeParserRuleCall_0());
-		}
-		this_DataType_0=ruleDataType
-		{
-			$current = $this_DataType_0.current;
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getDtoTypeAccess().getDtoParserRuleCall_1());
+			newCompositeNode(grammarAccess.getAbstractElementAccess().getDtoParserRuleCall_1());
 		}
 		this_Dto_1=ruleDto
 		{
@@ -403,59 +331,6 @@ ruleDto returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleDataType
-entryRuleDataType returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getDataTypeRule()); }
-	iv_ruleDataType=ruleDataType
-	{ $current=$iv_ruleDataType.current; }
-	EOF;
-
-// Rule DataType
-ruleDataType returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		otherlv_0='type'
-		{
-			newLeafNode(otherlv_0, grammarAccess.getDataTypeAccess().getTypeKeyword_0());
-		}
-		(
-			(
-				lv_name_1_0=RULE_ID
-				{
-					newLeafNode(lv_name_1_0, grammarAccess.getDataTypeAccess().getNameIDTerminalRuleCall_1_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getDataTypeRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"name",
-						lv_name_1_0,
-						"org.eclipse.xtext.common.Terminals.ID");
-				}
-			)
-		)
-		(
-			otherlv_2='[]'
-			{
-				newLeafNode(otherlv_2, grammarAccess.getDataTypeAccess().getLeftSquareBracketRightSquareBracketKeyword_2());
-			}
-		)?
-		(
-			otherlv_3=';'
-			{
-				newLeafNode(otherlv_3, grammarAccess.getDataTypeAccess().getSemicolonKeyword_3());
-			}
-		)?
-	)
-;
-
 // Entry rule entryRuleQualifiedName
 entryRuleQualifiedName returns [String current=null]:
 	{ newCompositeNode(grammarAccess.getQualifiedNameRule()); }
@@ -539,38 +414,59 @@ ruleProperty returns [EObject current=null]
 		}
 		(
 			(
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getPropertyRule());
+				(
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getPropertyRule());
+						}
 					}
-				}
-				{
-					newCompositeNode(grammarAccess.getPropertyAccess().getTypeTypeCrossReference_3_0());
-				}
-				ruleQualifiedName
-				{
-					afterParserOrEnumRuleCall();
-				}
+					{
+						newCompositeNode(grammarAccess.getPropertyAccess().getClassTypeEntityCrossReference_3_0_0());
+					}
+					ruleQualifiedName
+					{
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			    |
+			(
+				(
+					lv_type_4_0=RULE_DATATYPE
+					{
+						newLeafNode(lv_type_4_0, grammarAccess.getPropertyAccess().getTypeDATATYPETerminalRuleCall_3_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getPropertyRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"type",
+							lv_type_4_0,
+							"prodest.es.gov.br.dsl.NestDsl.DATATYPE");
+					}
+				)
 			)
 		)
 		(
 			(
-				lv_array_4_0='[]'
+				lv_array_5_0='[]'
 				{
-					newLeafNode(lv_array_4_0, grammarAccess.getPropertyAccess().getArrayLeftSquareBracketRightSquareBracketKeyword_4_0());
+					newLeafNode(lv_array_5_0, grammarAccess.getPropertyAccess().getArrayLeftSquareBracketRightSquareBracketKeyword_4_0());
 				}
 				{
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getPropertyRule());
 					}
-					setWithLastConsumed($current, "array", lv_array_4_0, "[]");
+					setWithLastConsumed($current, "array", lv_array_5_0, "[]");
 				}
 			)
 		)?
 		(
-			otherlv_5=';'
+			otherlv_6=';'
 			{
-				newLeafNode(otherlv_5, grammarAccess.getPropertyAccess().getSemicolonKeyword_5());
+				newLeafNode(otherlv_6, grammarAccess.getPropertyAccess().getSemicolonKeyword_5());
 			}
 		)?
 	)
@@ -616,38 +512,59 @@ ruleDtoProperty returns [EObject current=null]
 		}
 		(
 			(
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getDtoPropertyRule());
+				(
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getDtoPropertyRule());
+						}
 					}
-				}
-				{
-					newCompositeNode(grammarAccess.getDtoPropertyAccess().getTypeDtoTypeCrossReference_2_0());
-				}
-				ruleQualifiedName
-				{
-					afterParserOrEnumRuleCall();
-				}
+					{
+						newCompositeNode(grammarAccess.getDtoPropertyAccess().getClassTypeDtoCrossReference_2_0_0());
+					}
+					ruleQualifiedName
+					{
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			    |
+			(
+				(
+					lv_type_3_0=RULE_DATATYPE
+					{
+						newLeafNode(lv_type_3_0, grammarAccess.getDtoPropertyAccess().getTypeDATATYPETerminalRuleCall_2_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getDtoPropertyRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"type",
+							lv_type_3_0,
+							"prodest.es.gov.br.dsl.NestDsl.DATATYPE");
+					}
+				)
 			)
 		)
 		(
 			(
-				lv_array_3_0='[]'
+				lv_array_4_0='[]'
 				{
-					newLeafNode(lv_array_3_0, grammarAccess.getDtoPropertyAccess().getArrayLeftSquareBracketRightSquareBracketKeyword_3_0());
+					newLeafNode(lv_array_4_0, grammarAccess.getDtoPropertyAccess().getArrayLeftSquareBracketRightSquareBracketKeyword_3_0());
 				}
 				{
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getDtoPropertyRule());
 					}
-					setWithLastConsumed($current, "array", lv_array_3_0, "[]");
+					setWithLastConsumed($current, "array", lv_array_4_0, "[]");
 				}
 			)
 		)?
 		(
-			otherlv_4=';'
+			otherlv_5=';'
 			{
-				newLeafNode(otherlv_4, grammarAccess.getDtoPropertyAccess().getSemicolonKeyword_4());
+				newLeafNode(otherlv_5, grammarAccess.getDtoPropertyAccess().getSemicolonKeyword_4());
 			}
 		)?
 	)
@@ -977,7 +894,7 @@ ruleMethod returns [EObject current=null]
 					}
 				}
 				{
-					newCompositeNode(grammarAccess.getMethodAccess().getReturnTypeTypeCrossReference_5_0());
+					newCompositeNode(grammarAccess.getMethodAccess().getReturnTypeAbstractElementCrossReference_5_0());
 				}
 				ruleQualifiedName
 				{
@@ -1054,7 +971,7 @@ ruleMethodArg returns [EObject current=null]
 					}
 				}
 				{
-					newCompositeNode(grammarAccess.getMethodArgAccess().getTypeTypeCrossReference_2_0());
+					newCompositeNode(grammarAccess.getMethodArgAccess().getTypeAbstractElementCrossReference_2_0());
 				}
 				ruleQualifiedName
 				{
@@ -1078,6 +995,8 @@ ruleMethodArg returns [EObject current=null]
 		)?
 	)
 ;
+
+RULE_DATATYPE : ('string'|'number'|'Date'|'boolean');
 
 RULE_ARGUMENTREGEX : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')* '=>' ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')* '.' ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

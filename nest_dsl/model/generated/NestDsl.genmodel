@@ -12,8 +12,6 @@
     <genClasses ecoreClass="NestDsl.ecore#//AbstractElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NestDsl.ecore#//AbstractElement/name"/>
     </genClasses>
-    <genClasses ecoreClass="NestDsl.ecore#//Type"/>
-    <genClasses ecoreClass="NestDsl.ecore#//DtoType"/>
     <genClasses ecoreClass="NestDsl.ecore#//Entity">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NestDsl.ecore#//Entity/superType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference NestDsl.ecore#//Entity/properties"/>
@@ -23,16 +21,17 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NestDsl.ecore#//Dto/superType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference NestDsl.ecore#//Dto/properties"/>
     </genClasses>
-    <genClasses ecoreClass="NestDsl.ecore#//DataType"/>
     <genClasses ecoreClass="NestDsl.ecore#//Property">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference NestDsl.ecore#//Property/relation"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NestDsl.ecore#//Property/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NestDsl.ecore#//Property/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NestDsl.ecore#//Property/classType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NestDsl.ecore#//Property/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NestDsl.ecore#//Property/array"/>
     </genClasses>
     <genClasses ecoreClass="NestDsl.ecore#//DtoProperty">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NestDsl.ecore#//DtoProperty/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NestDsl.ecore#//DtoProperty/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NestDsl.ecore#//DtoProperty/classType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NestDsl.ecore#//DtoProperty/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NestDsl.ecore#//DtoProperty/array"/>
     </genClasses>
     <genClasses ecoreClass="NestDsl.ecore#//Relation">

@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.DtoProperty#getName <em>Name</em>}</li>
+ *   <li>{@link prodest.es.gov.br.dsl.nestdsl.DtoProperty#getClassType <em>Class Type</em>}</li>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.DtoProperty#getType <em>Type</em>}</li>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.DtoProperty#getArray <em>Array</em>}</li>
  * </ul>
@@ -48,26 +49,48 @@ public interface DtoProperty extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Type</b></em>' reference.
+   * Returns the value of the '<em><b>Class Type</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' reference.
-   * @see #setType(DtoType)
+   * @return the value of the '<em>Class Type</em>' reference.
+   * @see #setClassType(Dto)
+   * @see prodest.es.gov.br.dsl.nestdsl.NestdslPackage#getDtoProperty_ClassType()
+   * @model
+   * @generated
+   */
+  Dto getClassType();
+
+  /**
+   * Sets the value of the '{@link prodest.es.gov.br.dsl.nestdsl.DtoProperty#getClassType <em>Class Type</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Class Type</em>' reference.
+   * @see #getClassType()
+   * @generated
+   */
+  void setClassType(Dto value);
+
+  /**
+   * Returns the value of the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Type</em>' attribute.
+   * @see #setType(String)
    * @see prodest.es.gov.br.dsl.nestdsl.NestdslPackage#getDtoProperty_Type()
    * @model
    * @generated
    */
-  DtoType getType();
+  String getType();
 
   /**
-   * Sets the value of the '{@link prodest.es.gov.br.dsl.nestdsl.DtoProperty#getType <em>Type</em>}' reference.
+   * Sets the value of the '{@link prodest.es.gov.br.dsl.nestdsl.DtoProperty#getType <em>Type</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' reference.
+   * @param value the new value of the '<em>Type</em>' attribute.
    * @see #getType()
    * @generated
    */
-  void setType(DtoType value);
+  void setType(String value);
 
   /**
    * Returns the value of the '<em><b>Array</b></em>' attribute.

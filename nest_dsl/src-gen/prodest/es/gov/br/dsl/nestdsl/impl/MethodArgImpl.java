@@ -11,9 +11,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import prodest.es.gov.br.dsl.nestdsl.AbstractElement;
 import prodest.es.gov.br.dsl.nestdsl.MethodArg;
 import prodest.es.gov.br.dsl.nestdsl.NestdslPackage;
-import prodest.es.gov.br.dsl.nestdsl.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -60,7 +60,7 @@ public class MethodArgImpl extends MinimalEObjectImpl.Container implements Metho
    * @generated
    * @ordered
    */
-  protected Type type;
+  protected AbstractElement type;
 
   /**
    * The default value of the '{@link #getArray() <em>Array</em>}' attribute.
@@ -134,12 +134,12 @@ public class MethodArgImpl extends MinimalEObjectImpl.Container implements Metho
    * @generated
    */
   @Override
-  public Type getType()
+  public AbstractElement getType()
   {
     if (type != null && type.eIsProxy())
     {
       InternalEObject oldType = (InternalEObject)type;
-      type = (Type)eResolveProxy(oldType);
+      type = (AbstractElement)eResolveProxy(oldType);
       if (type != oldType)
       {
         if (eNotificationRequired())
@@ -154,7 +154,7 @@ public class MethodArgImpl extends MinimalEObjectImpl.Container implements Metho
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type basicGetType()
+  public AbstractElement basicGetType()
   {
     return type;
   }
@@ -165,9 +165,9 @@ public class MethodArgImpl extends MinimalEObjectImpl.Container implements Metho
    * @generated
    */
   @Override
-  public void setType(Type newType)
+  public void setType(AbstractElement newType)
   {
-    Type oldType = type;
+    AbstractElement oldType = type;
     type = newType;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, NestdslPackage.METHOD_ARG__TYPE, oldType, type));
@@ -233,7 +233,7 @@ public class MethodArgImpl extends MinimalEObjectImpl.Container implements Metho
         setName((String)newValue);
         return;
       case NestdslPackage.METHOD_ARG__TYPE:
-        setType((Type)newValue);
+        setType((AbstractElement)newValue);
         return;
       case NestdslPackage.METHOD_ARG__ARRAY:
         setArray((String)newValue);
@@ -256,7 +256,7 @@ public class MethodArgImpl extends MinimalEObjectImpl.Container implements Metho
         setName(NAME_EDEFAULT);
         return;
       case NestdslPackage.METHOD_ARG__TYPE:
-        setType((Type)null);
+        setType((AbstractElement)null);
         return;
       case NestdslPackage.METHOD_ARG__ARRAY:
         setArray(ARRAY_EDEFAULT);

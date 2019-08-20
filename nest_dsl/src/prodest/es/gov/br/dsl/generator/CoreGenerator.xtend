@@ -81,7 +81,11 @@ class CoreGenerator extends AbstractGenerator {
 					@Column()
 			«ENDIF»
 		«ENDIF»
-		«p.name»: «p.type.fullyQualifiedName»«p.array»;
+		«IF p.classType !== null»
+			«p.name»: «p.classType.fullyQualifiedName»«p.array»;
+		«ELSE»
+			«p.name»: «p.type»«p.array»;
+		«ENDIF»
     '''
 	
 	def controllerCompile(Entity e)

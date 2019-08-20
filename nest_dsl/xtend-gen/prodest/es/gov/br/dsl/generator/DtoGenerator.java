@@ -40,15 +40,21 @@ public class DtoGenerator extends AbstractGenerator {
       EList<DtoProperty> _properties = dto.getProperties();
       for(final DtoProperty p : _properties) {
         {
-          boolean _equals = p.getType().eClass().getName().equals("Dto");
-          if (_equals) {
-            _builder.append("import { ");
-            QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(p.getType());
-            _builder.append(_fullyQualifiedName);
-            _builder.append(" } from \'./");
-            QualifiedName _lowerCase = this._iQualifiedNameProvider.getFullyQualifiedName(p.getType()).toLowerCase();
-            _builder.append(_lowerCase);
-            _builder.append(".dto\'");
+          Dto _classType = p.getClassType();
+          boolean _tripleNotEquals = (_classType != null);
+          if (_tripleNotEquals) {
+            {
+              boolean _equals = p.getClassType().eClass().getName().equals("Dto");
+              if (_equals) {
+                _builder.append("import { ");
+                QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(p.getClassType());
+                _builder.append(_fullyQualifiedName);
+                _builder.append(" } from \'./");
+                QualifiedName _lowerCase = this._iQualifiedNameProvider.getFullyQualifiedName(p.getClassType()).toLowerCase();
+                _builder.append(_lowerCase);
+                _builder.append(".dto\'");
+              }
+            }
           }
         }
         _builder.newLineIfNotEmpty();
@@ -61,8 +67,8 @@ public class DtoGenerator extends AbstractGenerator {
     _builder.append("Dto ");
     {
       Dto _superType = dto.getSuperType();
-      boolean _tripleNotEquals = (_superType != null);
-      if (_tripleNotEquals) {
+      boolean _tripleNotEquals_1 = (_superType != null);
+      if (_tripleNotEquals_1) {
         _builder.append("extends ");
         QualifiedName _fullyQualifiedName_1 = this._iQualifiedNameProvider.getFullyQualifiedName(dto.getSuperType());
         _builder.append(_fullyQualifiedName_1);
@@ -123,8 +129,17 @@ public class DtoGenerator extends AbstractGenerator {
       }
     }
     _builder.append(": ");
-    QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(p.getType());
-    _builder.append(_fullyQualifiedName);
+    {
+      Dto _classType = p.getClassType();
+      boolean _tripleNotEquals = (_classType != null);
+      if (_tripleNotEquals) {
+        QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(p.getClassType());
+        _builder.append(_fullyQualifiedName);
+      } else {
+        String _type = p.getType();
+        _builder.append(_type);
+      }
+    }
     String _array = p.getArray();
     _builder.append(_array);
     {

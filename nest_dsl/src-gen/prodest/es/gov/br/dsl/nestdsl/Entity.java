@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Entity extends Type
+public interface Entity extends AbstractElement
 {
   /**
    * Returns the value of the '<em><b>Super Type</b></em>' reference.

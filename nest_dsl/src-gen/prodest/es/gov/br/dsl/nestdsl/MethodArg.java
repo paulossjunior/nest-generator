@@ -52,12 +52,12 @@ public interface MethodArg extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' reference.
-   * @see #setType(Type)
+   * @see #setType(AbstractElement)
    * @see prodest.es.gov.br.dsl.nestdsl.NestdslPackage#getMethodArg_Type()
    * @model
    * @generated
    */
-  Type getType();
+  AbstractElement getType();
 
   /**
    * Sets the value of the '{@link prodest.es.gov.br.dsl.nestdsl.MethodArg#getType <em>Type</em>}' reference.
@@ -67,7 +67,7 @@ public interface MethodArg extends EObject
    * @see #getType()
    * @generated
    */
-  void setType(Type value);
+  void setType(AbstractElement value);
 
   /**
    * Returns the value of the '<em><b>Array</b></em>' attribute.

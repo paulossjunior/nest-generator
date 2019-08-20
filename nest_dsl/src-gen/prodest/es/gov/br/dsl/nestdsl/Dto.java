@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Dto extends DtoType
+public interface Dto extends AbstractElement
 {
   /**
    * Returns the value of the '<em><b>Super Type</b></em>' reference.
