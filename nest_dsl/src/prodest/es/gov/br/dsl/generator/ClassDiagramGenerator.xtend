@@ -54,7 +54,11 @@ class ClassDiagramGenerator extends AbstractGenerator {
    
    def propertyCompile(Entity e, Property p)
    '''
-	«e.name»: «p.type.fullyQualifiedName»«p.array» «p.name»
+	«IF p.classType !== null»
+		«e.name»: «p.classType.fullyQualifiedName»«p.array» «p.name»
+	«ELSE»
+		«e.name»: «p.type»«p.array» «p.name»
+	«ENDIF»
    '''
    
    def methodCompile(Entity e)
