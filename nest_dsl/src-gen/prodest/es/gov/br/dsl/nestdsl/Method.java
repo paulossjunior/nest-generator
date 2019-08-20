@@ -90,12 +90,12 @@ public interface Method extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Return Type</em>' reference.
-   * @see #setReturnType(Type)
+   * @see #setReturnType(AbstractElement)
    * @see prodest.es.gov.br.dsl.nestdsl.NestdslPackage#getMethod_ReturnType()
    * @model
    * @generated
    */
-  Type getReturnType();
+  AbstractElement getReturnType();
 
   /**
    * Sets the value of the '{@link prodest.es.gov.br.dsl.nestdsl.Method#getReturnType <em>Return Type</em>}' reference.
@@ -105,7 +105,7 @@ public interface Method extends EObject
    * @see #getReturnType()
    * @generated
    */
-  void setReturnType(Type value);
+  void setReturnType(AbstractElement value);
 
   /**
    * Returns the value of the '<em><b>Array</b></em>' attribute.

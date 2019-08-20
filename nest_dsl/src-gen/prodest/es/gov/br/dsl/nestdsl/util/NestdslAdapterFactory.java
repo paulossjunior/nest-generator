@@ -86,16 +86,6 @@ public class NestdslAdapterFactory extends AdapterFactoryImpl
         return createAbstractElementAdapter();
       }
       @Override
-      public Adapter caseType(Type object)
-      {
-        return createTypeAdapter();
-      }
-      @Override
-      public Adapter caseDtoType(DtoType object)
-      {
-        return createDtoTypeAdapter();
-      }
-      @Override
       public Adapter caseEntity(Entity object)
       {
         return createEntityAdapter();
@@ -104,11 +94,6 @@ public class NestdslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseDto(Dto object)
       {
         return createDtoAdapter();
-      }
-      @Override
-      public Adapter caseDataType(DataType object)
-      {
-        return createDataTypeAdapter();
       }
       @Override
       public Adapter caseProperty(Property object)
@@ -198,36 +183,6 @@ public class NestdslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link prodest.es.gov.br.dsl.nestdsl.Type <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see prodest.es.gov.br.dsl.nestdsl.Type
-   * @generated
-   */
-  public Adapter createTypeAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link prodest.es.gov.br.dsl.nestdsl.DtoType <em>Dto Type</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see prodest.es.gov.br.dsl.nestdsl.DtoType
-   * @generated
-   */
-  public Adapter createDtoTypeAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link prodest.es.gov.br.dsl.nestdsl.Entity <em>Entity</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -253,21 +208,6 @@ public class NestdslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createDtoAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link prodest.es.gov.br.dsl.nestdsl.DataType <em>Data Type</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see prodest.es.gov.br.dsl.nestdsl.DataType
-   * @generated
-   */
-  public Adapter createDataTypeAdapter()
   {
     return null;
   }

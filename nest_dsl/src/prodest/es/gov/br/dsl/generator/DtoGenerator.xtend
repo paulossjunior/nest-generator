@@ -25,7 +25,7 @@ class DtoGenerator extends AbstractGenerator {
 	def compile(Dto dto)
 	'''
 		«FOR p : dto.properties»
-			«IF p.type.eClass.name.equals('Dto')»import { «p.type.fullyQualifiedName» } from './«p.type.fullyQualifiedName.toLowerCase».dto'«ENDIF»
+			«IF p.classType !== null»«IF p.classType.eClass.name.equals('Dto')»import { «p.classType.fullyQualifiedName» } from './«p.classType.fullyQualifiedName.toLowerCase».dto'«ENDIF»«ENDIF»
 		«ENDFOR»
 		
 		export class «dto.name»Dto «IF dto.superType !== null
@@ -47,7 +47,7 @@ class DtoGenerator extends AbstractGenerator {
 	
 	def compileProperty(DtoProperty p, Boolean readonly)
 	'''
-		«IF readonly == false»	readonly «p.name»«ELSE»		«p.name»«ENDIF»: «p.type.fullyQualifiedName»«p.array»«IF readonly == true»,«ELSE»;«ENDIF»
+		«IF readonly == false»	readonly «p.name»«ELSE»		«p.name»«ENDIF»: «IF p.classType !== null»«p.classType.fullyQualifiedName»«ELSE»«p.type»«ENDIF»«p.array»«IF readonly == true»,«ELSE»;«ENDIF»
 	'''
 	
 	def compileConstructor(DtoProperty p)

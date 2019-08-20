@@ -38,7 +38,7 @@ import prodest.es.gov.br.dsl.nestdsl.Property;
  *
  * @generated
  */
-public class EntityImpl extends TypeImpl implements Entity
+public class EntityImpl extends AbstractElementImpl implements Entity
 {
   /**
    * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference.

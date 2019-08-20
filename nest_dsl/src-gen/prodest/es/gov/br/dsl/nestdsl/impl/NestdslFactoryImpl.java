@@ -67,11 +67,8 @@ public class NestdslFactoryImpl extends EFactoryImpl implements NestdslFactory
     {
       case NestdslPackage.DOMAINMODEL: return createDomainmodel();
       case NestdslPackage.ABSTRACT_ELEMENT: return createAbstractElement();
-      case NestdslPackage.TYPE: return createType();
-      case NestdslPackage.DTO_TYPE: return createDtoType();
       case NestdslPackage.ENTITY: return createEntity();
       case NestdslPackage.DTO: return createDto();
-      case NestdslPackage.DATA_TYPE: return createDataType();
       case NestdslPackage.PROPERTY: return createProperty();
       case NestdslPackage.DTO_PROPERTY: return createDtoProperty();
       case NestdslPackage.RELATION: return createRelation();
@@ -114,30 +111,6 @@ public class NestdslFactoryImpl extends EFactoryImpl implements NestdslFactory
    * @generated
    */
   @Override
-  public Type createType()
-  {
-    TypeImpl type = new TypeImpl();
-    return type;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public DtoType createDtoType()
-  {
-    DtoTypeImpl dtoType = new DtoTypeImpl();
-    return dtoType;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public Entity createEntity()
   {
     EntityImpl entity = new EntityImpl();
@@ -154,18 +127,6 @@ public class NestdslFactoryImpl extends EFactoryImpl implements NestdslFactory
   {
     DtoImpl dto = new DtoImpl();
     return dto;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public DataType createDataType()
-  {
-    DataTypeImpl dataType = new DataTypeImpl();
-    return dataType;
   }
 
   /**

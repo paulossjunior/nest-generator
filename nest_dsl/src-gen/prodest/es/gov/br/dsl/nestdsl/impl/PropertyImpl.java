@@ -12,10 +12,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import prodest.es.gov.br.dsl.nestdsl.Entity;
 import prodest.es.gov.br.dsl.nestdsl.NestdslPackage;
 import prodest.es.gov.br.dsl.nestdsl.Property;
 import prodest.es.gov.br.dsl.nestdsl.Relation;
-import prodest.es.gov.br.dsl.nestdsl.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,6 +27,7 @@ import prodest.es.gov.br.dsl.nestdsl.Type;
  * <ul>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.impl.PropertyImpl#getRelation <em>Relation</em>}</li>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.impl.PropertyImpl#getName <em>Name</em>}</li>
+ *   <li>{@link prodest.es.gov.br.dsl.nestdsl.impl.PropertyImpl#getClassType <em>Class Type</em>}</li>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.impl.PropertyImpl#getType <em>Type</em>}</li>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.impl.PropertyImpl#getArray <em>Array</em>}</li>
  * </ul>
@@ -66,14 +67,34 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+   * The cached value of the '{@link #getClassType() <em>Class Type</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getClassType()
+   * @generated
+   * @ordered
+   */
+  protected Entity classType;
+
+  /**
+   * The default value of the '{@link #getType() <em>Type</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getType()
    * @generated
    * @ordered
    */
-  protected Type type;
+  protected static final String TYPE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getType()
+   * @generated
+   * @ordered
+   */
+  protected String type = TYPE_EDEFAULT;
 
   /**
    * The default value of the '{@link #getArray() <em>Array</em>}' attribute.
@@ -197,19 +218,19 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
    * @generated
    */
   @Override
-  public Type getType()
+  public Entity getClassType()
   {
-    if (type != null && type.eIsProxy())
+    if (classType != null && classType.eIsProxy())
     {
-      InternalEObject oldType = (InternalEObject)type;
-      type = (Type)eResolveProxy(oldType);
-      if (type != oldType)
+      InternalEObject oldClassType = (InternalEObject)classType;
+      classType = (Entity)eResolveProxy(oldClassType);
+      if (classType != oldClassType)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, NestdslPackage.PROPERTY__TYPE, oldType, type));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, NestdslPackage.PROPERTY__CLASS_TYPE, oldClassType, classType));
       }
     }
-    return type;
+    return classType;
   }
 
   /**
@@ -217,7 +238,32 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type basicGetType()
+  public Entity basicGetClassType()
+  {
+    return classType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setClassType(Entity newClassType)
+  {
+    Entity oldClassType = classType;
+    classType = newClassType;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, NestdslPackage.PROPERTY__CLASS_TYPE, oldClassType, classType));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getType()
   {
     return type;
   }
@@ -228,9 +274,9 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
    * @generated
    */
   @Override
-  public void setType(Type newType)
+  public void setType(String newType)
   {
-    Type oldType = type;
+    String oldType = type;
     type = newType;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, NestdslPackage.PROPERTY__TYPE, oldType, type));
@@ -291,9 +337,11 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
         return getRelation();
       case NestdslPackage.PROPERTY__NAME:
         return getName();
+      case NestdslPackage.PROPERTY__CLASS_TYPE:
+        if (resolve) return getClassType();
+        return basicGetClassType();
       case NestdslPackage.PROPERTY__TYPE:
-        if (resolve) return getType();
-        return basicGetType();
+        return getType();
       case NestdslPackage.PROPERTY__ARRAY:
         return getArray();
     }
@@ -316,8 +364,11 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
       case NestdslPackage.PROPERTY__NAME:
         setName((String)newValue);
         return;
+      case NestdslPackage.PROPERTY__CLASS_TYPE:
+        setClassType((Entity)newValue);
+        return;
       case NestdslPackage.PROPERTY__TYPE:
-        setType((Type)newValue);
+        setType((String)newValue);
         return;
       case NestdslPackage.PROPERTY__ARRAY:
         setArray((String)newValue);
@@ -342,8 +393,11 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
       case NestdslPackage.PROPERTY__NAME:
         setName(NAME_EDEFAULT);
         return;
+      case NestdslPackage.PROPERTY__CLASS_TYPE:
+        setClassType((Entity)null);
+        return;
       case NestdslPackage.PROPERTY__TYPE:
-        setType((Type)null);
+        setType(TYPE_EDEFAULT);
         return;
       case NestdslPackage.PROPERTY__ARRAY:
         setArray(ARRAY_EDEFAULT);
@@ -366,8 +420,10 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
         return relation != null;
       case NestdslPackage.PROPERTY__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case NestdslPackage.PROPERTY__CLASS_TYPE:
+        return classType != null;
       case NestdslPackage.PROPERTY__TYPE:
-        return type != null;
+        return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
       case NestdslPackage.PROPERTY__ARRAY:
         return ARRAY_EDEFAULT == null ? array != null : !ARRAY_EDEFAULT.equals(array);
     }
@@ -387,6 +443,8 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
+    result.append(", type: ");
+    result.append(type);
     result.append(", array: ");
     result.append(array);
     result.append(')');

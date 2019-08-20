@@ -118,19 +118,8 @@ public class ClassDiagramGenerator extends AbstractGenerator {
   }
   
   public CharSequence propertyCompile(final Entity e, final Property p) {
-    StringConcatenation _builder = new StringConcatenation();
-    String _name = e.getName();
-    _builder.append(_name);
-    _builder.append(": ");
-    QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(p.getType());
-    _builder.append(_fullyQualifiedName);
-    String _array = p.getArray();
-    _builder.append(_array);
-    _builder.append(" ");
-    String _name_1 = p.getName();
-    _builder.append(_name_1);
-    _builder.newLineIfNotEmpty();
-    return _builder;
+    throw new Error("Unresolved compilation problems:"
+      + "\nType mismatch: cannot convert from String to EObject");
   }
   
   public CharSequence methodCompile(final Entity e) {

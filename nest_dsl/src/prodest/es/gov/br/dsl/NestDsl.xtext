@@ -8,16 +8,9 @@ Domainmodel:
     ;
     
 AbstractElement:
-    Type | DtoType
+    Entity | Dto
     ;
  
-Type:
-	DataType | Entity
-	;
-
-DtoType:
-	DataType | Dto
-	;
 
 Entity:
     'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'
@@ -32,9 +25,10 @@ Dto:
 	'}'
 	;
 	
-DataType:
-    'type' name=ID('[]')?(';')?
+terminal DATATYPE:
+    ('string' | 'number' | 'Date' | 'boolean')
     ;
+
 
 QualifiedName:
    ID
@@ -42,11 +36,11 @@ QualifiedName:
  
 Property:
 	relation = (Relation)?
-    name=ID ':' type=[Type|QualifiedName](array='[]')?(';')?
+    name=ID ':' (classType=[Entity|QualifiedName] | type=DATATYPE)(array='[]')?(';')?
     ;
     
 DtoProperty:
-    name=ID ':' type=[DtoType|QualifiedName](array='[]')?(';')?
+    name=ID ':' (classType=[Dto|QualifiedName] | type=DATATYPE)(array='[]')?(';')?
     ;
     
 Relation:
@@ -68,11 +62,11 @@ terminal ARGUMENTREGEX:
 	;
 
 Method:
-	verb=( 'Get' | 'Post' | 'Delete' | 'Put' ) name=ID '(' (args+= MethodArg(',')?)* '):' returnType=[Type|QualifiedName](array='[]')?(';')?
+	verb=( 'Get' | 'Post' | 'Delete' | 'Put' ) name=ID '(' (args+= MethodArg(',')?)* '):' returnType=[AbstractElement|QualifiedName](array='[]')?(';')?
 	;
 	
 MethodArg:
-	name=ID ':' type=[Type|QualifiedName](array='[]')?
+	name=ID ':' type=[AbstractElement|QualifiedName](array='[]')?
 ;
 
 
