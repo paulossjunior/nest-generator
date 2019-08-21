@@ -574,7 +574,7 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
    * @generated
    */
   @Override
-  public EReference getMethod_ReturnType()
+  public EReference getMethod_ReturnClassType()
   {
     return (EReference)methodEClass.getEStructuralFeatures().get(3);
   }
@@ -585,9 +585,20 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
    * @generated
    */
   @Override
-  public EAttribute getMethod_Array()
+  public EAttribute getMethod_ReturnType()
   {
     return (EAttribute)methodEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getMethod_Array()
+  {
+    return (EAttribute)methodEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -618,7 +629,7 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
    * @generated
    */
   @Override
-  public EReference getMethodArg_Type()
+  public EReference getMethodArg_ClassType()
   {
     return (EReference)methodArgEClass.getEStructuralFeatures().get(1);
   }
@@ -629,9 +640,20 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
    * @generated
    */
   @Override
-  public EAttribute getMethodArg_Array()
+  public EAttribute getMethodArg_Type()
   {
     return (EAttribute)methodArgEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getMethodArg_Array()
+  {
+    return (EAttribute)methodArgEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -710,12 +732,14 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
     createEAttribute(methodEClass, METHOD__VERB);
     createEAttribute(methodEClass, METHOD__NAME);
     createEReference(methodEClass, METHOD__ARGS);
-    createEReference(methodEClass, METHOD__RETURN_TYPE);
+    createEReference(methodEClass, METHOD__RETURN_CLASS_TYPE);
+    createEAttribute(methodEClass, METHOD__RETURN_TYPE);
     createEAttribute(methodEClass, METHOD__ARRAY);
 
     methodArgEClass = createEClass(METHOD_ARG);
     createEAttribute(methodArgEClass, METHOD_ARG__NAME);
-    createEReference(methodArgEClass, METHOD_ARG__TYPE);
+    createEReference(methodArgEClass, METHOD_ARG__CLASS_TYPE);
+    createEAttribute(methodArgEClass, METHOD_ARG__TYPE);
     createEAttribute(methodArgEClass, METHOD_ARG__ARRAY);
   }
 
@@ -797,12 +821,14 @@ public class NestdslPackageImpl extends EPackageImpl implements NestdslPackage
     initEAttribute(getMethod_Verb(), ecorePackage.getEString(), "verb", null, 0, 1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getMethod_Name(), ecorePackage.getEString(), "name", null, 0, 1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMethod_Args(), this.getMethodArg(), null, "args", null, 0, -1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getMethod_ReturnType(), this.getAbstractElement(), null, "returnType", null, 0, 1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMethod_ReturnClassType(), this.getAbstractElement(), null, "returnClassType", null, 0, 1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMethod_ReturnType(), ecorePackage.getEString(), "returnType", null, 0, 1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getMethod_Array(), ecorePackage.getEString(), "array", null, 0, 1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(methodArgEClass, MethodArg.class, "MethodArg", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMethodArg_Name(), ecorePackage.getEString(), "name", null, 0, 1, MethodArg.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getMethodArg_Type(), this.getAbstractElement(), null, "type", null, 0, 1, MethodArg.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMethodArg_ClassType(), this.getAbstractElement(), null, "classType", null, 0, 1, MethodArg.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMethodArg_Type(), ecorePackage.getEString(), "type", null, 0, 1, MethodArg.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getMethodArg_Array(), ecorePackage.getEString(), "array", null, 0, 1, MethodArg.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource

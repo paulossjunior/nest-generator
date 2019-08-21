@@ -223,7 +223,8 @@ class HelpersGenerator extends AbstractGenerator {
 			    "test:cov": "jest --coverage",
 			    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
 			    "test:e2e": "jest --config ./test/jest-e2e.json",
-			    "classDiagram": "mmdc -i classDiagram.mmd -o classDiagram.png"
+			    "generate:classDiagram": "mmdc -i classDiagram.mmd -o classDiagram.png",
+			    "generate:archDiagram": "mmdc -i archDiagram.mmd -o archDiagram.png"
 			  },
 			  "dependencies": {
 			    "@nestjs/common": "^6.0.0",

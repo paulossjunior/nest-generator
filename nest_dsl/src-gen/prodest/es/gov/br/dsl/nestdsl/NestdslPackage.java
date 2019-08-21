@@ -491,13 +491,22 @@ public interface NestdslPackage extends EPackage
   int METHOD__ARGS = 2;
 
   /**
-   * The feature id for the '<em><b>Return Type</b></em>' reference.
+   * The feature id for the '<em><b>Return Class Type</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int METHOD__RETURN_TYPE = 3;
+  int METHOD__RETURN_CLASS_TYPE = 3;
+
+  /**
+   * The feature id for the '<em><b>Return Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METHOD__RETURN_TYPE = 4;
 
   /**
    * The feature id for the '<em><b>Array</b></em>' attribute.
@@ -506,7 +515,7 @@ public interface NestdslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int METHOD__ARRAY = 4;
+  int METHOD__ARRAY = 5;
 
   /**
    * The number of structural features of the '<em>Method</em>' class.
@@ -515,7 +524,7 @@ public interface NestdslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int METHOD_FEATURE_COUNT = 5;
+  int METHOD_FEATURE_COUNT = 6;
 
   /**
    * The meta object id for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.MethodArgImpl <em>Method Arg</em>}' class.
@@ -537,13 +546,22 @@ public interface NestdslPackage extends EPackage
   int METHOD_ARG__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' reference.
+   * The feature id for the '<em><b>Class Type</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int METHOD_ARG__TYPE = 1;
+  int METHOD_ARG__CLASS_TYPE = 1;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METHOD_ARG__TYPE = 2;
 
   /**
    * The feature id for the '<em><b>Array</b></em>' attribute.
@@ -552,7 +570,7 @@ public interface NestdslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int METHOD_ARG__ARRAY = 2;
+  int METHOD_ARG__ARRAY = 3;
 
   /**
    * The number of structural features of the '<em>Method Arg</em>' class.
@@ -561,7 +579,7 @@ public interface NestdslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int METHOD_ARG_FEATURE_COUNT = 3;
+  int METHOD_ARG_FEATURE_COUNT = 4;
 
 
   /**
@@ -951,15 +969,26 @@ public interface NestdslPackage extends EPackage
   EReference getMethod_Args();
 
   /**
-   * Returns the meta object for the reference '{@link prodest.es.gov.br.dsl.nestdsl.Method#getReturnType <em>Return Type</em>}'.
+   * Returns the meta object for the reference '{@link prodest.es.gov.br.dsl.nestdsl.Method#getReturnClassType <em>Return Class Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Return Type</em>'.
+   * @return the meta object for the reference '<em>Return Class Type</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.Method#getReturnClassType()
+   * @see #getMethod()
+   * @generated
+   */
+  EReference getMethod_ReturnClassType();
+
+  /**
+   * Returns the meta object for the attribute '{@link prodest.es.gov.br.dsl.nestdsl.Method#getReturnType <em>Return Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Return Type</em>'.
    * @see prodest.es.gov.br.dsl.nestdsl.Method#getReturnType()
    * @see #getMethod()
    * @generated
    */
-  EReference getMethod_ReturnType();
+  EAttribute getMethod_ReturnType();
 
   /**
    * Returns the meta object for the attribute '{@link prodest.es.gov.br.dsl.nestdsl.Method#getArray <em>Array</em>}'.
@@ -994,15 +1023,26 @@ public interface NestdslPackage extends EPackage
   EAttribute getMethodArg_Name();
 
   /**
-   * Returns the meta object for the reference '{@link prodest.es.gov.br.dsl.nestdsl.MethodArg#getType <em>Type</em>}'.
+   * Returns the meta object for the reference '{@link prodest.es.gov.br.dsl.nestdsl.MethodArg#getClassType <em>Class Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Type</em>'.
+   * @return the meta object for the reference '<em>Class Type</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.MethodArg#getClassType()
+   * @see #getMethodArg()
+   * @generated
+   */
+  EReference getMethodArg_ClassType();
+
+  /**
+   * Returns the meta object for the attribute '{@link prodest.es.gov.br.dsl.nestdsl.MethodArg#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Type</em>'.
    * @see prodest.es.gov.br.dsl.nestdsl.MethodArg#getType()
    * @see #getMethodArg()
    * @generated
    */
-  EReference getMethodArg_Type();
+  EAttribute getMethodArg_Type();
 
   /**
    * Returns the meta object for the attribute '{@link prodest.es.gov.br.dsl.nestdsl.MethodArg#getArray <em>Array</em>}'.
@@ -1347,12 +1387,20 @@ public interface NestdslPackage extends EPackage
     EReference METHOD__ARGS = eINSTANCE.getMethod_Args();
 
     /**
-     * The meta object literal for the '<em><b>Return Type</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Return Class Type</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference METHOD__RETURN_TYPE = eINSTANCE.getMethod_ReturnType();
+    EReference METHOD__RETURN_CLASS_TYPE = eINSTANCE.getMethod_ReturnClassType();
+
+    /**
+     * The meta object literal for the '<em><b>Return Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute METHOD__RETURN_TYPE = eINSTANCE.getMethod_ReturnType();
 
     /**
      * The meta object literal for the '<em><b>Array</b></em>' attribute feature.
@@ -1381,12 +1429,20 @@ public interface NestdslPackage extends EPackage
     EAttribute METHOD_ARG__NAME = eINSTANCE.getMethodArg_Name();
 
     /**
-     * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Class Type</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference METHOD_ARG__TYPE = eINSTANCE.getMethodArg_Type();
+    EReference METHOD_ARG__CLASS_TYPE = eINSTANCE.getMethodArg_ClassType();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute METHOD_ARG__TYPE = eINSTANCE.getMethodArg_Type();
 
     /**
      * The meta object literal for the '<em><b>Array</b></em>' attribute feature.

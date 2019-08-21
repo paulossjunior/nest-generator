@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.Method#getVerb <em>Verb</em>}</li>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.Method#getName <em>Name</em>}</li>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.Method#getArgs <em>Args</em>}</li>
+ *   <li>{@link prodest.es.gov.br.dsl.nestdsl.Method#getReturnClassType <em>Return Class Type</em>}</li>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.Method#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.Method#getArray <em>Array</em>}</li>
  * </ul>
@@ -86,26 +87,48 @@ public interface Method extends EObject
   EList<MethodArg> getArgs();
 
   /**
-   * Returns the value of the '<em><b>Return Type</b></em>' reference.
+   * Returns the value of the '<em><b>Return Class Type</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Return Type</em>' reference.
-   * @see #setReturnType(AbstractElement)
+   * @return the value of the '<em>Return Class Type</em>' reference.
+   * @see #setReturnClassType(AbstractElement)
+   * @see prodest.es.gov.br.dsl.nestdsl.NestdslPackage#getMethod_ReturnClassType()
+   * @model
+   * @generated
+   */
+  AbstractElement getReturnClassType();
+
+  /**
+   * Sets the value of the '{@link prodest.es.gov.br.dsl.nestdsl.Method#getReturnClassType <em>Return Class Type</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Return Class Type</em>' reference.
+   * @see #getReturnClassType()
+   * @generated
+   */
+  void setReturnClassType(AbstractElement value);
+
+  /**
+   * Returns the value of the '<em><b>Return Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Return Type</em>' attribute.
+   * @see #setReturnType(String)
    * @see prodest.es.gov.br.dsl.nestdsl.NestdslPackage#getMethod_ReturnType()
    * @model
    * @generated
    */
-  AbstractElement getReturnType();
+  String getReturnType();
 
   /**
-   * Sets the value of the '{@link prodest.es.gov.br.dsl.nestdsl.Method#getReturnType <em>Return Type</em>}' reference.
+   * Sets the value of the '{@link prodest.es.gov.br.dsl.nestdsl.Method#getReturnType <em>Return Type</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Return Type</em>' reference.
+   * @param value the new value of the '<em>Return Type</em>' attribute.
    * @see #getReturnType()
    * @generated
    */
-  void setReturnType(AbstractElement value);
+  void setReturnType(String value);
 
   /**
    * Returns the value of the '<em><b>Array</b></em>' attribute.

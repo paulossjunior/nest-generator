@@ -461,7 +461,10 @@ public class HelpersGenerator extends AbstractGenerator {
     _builder.append("\"test:e2e\": \"jest --config ./test/jest-e2e.json\",");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("\"classDiagram\": \"mmdc -i classDiagram.mmd -o classDiagram.png\"");
+    _builder.append("\"generate:classDiagram\": \"mmdc -i classDiagram.mmd -o classDiagram.png\",");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"generate:archDiagram\": \"mmdc -i archDiagram.mmd -o archDiagram.png\"");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("},");

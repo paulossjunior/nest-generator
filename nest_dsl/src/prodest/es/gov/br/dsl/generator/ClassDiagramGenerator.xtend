@@ -19,11 +19,14 @@ class ClassDiagramGenerator extends AbstractGenerator {
 	
 	override doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		fsa.generateFile(
-                "install.sh",
-                mermaidInstaller)
+            "install.sh",
+            mermaidInstaller)
         fsa.generateFile(
-                "classDiagram.mmd",
-                classDiagramCompiler(resource))
+            "classDiagram.mmd",
+            classDiagramCompiler(resource))
+        fsa.generateFile(
+            "archDiagram.mmd",
+            archDiagram())
 	}
 	
 	def mermaidInstaller()
@@ -65,7 +68,7 @@ class ClassDiagramGenerator extends AbstractGenerator {
    '''
    	«FOR method: e.methods»
    		«var newArgs = generateArgList(method)»
-   		«e.name»: «method.returnType.fullyQualifiedName» «method.name»(«FOR arg: newArgs»«arg»«ENDFOR»)
+   		«e.name»: «IF method.returnClassType !== null»«method.returnClassType.fullyQualifiedName»«ELSE»«method.returnType»«ENDIF» «method.name»(«FOR arg: newArgs»«arg»«ENDFOR»)
    	«ENDFOR»
    '''
    
@@ -83,8 +86,30 @@ class ClassDiagramGenerator extends AbstractGenerator {
 	}
 	
 	def compile(MethodArg arg){
-		if(arg.array !== null)
-			return arg.name + ': ' + arg.type.fullyQualifiedName+arg.array
-		return arg.name + ': ' + arg.type.fullyQualifiedName
+		var response = arg.name + ': '
+		if(arg.classType !== null){
+			if(arg.array !== null)
+				response += arg.classType.fullyQualifiedName+arg.array
+			response += arg.classType.fullyQualifiedName
+		}
+		else{			
+			if(arg.array !== null)
+				response += arg.type+arg.array
+			response += arg.type
+		}
+		return response
 	}
+	
+	def archDiagram()
+	'''
+		classDiagram
+		BaseController o-- IBase
+		BaseService <-- IBase : implements
+		IBase: T[] findAll()
+		IBase: T findOne(id: number)
+		IBase: void createOne(object: T)
+		IBase: void updateOne(id: number, object: T)
+		IBase: void deleteOne(id: number)
+		
+	'''
 }

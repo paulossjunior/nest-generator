@@ -2001,7 +2001,7 @@ public class InternalNestDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleMethod"
-    // InternalNestDsl.g:779:1: ruleMethod returns [EObject current=null] : ( ( ( (lv_verb_0_1= 'Get' | lv_verb_0_2= 'Post' | lv_verb_0_3= 'Delete' | lv_verb_0_4= 'Put' ) ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '(' ( ( (lv_args_3_0= ruleMethodArg ) ) (otherlv_4= ',' )? )* otherlv_5= '):' ( ( ruleQualifiedName ) ) ( (lv_array_7_0= '[]' ) )? (otherlv_8= ';' )? ) ;
+    // InternalNestDsl.g:779:1: ruleMethod returns [EObject current=null] : ( ( ( (lv_verb_0_1= 'Get' | lv_verb_0_2= 'Post' | lv_verb_0_3= 'Delete' | lv_verb_0_4= 'Put' ) ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '(' ( ( (lv_args_3_0= ruleMethodArg ) ) (otherlv_4= ',' )? )* otherlv_5= '):' ( ( ( ruleQualifiedName ) ) | ( (lv_returnType_7_0= RULE_DATATYPE ) ) ) ( (lv_array_8_0= '[]' ) )? (otherlv_9= ';' )? ) ;
     public final EObject ruleMethod() throws RecognitionException {
         EObject current = null;
 
@@ -2013,8 +2013,9 @@ public class InternalNestDslParser extends AbstractInternalAntlrParser {
         Token otherlv_2=null;
         Token otherlv_4=null;
         Token otherlv_5=null;
-        Token lv_array_7_0=null;
-        Token otherlv_8=null;
+        Token lv_returnType_7_0=null;
+        Token lv_array_8_0=null;
+        Token otherlv_9=null;
         EObject lv_args_3_0 = null;
 
 
@@ -2022,11 +2023,11 @@ public class InternalNestDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalNestDsl.g:785:2: ( ( ( ( (lv_verb_0_1= 'Get' | lv_verb_0_2= 'Post' | lv_verb_0_3= 'Delete' | lv_verb_0_4= 'Put' ) ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '(' ( ( (lv_args_3_0= ruleMethodArg ) ) (otherlv_4= ',' )? )* otherlv_5= '):' ( ( ruleQualifiedName ) ) ( (lv_array_7_0= '[]' ) )? (otherlv_8= ';' )? ) )
-            // InternalNestDsl.g:786:2: ( ( ( (lv_verb_0_1= 'Get' | lv_verb_0_2= 'Post' | lv_verb_0_3= 'Delete' | lv_verb_0_4= 'Put' ) ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '(' ( ( (lv_args_3_0= ruleMethodArg ) ) (otherlv_4= ',' )? )* otherlv_5= '):' ( ( ruleQualifiedName ) ) ( (lv_array_7_0= '[]' ) )? (otherlv_8= ';' )? )
+            // InternalNestDsl.g:785:2: ( ( ( ( (lv_verb_0_1= 'Get' | lv_verb_0_2= 'Post' | lv_verb_0_3= 'Delete' | lv_verb_0_4= 'Put' ) ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '(' ( ( (lv_args_3_0= ruleMethodArg ) ) (otherlv_4= ',' )? )* otherlv_5= '):' ( ( ( ruleQualifiedName ) ) | ( (lv_returnType_7_0= RULE_DATATYPE ) ) ) ( (lv_array_8_0= '[]' ) )? (otherlv_9= ';' )? ) )
+            // InternalNestDsl.g:786:2: ( ( ( (lv_verb_0_1= 'Get' | lv_verb_0_2= 'Post' | lv_verb_0_3= 'Delete' | lv_verb_0_4= 'Put' ) ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '(' ( ( (lv_args_3_0= ruleMethodArg ) ) (otherlv_4= ',' )? )* otherlv_5= '):' ( ( ( ruleQualifiedName ) ) | ( (lv_returnType_7_0= RULE_DATATYPE ) ) ) ( (lv_array_8_0= '[]' ) )? (otherlv_9= ';' )? )
             {
-            // InternalNestDsl.g:786:2: ( ( ( (lv_verb_0_1= 'Get' | lv_verb_0_2= 'Post' | lv_verb_0_3= 'Delete' | lv_verb_0_4= 'Put' ) ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '(' ( ( (lv_args_3_0= ruleMethodArg ) ) (otherlv_4= ',' )? )* otherlv_5= '):' ( ( ruleQualifiedName ) ) ( (lv_array_7_0= '[]' ) )? (otherlv_8= ';' )? )
-            // InternalNestDsl.g:787:3: ( ( (lv_verb_0_1= 'Get' | lv_verb_0_2= 'Post' | lv_verb_0_3= 'Delete' | lv_verb_0_4= 'Put' ) ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '(' ( ( (lv_args_3_0= ruleMethodArg ) ) (otherlv_4= ',' )? )* otherlv_5= '):' ( ( ruleQualifiedName ) ) ( (lv_array_7_0= '[]' ) )? (otherlv_8= ';' )?
+            // InternalNestDsl.g:786:2: ( ( ( (lv_verb_0_1= 'Get' | lv_verb_0_2= 'Post' | lv_verb_0_3= 'Delete' | lv_verb_0_4= 'Put' ) ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '(' ( ( (lv_args_3_0= ruleMethodArg ) ) (otherlv_4= ',' )? )* otherlv_5= '):' ( ( ( ruleQualifiedName ) ) | ( (lv_returnType_7_0= RULE_DATATYPE ) ) ) ( (lv_array_8_0= '[]' ) )? (otherlv_9= ';' )? )
+            // InternalNestDsl.g:787:3: ( ( (lv_verb_0_1= 'Get' | lv_verb_0_2= 'Post' | lv_verb_0_3= 'Delete' | lv_verb_0_4= 'Put' ) ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '(' ( ( (lv_args_3_0= ruleMethodArg ) ) (otherlv_4= ',' )? )* otherlv_5= '):' ( ( ( ruleQualifiedName ) ) | ( (lv_returnType_7_0= RULE_DATATYPE ) ) ) ( (lv_array_8_0= '[]' ) )? (otherlv_9= ';' )?
             {
             // InternalNestDsl.g:787:3: ( ( (lv_verb_0_1= 'Get' | lv_verb_0_2= 'Post' | lv_verb_0_3= 'Delete' | lv_verb_0_4= 'Put' ) ) )
             // InternalNestDsl.g:788:4: ( (lv_verb_0_1= 'Get' | lv_verb_0_2= 'Post' | lv_verb_0_3= 'Delete' | lv_verb_0_4= 'Put' ) )
@@ -2244,61 +2245,119 @@ public class InternalNestDslParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_5=(Token)match(input,31,FOLLOW_4); 
+            otherlv_5=(Token)match(input,31,FOLLOW_11); 
 
             			newLeafNode(otherlv_5, grammarAccess.getMethodAccess().getRightParenthesisColonKeyword_4());
             		
-            // InternalNestDsl.g:889:3: ( ( ruleQualifiedName ) )
-            // InternalNestDsl.g:890:4: ( ruleQualifiedName )
-            {
-            // InternalNestDsl.g:890:4: ( ruleQualifiedName )
-            // InternalNestDsl.g:891:5: ruleQualifiedName
-            {
-
-            					if (current==null) {
-            						current = createModelElement(grammarAccess.getMethodRule());
-            					}
-            				
-
-            					newCompositeNode(grammarAccess.getMethodAccess().getReturnTypeAbstractElementCrossReference_5_0());
-            				
-            pushFollow(FOLLOW_12);
-            ruleQualifiedName();
-
-            state._fsp--;
-
-
-            					afterParserOrEnumRuleCall();
-            				
-
-            }
-
-
-            }
-
-            // InternalNestDsl.g:905:3: ( (lv_array_7_0= '[]' ) )?
+            // InternalNestDsl.g:889:3: ( ( ( ruleQualifiedName ) ) | ( (lv_returnType_7_0= RULE_DATATYPE ) ) )
             int alt21=2;
             int LA21_0 = input.LA(1);
 
-            if ( (LA21_0==19) ) {
+            if ( (LA21_0==RULE_ID) ) {
                 alt21=1;
+            }
+            else if ( (LA21_0==RULE_DATATYPE) ) {
+                alt21=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 21, 0, input);
+
+                throw nvae;
             }
             switch (alt21) {
                 case 1 :
-                    // InternalNestDsl.g:906:4: (lv_array_7_0= '[]' )
+                    // InternalNestDsl.g:890:4: ( ( ruleQualifiedName ) )
                     {
-                    // InternalNestDsl.g:906:4: (lv_array_7_0= '[]' )
-                    // InternalNestDsl.g:907:5: lv_array_7_0= '[]'
+                    // InternalNestDsl.g:890:4: ( ( ruleQualifiedName ) )
+                    // InternalNestDsl.g:891:5: ( ruleQualifiedName )
                     {
-                    lv_array_7_0=(Token)match(input,19,FOLLOW_13); 
+                    // InternalNestDsl.g:891:5: ( ruleQualifiedName )
+                    // InternalNestDsl.g:892:6: ruleQualifiedName
+                    {
 
-                    					newLeafNode(lv_array_7_0, grammarAccess.getMethodAccess().getArrayLeftSquareBracketRightSquareBracketKeyword_6_0());
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getMethodRule());
+                    						}
+                    					
+
+                    						newCompositeNode(grammarAccess.getMethodAccess().getReturnClassTypeAbstractElementCrossReference_5_0_0());
+                    					
+                    pushFollow(FOLLOW_12);
+                    ruleQualifiedName();
+
+                    state._fsp--;
+
+
+                    						afterParserOrEnumRuleCall();
+                    					
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalNestDsl.g:907:4: ( (lv_returnType_7_0= RULE_DATATYPE ) )
+                    {
+                    // InternalNestDsl.g:907:4: ( (lv_returnType_7_0= RULE_DATATYPE ) )
+                    // InternalNestDsl.g:908:5: (lv_returnType_7_0= RULE_DATATYPE )
+                    {
+                    // InternalNestDsl.g:908:5: (lv_returnType_7_0= RULE_DATATYPE )
+                    // InternalNestDsl.g:909:6: lv_returnType_7_0= RULE_DATATYPE
+                    {
+                    lv_returnType_7_0=(Token)match(input,RULE_DATATYPE,FOLLOW_12); 
+
+                    						newLeafNode(lv_returnType_7_0, grammarAccess.getMethodAccess().getReturnTypeDATATYPETerminalRuleCall_5_1_0());
+                    					
+
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getMethodRule());
+                    						}
+                    						setWithLastConsumed(
+                    							current,
+                    							"returnType",
+                    							lv_returnType_7_0,
+                    							"prodest.es.gov.br.dsl.NestDsl.DATATYPE");
+                    					
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+            // InternalNestDsl.g:926:3: ( (lv_array_8_0= '[]' ) )?
+            int alt22=2;
+            int LA22_0 = input.LA(1);
+
+            if ( (LA22_0==19) ) {
+                alt22=1;
+            }
+            switch (alt22) {
+                case 1 :
+                    // InternalNestDsl.g:927:4: (lv_array_8_0= '[]' )
+                    {
+                    // InternalNestDsl.g:927:4: (lv_array_8_0= '[]' )
+                    // InternalNestDsl.g:928:5: lv_array_8_0= '[]'
+                    {
+                    lv_array_8_0=(Token)match(input,19,FOLLOW_13); 
+
+                    					newLeafNode(lv_array_8_0, grammarAccess.getMethodAccess().getArrayLeftSquareBracketRightSquareBracketKeyword_6_0());
                     				
 
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getMethodRule());
                     					}
-                    					setWithLastConsumed(current, "array", lv_array_7_0, "[]");
+                    					setWithLastConsumed(current, "array", lv_array_8_0, "[]");
                     				
 
                     }
@@ -2309,20 +2368,20 @@ public class InternalNestDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalNestDsl.g:919:3: (otherlv_8= ';' )?
-            int alt22=2;
-            int LA22_0 = input.LA(1);
+            // InternalNestDsl.g:940:3: (otherlv_9= ';' )?
+            int alt23=2;
+            int LA23_0 = input.LA(1);
 
-            if ( (LA22_0==20) ) {
-                alt22=1;
+            if ( (LA23_0==20) ) {
+                alt23=1;
             }
-            switch (alt22) {
+            switch (alt23) {
                 case 1 :
-                    // InternalNestDsl.g:920:4: otherlv_8= ';'
+                    // InternalNestDsl.g:941:4: otherlv_9= ';'
                     {
-                    otherlv_8=(Token)match(input,20,FOLLOW_2); 
+                    otherlv_9=(Token)match(input,20,FOLLOW_2); 
 
-                    				newLeafNode(otherlv_8, grammarAccess.getMethodAccess().getSemicolonKeyword_7());
+                    				newLeafNode(otherlv_9, grammarAccess.getMethodAccess().getSemicolonKeyword_7());
                     			
 
                     }
@@ -2353,7 +2412,7 @@ public class InternalNestDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleMethodArg"
-    // InternalNestDsl.g:929:1: entryRuleMethodArg returns [EObject current=null] : iv_ruleMethodArg= ruleMethodArg EOF ;
+    // InternalNestDsl.g:950:1: entryRuleMethodArg returns [EObject current=null] : iv_ruleMethodArg= ruleMethodArg EOF ;
     public final EObject entryRuleMethodArg() throws RecognitionException {
         EObject current = null;
 
@@ -2361,8 +2420,8 @@ public class InternalNestDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalNestDsl.g:929:50: (iv_ruleMethodArg= ruleMethodArg EOF )
-            // InternalNestDsl.g:930:2: iv_ruleMethodArg= ruleMethodArg EOF
+            // InternalNestDsl.g:950:50: (iv_ruleMethodArg= ruleMethodArg EOF )
+            // InternalNestDsl.g:951:2: iv_ruleMethodArg= ruleMethodArg EOF
             {
              newCompositeNode(grammarAccess.getMethodArgRule()); 
             pushFollow(FOLLOW_1);
@@ -2389,29 +2448,30 @@ public class InternalNestDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleMethodArg"
-    // InternalNestDsl.g:936:1: ruleMethodArg returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( ( ruleQualifiedName ) ) ( (lv_array_3_0= '[]' ) )? ) ;
+    // InternalNestDsl.g:957:1: ruleMethodArg returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( ( ( ruleQualifiedName ) ) | ( (lv_type_3_0= RULE_DATATYPE ) ) ) ( (lv_array_4_0= '[]' ) )? ) ;
     public final EObject ruleMethodArg() throws RecognitionException {
         EObject current = null;
 
         Token lv_name_0_0=null;
         Token otherlv_1=null;
-        Token lv_array_3_0=null;
+        Token lv_type_3_0=null;
+        Token lv_array_4_0=null;
 
 
         	enterRule();
 
         try {
-            // InternalNestDsl.g:942:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( ( ruleQualifiedName ) ) ( (lv_array_3_0= '[]' ) )? ) )
-            // InternalNestDsl.g:943:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( ( ruleQualifiedName ) ) ( (lv_array_3_0= '[]' ) )? )
+            // InternalNestDsl.g:963:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( ( ( ruleQualifiedName ) ) | ( (lv_type_3_0= RULE_DATATYPE ) ) ) ( (lv_array_4_0= '[]' ) )? ) )
+            // InternalNestDsl.g:964:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( ( ( ruleQualifiedName ) ) | ( (lv_type_3_0= RULE_DATATYPE ) ) ) ( (lv_array_4_0= '[]' ) )? )
             {
-            // InternalNestDsl.g:943:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( ( ruleQualifiedName ) ) ( (lv_array_3_0= '[]' ) )? )
-            // InternalNestDsl.g:944:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( ( ruleQualifiedName ) ) ( (lv_array_3_0= '[]' ) )?
+            // InternalNestDsl.g:964:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( ( ( ruleQualifiedName ) ) | ( (lv_type_3_0= RULE_DATATYPE ) ) ) ( (lv_array_4_0= '[]' ) )? )
+            // InternalNestDsl.g:965:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( ( ( ruleQualifiedName ) ) | ( (lv_type_3_0= RULE_DATATYPE ) ) ) ( (lv_array_4_0= '[]' ) )?
             {
-            // InternalNestDsl.g:944:3: ( (lv_name_0_0= RULE_ID ) )
-            // InternalNestDsl.g:945:4: (lv_name_0_0= RULE_ID )
+            // InternalNestDsl.g:965:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalNestDsl.g:966:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalNestDsl.g:945:4: (lv_name_0_0= RULE_ID )
-            // InternalNestDsl.g:946:5: lv_name_0_0= RULE_ID
+            // InternalNestDsl.g:966:4: (lv_name_0_0= RULE_ID )
+            // InternalNestDsl.g:967:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_10); 
 
@@ -2433,61 +2493,119 @@ public class InternalNestDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,18,FOLLOW_4); 
+            otherlv_1=(Token)match(input,18,FOLLOW_11); 
 
             			newLeafNode(otherlv_1, grammarAccess.getMethodArgAccess().getColonKeyword_1());
             		
-            // InternalNestDsl.g:966:3: ( ( ruleQualifiedName ) )
-            // InternalNestDsl.g:967:4: ( ruleQualifiedName )
-            {
-            // InternalNestDsl.g:967:4: ( ruleQualifiedName )
-            // InternalNestDsl.g:968:5: ruleQualifiedName
-            {
+            // InternalNestDsl.g:987:3: ( ( ( ruleQualifiedName ) ) | ( (lv_type_3_0= RULE_DATATYPE ) ) )
+            int alt24=2;
+            int LA24_0 = input.LA(1);
 
-            					if (current==null) {
-            						current = createModelElement(grammarAccess.getMethodArgRule());
-            					}
-            				
-
-            					newCompositeNode(grammarAccess.getMethodArgAccess().getTypeAbstractElementCrossReference_2_0());
-            				
-            pushFollow(FOLLOW_19);
-            ruleQualifiedName();
-
-            state._fsp--;
-
-
-            					afterParserOrEnumRuleCall();
-            				
-
+            if ( (LA24_0==RULE_ID) ) {
+                alt24=1;
             }
-
-
+            else if ( (LA24_0==RULE_DATATYPE) ) {
+                alt24=2;
             }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 24, 0, input);
 
-            // InternalNestDsl.g:982:3: ( (lv_array_3_0= '[]' ) )?
-            int alt23=2;
-            int LA23_0 = input.LA(1);
-
-            if ( (LA23_0==19) ) {
-                alt23=1;
+                throw nvae;
             }
-            switch (alt23) {
+            switch (alt24) {
                 case 1 :
-                    // InternalNestDsl.g:983:4: (lv_array_3_0= '[]' )
+                    // InternalNestDsl.g:988:4: ( ( ruleQualifiedName ) )
                     {
-                    // InternalNestDsl.g:983:4: (lv_array_3_0= '[]' )
-                    // InternalNestDsl.g:984:5: lv_array_3_0= '[]'
+                    // InternalNestDsl.g:988:4: ( ( ruleQualifiedName ) )
+                    // InternalNestDsl.g:989:5: ( ruleQualifiedName )
                     {
-                    lv_array_3_0=(Token)match(input,19,FOLLOW_2); 
+                    // InternalNestDsl.g:989:5: ( ruleQualifiedName )
+                    // InternalNestDsl.g:990:6: ruleQualifiedName
+                    {
 
-                    					newLeafNode(lv_array_3_0, grammarAccess.getMethodArgAccess().getArrayLeftSquareBracketRightSquareBracketKeyword_3_0());
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getMethodArgRule());
+                    						}
+                    					
+
+                    						newCompositeNode(grammarAccess.getMethodArgAccess().getClassTypeAbstractElementCrossReference_2_0_0());
+                    					
+                    pushFollow(FOLLOW_19);
+                    ruleQualifiedName();
+
+                    state._fsp--;
+
+
+                    						afterParserOrEnumRuleCall();
+                    					
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalNestDsl.g:1005:4: ( (lv_type_3_0= RULE_DATATYPE ) )
+                    {
+                    // InternalNestDsl.g:1005:4: ( (lv_type_3_0= RULE_DATATYPE ) )
+                    // InternalNestDsl.g:1006:5: (lv_type_3_0= RULE_DATATYPE )
+                    {
+                    // InternalNestDsl.g:1006:5: (lv_type_3_0= RULE_DATATYPE )
+                    // InternalNestDsl.g:1007:6: lv_type_3_0= RULE_DATATYPE
+                    {
+                    lv_type_3_0=(Token)match(input,RULE_DATATYPE,FOLLOW_19); 
+
+                    						newLeafNode(lv_type_3_0, grammarAccess.getMethodArgAccess().getTypeDATATYPETerminalRuleCall_2_1_0());
+                    					
+
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getMethodArgRule());
+                    						}
+                    						setWithLastConsumed(
+                    							current,
+                    							"type",
+                    							lv_type_3_0,
+                    							"prodest.es.gov.br.dsl.NestDsl.DATATYPE");
+                    					
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+            // InternalNestDsl.g:1024:3: ( (lv_array_4_0= '[]' ) )?
+            int alt25=2;
+            int LA25_0 = input.LA(1);
+
+            if ( (LA25_0==19) ) {
+                alt25=1;
+            }
+            switch (alt25) {
+                case 1 :
+                    // InternalNestDsl.g:1025:4: (lv_array_4_0= '[]' )
+                    {
+                    // InternalNestDsl.g:1025:4: (lv_array_4_0= '[]' )
+                    // InternalNestDsl.g:1026:5: lv_array_4_0= '[]'
+                    {
+                    lv_array_4_0=(Token)match(input,19,FOLLOW_2); 
+
+                    					newLeafNode(lv_array_4_0, grammarAccess.getMethodArgAccess().getArrayLeftSquareBracketRightSquareBracketKeyword_3_0());
                     				
 
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getMethodArgRule());
                     					}
-                    					setWithLastConsumed(current, "array", lv_array_3_0, "[]");
+                    					setWithLastConsumed(current, "array", lv_array_4_0, "[]");
                     				
 
                     }

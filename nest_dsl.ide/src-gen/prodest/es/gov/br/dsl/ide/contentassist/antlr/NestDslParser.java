@@ -38,6 +38,8 @@ public class NestDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getOneArgumentRelationAccess().getArgumentAlternatives_0_0(), "rule__OneArgumentRelation__ArgumentAlternatives_0_0");
 			builder.put(grammarAccess.getMultipleArgumentRelationAccess().getArgumentAlternatives_0_0(), "rule__MultipleArgumentRelation__ArgumentAlternatives_0_0");
 			builder.put(grammarAccess.getMethodAccess().getVerbAlternatives_0_0(), "rule__Method__VerbAlternatives_0_0");
+			builder.put(grammarAccess.getMethodAccess().getAlternatives_5(), "rule__Method__Alternatives_5");
+			builder.put(grammarAccess.getMethodArgAccess().getAlternatives_2(), "rule__MethodArg__Alternatives_2");
 			builder.put(grammarAccess.getEntityAccess().getGroup(), "rule__Entity__Group__0");
 			builder.put(grammarAccess.getEntityAccess().getGroup_2(), "rule__Entity__Group_2__0");
 			builder.put(grammarAccess.getDtoAccess().getGroup(), "rule__Dto__Group__0");
@@ -76,10 +78,12 @@ public class NestDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getMethodAccess().getVerbAssignment_0(), "rule__Method__VerbAssignment_0");
 			builder.put(grammarAccess.getMethodAccess().getNameAssignment_1(), "rule__Method__NameAssignment_1");
 			builder.put(grammarAccess.getMethodAccess().getArgsAssignment_3_0(), "rule__Method__ArgsAssignment_3_0");
-			builder.put(grammarAccess.getMethodAccess().getReturnTypeAssignment_5(), "rule__Method__ReturnTypeAssignment_5");
+			builder.put(grammarAccess.getMethodAccess().getReturnClassTypeAssignment_5_0(), "rule__Method__ReturnClassTypeAssignment_5_0");
+			builder.put(grammarAccess.getMethodAccess().getReturnTypeAssignment_5_1(), "rule__Method__ReturnTypeAssignment_5_1");
 			builder.put(grammarAccess.getMethodAccess().getArrayAssignment_6(), "rule__Method__ArrayAssignment_6");
 			builder.put(grammarAccess.getMethodArgAccess().getNameAssignment_0(), "rule__MethodArg__NameAssignment_0");
-			builder.put(grammarAccess.getMethodArgAccess().getTypeAssignment_2(), "rule__MethodArg__TypeAssignment_2");
+			builder.put(grammarAccess.getMethodArgAccess().getClassTypeAssignment_2_0(), "rule__MethodArg__ClassTypeAssignment_2_0");
+			builder.put(grammarAccess.getMethodArgAccess().getTypeAssignment_2_1(), "rule__MethodArg__TypeAssignment_2_1");
 			builder.put(grammarAccess.getMethodArgAccess().getArrayAssignment_3(), "rule__MethodArg__ArrayAssignment_3");
 		}
 	}

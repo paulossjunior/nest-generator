@@ -15,6 +15,7 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import prodest.es.gov.br.dsl.nestdsl.AbstractElement;
 import prodest.es.gov.br.dsl.nestdsl.Entity;
 import prodest.es.gov.br.dsl.nestdsl.Method;
 import prodest.es.gov.br.dsl.nestdsl.MethodArg;
@@ -37,6 +38,9 @@ public class ClassDiagramGenerator extends AbstractGenerator {
     fsa.generateFile(
       "classDiagram.mmd", 
       this.classDiagramCompiler(resource));
+    fsa.generateFile(
+      "archDiagram.mmd", 
+      this.archDiagram());
   }
   
   public CharSequence mermaidInstaller() {
@@ -161,8 +165,17 @@ public class ClassDiagramGenerator extends AbstractGenerator {
         String _name = e.getName();
         _builder.append(_name);
         _builder.append(": ");
-        QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(method.getReturnType());
-        _builder.append(_fullyQualifiedName);
+        {
+          AbstractElement _returnClassType = method.getReturnClassType();
+          boolean _tripleNotEquals = (_returnClassType != null);
+          if (_tripleNotEquals) {
+            QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(method.getReturnClassType());
+            _builder.append(_fullyQualifiedName);
+          } else {
+            String _returnType = method.getReturnType();
+            _builder.append(_returnType);
+          }
+        }
         _builder.append(" ");
         String _name_1 = method.getName();
         _builder.append(_name_1);
@@ -195,19 +208,59 @@ public class ClassDiagramGenerator extends AbstractGenerator {
   }
   
   public String compile(final MethodArg arg) {
-    String _array = arg.getArray();
-    boolean _tripleNotEquals = (_array != null);
+    String _name = arg.getName();
+    String response = (_name + ": ");
+    AbstractElement _classType = arg.getClassType();
+    boolean _tripleNotEquals = (_classType != null);
     if (_tripleNotEquals) {
-      String _name = arg.getName();
-      String _plus = (_name + ": ");
-      QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(arg.getType());
-      String _plus_1 = (_plus + _fullyQualifiedName);
-      String _array_1 = arg.getArray();
-      return (_plus_1 + _array_1);
+      String _array = arg.getArray();
+      boolean _tripleNotEquals_1 = (_array != null);
+      if (_tripleNotEquals_1) {
+        String _response = response;
+        QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(arg.getClassType());
+        String _array_1 = arg.getArray();
+        String _plus = (_fullyQualifiedName + _array_1);
+        response = (_response + _plus);
+      }
+      String _response_1 = response;
+      QualifiedName _fullyQualifiedName_1 = this._iQualifiedNameProvider.getFullyQualifiedName(arg.getClassType());
+      response = (_response_1 + _fullyQualifiedName_1);
+    } else {
+      String _array_2 = arg.getArray();
+      boolean _tripleNotEquals_2 = (_array_2 != null);
+      if (_tripleNotEquals_2) {
+        String _response_2 = response;
+        String _type = arg.getType();
+        String _array_3 = arg.getArray();
+        String _plus_1 = (_type + _array_3);
+        response = (_response_2 + _plus_1);
+      }
+      String _response_3 = response;
+      String _type_1 = arg.getType();
+      response = (_response_3 + _type_1);
     }
-    String _name_1 = arg.getName();
-    String _plus_2 = (_name_1 + ": ");
-    QualifiedName _fullyQualifiedName_1 = this._iQualifiedNameProvider.getFullyQualifiedName(arg.getType());
-    return (_plus_2 + _fullyQualifiedName_1);
+    return response;
+  }
+  
+  public CharSequence archDiagram() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("classDiagram");
+    _builder.newLine();
+    _builder.append("BaseController o-- IBase");
+    _builder.newLine();
+    _builder.append("BaseService <-- IBase : implements");
+    _builder.newLine();
+    _builder.append("IBase: T[] findAll()");
+    _builder.newLine();
+    _builder.append("IBase: T findOne(id: number)");
+    _builder.newLine();
+    _builder.append("IBase: void createOne(object: T)");
+    _builder.newLine();
+    _builder.append("IBase: void updateOne(id: number, object: T)");
+    _builder.newLine();
+    _builder.append("IBase: void deleteOne(id: number)");
+    _builder.newLine();
+    _builder.newLine();
+    return _builder;
   }
 }

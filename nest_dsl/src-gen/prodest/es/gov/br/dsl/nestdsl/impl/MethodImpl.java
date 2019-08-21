@@ -35,6 +35,7 @@ import prodest.es.gov.br.dsl.nestdsl.NestdslPackage;
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.impl.MethodImpl#getVerb <em>Verb</em>}</li>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.impl.MethodImpl#getName <em>Name</em>}</li>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.impl.MethodImpl#getArgs <em>Args</em>}</li>
+ *   <li>{@link prodest.es.gov.br.dsl.nestdsl.impl.MethodImpl#getReturnClassType <em>Return Class Type</em>}</li>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.impl.MethodImpl#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.impl.MethodImpl#getArray <em>Array</em>}</li>
  * </ul>
@@ -94,14 +95,34 @@ public class MethodImpl extends MinimalEObjectImpl.Container implements Method
   protected EList<MethodArg> args;
 
   /**
-   * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' reference.
+   * The cached value of the '{@link #getReturnClassType() <em>Return Class Type</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getReturnClassType()
+   * @generated
+   * @ordered
+   */
+  protected AbstractElement returnClassType;
+
+  /**
+   * The default value of the '{@link #getReturnType() <em>Return Type</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getReturnType()
    * @generated
    * @ordered
    */
-  protected AbstractElement returnType;
+  protected static final String RETURN_TYPE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getReturnType()
+   * @generated
+   * @ordered
+   */
+  protected String returnType = RETURN_TYPE_EDEFAULT;
 
   /**
    * The default value of the '{@link #getArray() <em>Array</em>}' attribute.
@@ -215,19 +236,19 @@ public class MethodImpl extends MinimalEObjectImpl.Container implements Method
    * @generated
    */
   @Override
-  public AbstractElement getReturnType()
+  public AbstractElement getReturnClassType()
   {
-    if (returnType != null && returnType.eIsProxy())
+    if (returnClassType != null && returnClassType.eIsProxy())
     {
-      InternalEObject oldReturnType = (InternalEObject)returnType;
-      returnType = (AbstractElement)eResolveProxy(oldReturnType);
-      if (returnType != oldReturnType)
+      InternalEObject oldReturnClassType = (InternalEObject)returnClassType;
+      returnClassType = (AbstractElement)eResolveProxy(oldReturnClassType);
+      if (returnClassType != oldReturnClassType)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, NestdslPackage.METHOD__RETURN_TYPE, oldReturnType, returnType));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, NestdslPackage.METHOD__RETURN_CLASS_TYPE, oldReturnClassType, returnClassType));
       }
     }
-    return returnType;
+    return returnClassType;
   }
 
   /**
@@ -235,7 +256,32 @@ public class MethodImpl extends MinimalEObjectImpl.Container implements Method
    * <!-- end-user-doc -->
    * @generated
    */
-  public AbstractElement basicGetReturnType()
+  public AbstractElement basicGetReturnClassType()
+  {
+    return returnClassType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setReturnClassType(AbstractElement newReturnClassType)
+  {
+    AbstractElement oldReturnClassType = returnClassType;
+    returnClassType = newReturnClassType;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, NestdslPackage.METHOD__RETURN_CLASS_TYPE, oldReturnClassType, returnClassType));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getReturnType()
   {
     return returnType;
   }
@@ -246,9 +292,9 @@ public class MethodImpl extends MinimalEObjectImpl.Container implements Method
    * @generated
    */
   @Override
-  public void setReturnType(AbstractElement newReturnType)
+  public void setReturnType(String newReturnType)
   {
-    AbstractElement oldReturnType = returnType;
+    String oldReturnType = returnType;
     returnType = newReturnType;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, NestdslPackage.METHOD__RETURN_TYPE, oldReturnType, returnType));
@@ -311,9 +357,11 @@ public class MethodImpl extends MinimalEObjectImpl.Container implements Method
         return getName();
       case NestdslPackage.METHOD__ARGS:
         return getArgs();
+      case NestdslPackage.METHOD__RETURN_CLASS_TYPE:
+        if (resolve) return getReturnClassType();
+        return basicGetReturnClassType();
       case NestdslPackage.METHOD__RETURN_TYPE:
-        if (resolve) return getReturnType();
-        return basicGetReturnType();
+        return getReturnType();
       case NestdslPackage.METHOD__ARRAY:
         return getArray();
     }
@@ -341,8 +389,11 @@ public class MethodImpl extends MinimalEObjectImpl.Container implements Method
         getArgs().clear();
         getArgs().addAll((Collection<? extends MethodArg>)newValue);
         return;
+      case NestdslPackage.METHOD__RETURN_CLASS_TYPE:
+        setReturnClassType((AbstractElement)newValue);
+        return;
       case NestdslPackage.METHOD__RETURN_TYPE:
-        setReturnType((AbstractElement)newValue);
+        setReturnType((String)newValue);
         return;
       case NestdslPackage.METHOD__ARRAY:
         setArray((String)newValue);
@@ -370,8 +421,11 @@ public class MethodImpl extends MinimalEObjectImpl.Container implements Method
       case NestdslPackage.METHOD__ARGS:
         getArgs().clear();
         return;
+      case NestdslPackage.METHOD__RETURN_CLASS_TYPE:
+        setReturnClassType((AbstractElement)null);
+        return;
       case NestdslPackage.METHOD__RETURN_TYPE:
-        setReturnType((AbstractElement)null);
+        setReturnType(RETURN_TYPE_EDEFAULT);
         return;
       case NestdslPackage.METHOD__ARRAY:
         setArray(ARRAY_EDEFAULT);
@@ -396,8 +450,10 @@ public class MethodImpl extends MinimalEObjectImpl.Container implements Method
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case NestdslPackage.METHOD__ARGS:
         return args != null && !args.isEmpty();
+      case NestdslPackage.METHOD__RETURN_CLASS_TYPE:
+        return returnClassType != null;
       case NestdslPackage.METHOD__RETURN_TYPE:
-        return returnType != null;
+        return RETURN_TYPE_EDEFAULT == null ? returnType != null : !RETURN_TYPE_EDEFAULT.equals(returnType);
       case NestdslPackage.METHOD__ARRAY:
         return ARRAY_EDEFAULT == null ? array != null : !ARRAY_EDEFAULT.equals(array);
     }
@@ -419,6 +475,8 @@ public class MethodImpl extends MinimalEObjectImpl.Container implements Method
     result.append(verb);
     result.append(", name: ");
     result.append(name);
+    result.append(", returnType: ");
+    result.append(returnType);
     result.append(", array: ");
     result.append(array);
     result.append(')');

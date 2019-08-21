@@ -95,167 +95,20 @@ class CoreGenerator extends AbstractGenerator {
 	'''
 		import { Controller, Get, Post, Put, Delete, Param, Res, HttpStatus, Body } from '@nestjs/common';
 		import { ApiUseTags, ApiOperation, ApiResponse, ApiImplicitParam } from '@nestjs/swagger';
-		import{ «e.name»Service } from './«e.name.toLowerCase».service'
-		import { «e.name» } from './«e.name.toLowerCase».entity'
+		import{ «e.name»Service } from './«e.name.toLowerCase».service';
+		import { «e.name» } from './«e.name.toLowerCase».entity';
+		import { BaseController } from '../BaseModule/base.controller';
 		
-		@ApiUseTags('Insert your description')
+		@ApiUseTags('«e.name»')
 		@Controller('«e.name.toLowerCase»')
-		export class «e.name»Controller{
-			constructor(
-				private readonly service: «e.name»Service,
-			){}
+		export class «e.name»Controller extends BaseController<«e.name»> {
 			
-			@Get()
-			@ApiOperation({
-		        title: 'Insert your operation title',
-		        description: 'Insert your operation description'
-		    })
-		    @ApiResponse({
-		        status: 200,
-		        description: 'Insert your response description',
-		        type: «e.name»,
-		        isArray: true
-		    })
-		    
-			public async findAll(@Res() res): Promise<«e.name»[]> {
-				try{
-					return res
-				 			.status(HttpStatus.OK)
-					 		.send(await this.service.findAll());
-				}
-				catch(error){
-					const badGateWay = HttpStatus.BAD_GATEWAY;
-					res
-						.status(badGateWay)
-			 			.send({error, badGateWay});
-				}
-			}
-			
-			@Get('/:id')
-			@ApiOperation({
-		        title: 'Insert your operation title',
-		        description: 'Insert your operation description'
-		    })
-		    @ApiResponse({
-		        status: 200,
-		        description: 'Insert your response description',
-		        type: «e.name»,
-		        isArray: false
-		    })
-		    @ApiImplicitParam({
-		        name: 'id',
-		        description: 'Insert your param description',
-		        required: true, //or false
-		        type: 'number'
-		    })
-			
-			public async findOne(@Res() res, @Param('id') id): Promise<«e.name»> {
-				try{
-					return res
-					 	.status(HttpStatus.OK)
-					 	.send(await this.service.findOne(id));
-				}
-				catch(error){
-					const badGateWay = HttpStatus.BAD_GATEWAY;
-					res
-						 .status(badGateWay)
-						 .send({error, badGateWay});
-				}
-			}
-			
-			@Post()
-			@ApiOperation({
-		        title: 'Insert your operation title',
-		        description: 'Insert your operation description'
-		    })
-		    @ApiResponse({
-		        status: 200,
-		        description: 'Insert your response description',
-		        type: «e.name»,
-		        isArray: false // or true
-		    })
-		    
-			public async createOne(@Res() res, @Body() «e.name.toLowerCase»: «e.name»): Promise<void> {
-				try{
-					res
-					 .status(HttpStatus.OK)
-					 .send(await this.service.createOne(«e.name.toLowerCase»));
-				}
-				catch(error){
-					const badGateWay = HttpStatus.BAD_GATEWAY;
-					res
-						 .status(badGateWay)
-						 .send({error, badGateWay});
-				}
-			}
-			
-			@Put('/:id')
-			@ApiOperation({
-		        title: 'Insert your operation title',
-		        description: 'Insert your operation description'
-		    })
-		    @ApiResponse({
-		        status: 200,
-		        description: 'Insert your response description',
-		        type: «e.name»,
-		        isArray: false
-		    })
-		    @ApiImplicitParam({
-		        name: 'id',
-		        description: 'Insert your param description',
-		        required: true, //or false
-		        type: 'number'
-		    })
-					    
-			public async updateOne(@Res() res, @Param('id') id, @Body() «e.name.toLowerCase»: «e.name»): Promise<void> {
-				try{
-					«e.name.toLowerCase».id = Number(id);
-					res
-					 .status(HttpStatus.OK)
-					 .send(await this.service.updateOne(«e.name.toLowerCase»));
-				}
-				catch(error){
-					const badGateWay = HttpStatus.BAD_GATEWAY;
-					res
-					 .status(badGateWay)
-					 .send({error, badGateWay});
-				}
-			}
-			
-			@Delete('/:id')
-			@ApiOperation({
-		        title: 'Insert your operation title',
-		        description: 'Insert your operation description'
-		    })
-		    @ApiResponse({
-		        status: 200,
-		        description: 'Insert your response description',
-		        type: «e.name»,
-		        isArray: false
-		    })
-		    @ApiImplicitParam({
-		        name: 'id',
-		        description: 'Insert your param description',
-		        required: true, //or false
-		        type: 'number'
-		    })
-					    
-			public async deleteOne(@Res() res, @Param('id') id): Promise<void> {
-				try{
-					res
-					 .status(HttpStatus.OK)
-					 .send(await this.service.deleteOne(id));
-				}
-				catch(error){
-					const badGateWay = HttpStatus.BAD_GATEWAY;
-					res
-					 .status(badGateWay)
-					 .send({error, badGateWay});
-				}
+			constructor(private readonly service: «e.name»Service) {
+					super(service)
 			}
 			«FOR method: e.methods»
 			
-			@«method.verb»('/«method.name»')
+			@«method.verb»('«method.name»')
 			@ApiOperation({
 				title: 'Insert your operation title',
 				description: 'Insert your operation description'
@@ -267,11 +120,11 @@ class CoreGenerator extends AbstractGenerator {
 				isArray: false // or true
 			})
 			
-			public async «method.name»(@Res() res): Promise<«method.returnType.fullyQualifiedName»> {
+			public async «method.name»(@Res() res): Promise<«IF method.returnClassType !== null»«method.returnClassType.fullyQualifiedName»«ELSE»«method.returnType»«ENDIF»> {
 				try{
 					res
 					.status(HttpStatus.OK)
-					.send(await this.service.«method.name»(//Parameters));
+					.send(await this.service.«method.name»(/*Parameters*/));
 				}
 				catch(error){
 					const badGateWay = HttpStatus.BAD_GATEWAY;
@@ -287,39 +140,22 @@ class CoreGenerator extends AbstractGenerator {
 	'''
 		import { Injectable, Inject } from '@nestjs/common';
 		import { Repository } from 'typeorm';
-		import { «e.name» } from './«e.name.toLowerCase».entity'
+		import { «e.name» } from './«e.name.toLowerCase».entity';
+		import { BaseService } from "../BaseModule/base.service";
 		
 		@Injectable()
-		export class «e.name»Service {
+		export class «e.name»Service extends BaseService<«e.name»>{
 			
 			constructor(
 				@Inject('«e.name.toUpperCase»_REPOSITORY')
 				private readonly «e.name.toLowerCase»Repository: Repository<«e.name»>
-			){}
-			
-			async findAll(): Promise<«e.name»[]> {
-				return await this.«e.name.toLowerCase»Repository.find();
-			}
-			
-			async findOne(id: number): Promise<«e.name»> {
-				return await this.«e.name.toLowerCase»Repository.findOne({id: id});
-			}
-			
-			async createOne(«e.name.toLowerCase»: «e.name»): Promise<void> {
-				await this.«e.name.toLowerCase»Repository.save(«e.name.toLowerCase»);
-			}
-			
-			async updateOne(«e.name.toLowerCase»: «e.name»): Promise<void> {
-				await this.«e.name.toLowerCase»Repository.update(«e.name.toLowerCase».id, «e.name.toLowerCase»);
-			}
-			
-			async deleteOne(id: number): Promise<void> {
-				await this.«e.name.toLowerCase»Repository.delete(id)
+			){
+				super(«e.name.toLowerCase»Repository);
 			}
 			
 			«FOR method: e.methods»	
 				«var newArgs = generateArgList(method)»
-				async «method.name»(«FOR arg: newArgs»«arg»«ENDFOR»): Promise<«method.returnType.fullyQualifiedName»«method.array»> {
+				async «method.name»(«FOR arg: newArgs»«arg»«ENDFOR»): Promise<«IF method.returnClassType !== null»«method.returnClassType.fullyQualifiedName»«ELSE»«method.returnType»«ENDIF»> {
 					//To do «method.name»
 				}
 				
@@ -340,9 +176,18 @@ class CoreGenerator extends AbstractGenerator {
 	}
 	
 	def compile(MethodArg arg){
-		if(arg.array !== null)
-			return arg.name + ': ' + arg.type.fullyQualifiedName+arg.array
-		return arg.name + ': ' + arg.type.fullyQualifiedName
+		var response = arg.name + ': '
+		if(arg.classType !== null){
+			if(arg.array !== null)
+				response += arg.classType.fullyQualifiedName+arg.array
+			response += arg.classType.fullyQualifiedName
+		}
+		else{			
+			if(arg.array !== null)
+				response += arg.type+arg.array
+			response += arg.type
+		}
+		return response
 	}
 	
 	def providersCompile(Entity e)

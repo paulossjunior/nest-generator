@@ -76,7 +76,10 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//Entity:
-		//	'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{' properties+=Property* methods+=Method* '}';
+		//	'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'
+		//	properties+=Property*
+		//	methods+=Method*
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{' properties+=Property* methods+=Method* '}'
@@ -141,7 +144,9 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Dto:
-		//	'dto' name=ID ('extends' superType=[Dto|QualifiedName])? '{' properties+=DtoProperty* '}';
+		//	'dto' name=ID ('extends' superType=[Dto|QualifiedName])? '{'
+		//	properties+=DtoProperty*
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'dto' name=ID ('extends' superType=[Dto|QualifiedName])? '{' properties+=DtoProperty* '}'
@@ -213,7 +218,8 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Property:
-		//	relation=Relation? name=ID ':' (classType=[Entity|QualifiedName] | type=DATATYPE) array='[]'? ';'?;
+		//	relation=Relation?
+		//	name=ID ':' (classType=[Entity|QualifiedName] | type=DATATYPE) array='[]'? ';'?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//relation=Relation? name=ID ':' (classType=[Entity|QualifiedName] | type=DATATYPE) array='[]'? ';'?
@@ -454,20 +460,23 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cArgsMethodArgParserRuleCall_3_0_0 = (RuleCall)cArgsAssignment_3_0.eContents().get(0);
 		private final Keyword cCommaKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
 		private final Keyword cRightParenthesisColonKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cReturnTypeAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final CrossReference cReturnTypeAbstractElementCrossReference_5_0 = (CrossReference)cReturnTypeAssignment_5.eContents().get(0);
-		private final RuleCall cReturnTypeAbstractElementQualifiedNameParserRuleCall_5_0_1 = (RuleCall)cReturnTypeAbstractElementCrossReference_5_0.eContents().get(1);
+		private final Alternatives cAlternatives_5 = (Alternatives)cGroup.eContents().get(5);
+		private final Assignment cReturnClassTypeAssignment_5_0 = (Assignment)cAlternatives_5.eContents().get(0);
+		private final CrossReference cReturnClassTypeAbstractElementCrossReference_5_0_0 = (CrossReference)cReturnClassTypeAssignment_5_0.eContents().get(0);
+		private final RuleCall cReturnClassTypeAbstractElementQualifiedNameParserRuleCall_5_0_0_1 = (RuleCall)cReturnClassTypeAbstractElementCrossReference_5_0_0.eContents().get(1);
+		private final Assignment cReturnTypeAssignment_5_1 = (Assignment)cAlternatives_5.eContents().get(1);
+		private final RuleCall cReturnTypeDATATYPETerminalRuleCall_5_1_0 = (RuleCall)cReturnTypeAssignment_5_1.eContents().get(0);
 		private final Assignment cArrayAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final Keyword cArrayLeftSquareBracketRightSquareBracketKeyword_6_0 = (Keyword)cArrayAssignment_6.eContents().get(0);
 		private final Keyword cSemicolonKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//Method:
 		//	verb=('Get' | 'Post' | 'Delete' | 'Put') name=ID '(' (args+=MethodArg ','?)* '):'
-		//	returnType=[AbstractElement|QualifiedName] array='[]'? ';'?;
+		//	(returnClassType=[AbstractElement|QualifiedName] | returnType=DATATYPE) array='[]'? ';'?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//verb=('Get' | 'Post' | 'Delete' | 'Put') name=ID '(' (args+=MethodArg ','?)* '):'
-		//returnType=[AbstractElement|QualifiedName] array='[]'? ';'?
+		//(returnClassType=[AbstractElement|QualifiedName] | returnType=DATATYPE) array='[]'? ';'?
 		public Group getGroup() { return cGroup; }
 		
 		//verb=('Get' | 'Post' | 'Delete' | 'Put')
@@ -512,14 +521,23 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 		//'):'
 		public Keyword getRightParenthesisColonKeyword_4() { return cRightParenthesisColonKeyword_4; }
 		
-		//returnType=[AbstractElement|QualifiedName]
-		public Assignment getReturnTypeAssignment_5() { return cReturnTypeAssignment_5; }
+		//returnClassType=[AbstractElement|QualifiedName] | returnType=DATATYPE
+		public Alternatives getAlternatives_5() { return cAlternatives_5; }
+		
+		//returnClassType=[AbstractElement|QualifiedName]
+		public Assignment getReturnClassTypeAssignment_5_0() { return cReturnClassTypeAssignment_5_0; }
 		
 		//[AbstractElement|QualifiedName]
-		public CrossReference getReturnTypeAbstractElementCrossReference_5_0() { return cReturnTypeAbstractElementCrossReference_5_0; }
+		public CrossReference getReturnClassTypeAbstractElementCrossReference_5_0_0() { return cReturnClassTypeAbstractElementCrossReference_5_0_0; }
 		
 		//QualifiedName
-		public RuleCall getReturnTypeAbstractElementQualifiedNameParserRuleCall_5_0_1() { return cReturnTypeAbstractElementQualifiedNameParserRuleCall_5_0_1; }
+		public RuleCall getReturnClassTypeAbstractElementQualifiedNameParserRuleCall_5_0_0_1() { return cReturnClassTypeAbstractElementQualifiedNameParserRuleCall_5_0_0_1; }
+		
+		//returnType=DATATYPE
+		public Assignment getReturnTypeAssignment_5_1() { return cReturnTypeAssignment_5_1; }
+		
+		//DATATYPE
+		public RuleCall getReturnTypeDATATYPETerminalRuleCall_5_1_0() { return cReturnTypeDATATYPETerminalRuleCall_5_1_0; }
 		
 		//array='[]'?
 		public Assignment getArrayAssignment_6() { return cArrayAssignment_6; }
@@ -536,17 +554,20 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
 		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cTypeAbstractElementCrossReference_2_0 = (CrossReference)cTypeAssignment_2.eContents().get(0);
-		private final RuleCall cTypeAbstractElementQualifiedNameParserRuleCall_2_0_1 = (RuleCall)cTypeAbstractElementCrossReference_2_0.eContents().get(1);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Assignment cClassTypeAssignment_2_0 = (Assignment)cAlternatives_2.eContents().get(0);
+		private final CrossReference cClassTypeAbstractElementCrossReference_2_0_0 = (CrossReference)cClassTypeAssignment_2_0.eContents().get(0);
+		private final RuleCall cClassTypeAbstractElementQualifiedNameParserRuleCall_2_0_0_1 = (RuleCall)cClassTypeAbstractElementCrossReference_2_0_0.eContents().get(1);
+		private final Assignment cTypeAssignment_2_1 = (Assignment)cAlternatives_2.eContents().get(1);
+		private final RuleCall cTypeDATATYPETerminalRuleCall_2_1_0 = (RuleCall)cTypeAssignment_2_1.eContents().get(0);
 		private final Assignment cArrayAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final Keyword cArrayLeftSquareBracketRightSquareBracketKeyword_3_0 = (Keyword)cArrayAssignment_3.eContents().get(0);
 		
 		//MethodArg:
-		//	name=ID ':' type=[AbstractElement|QualifiedName] array='[]'?;
+		//	name=ID ':' (classType=[AbstractElement|QualifiedName] | type=DATATYPE) array='[]'?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID ':' type=[AbstractElement|QualifiedName] array='[]'?
+		//name=ID ':' (classType=[AbstractElement|QualifiedName] | type=DATATYPE) array='[]'?
 		public Group getGroup() { return cGroup; }
 		
 		//name=ID
@@ -558,14 +579,23 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 		//':'
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
 		
-		//type=[AbstractElement|QualifiedName]
-		public Assignment getTypeAssignment_2() { return cTypeAssignment_2; }
+		//classType=[AbstractElement|QualifiedName] | type=DATATYPE
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+		
+		//classType=[AbstractElement|QualifiedName]
+		public Assignment getClassTypeAssignment_2_0() { return cClassTypeAssignment_2_0; }
 		
 		//[AbstractElement|QualifiedName]
-		public CrossReference getTypeAbstractElementCrossReference_2_0() { return cTypeAbstractElementCrossReference_2_0; }
+		public CrossReference getClassTypeAbstractElementCrossReference_2_0_0() { return cClassTypeAbstractElementCrossReference_2_0_0; }
 		
 		//QualifiedName
-		public RuleCall getTypeAbstractElementQualifiedNameParserRuleCall_2_0_1() { return cTypeAbstractElementQualifiedNameParserRuleCall_2_0_1; }
+		public RuleCall getClassTypeAbstractElementQualifiedNameParserRuleCall_2_0_0_1() { return cClassTypeAbstractElementQualifiedNameParserRuleCall_2_0_0_1; }
+		
+		//type=DATATYPE
+		public Assignment getTypeAssignment_2_1() { return cTypeAssignment_2_1; }
+		
+		//DATATYPE
+		public RuleCall getTypeDATATYPETerminalRuleCall_2_1_0() { return cTypeDATATYPETerminalRuleCall_2_1_0; }
 		
 		//array='[]'?
 		public Assignment getArrayAssignment_3() { return cArrayAssignment_3; }
@@ -663,7 +693,10 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Entity:
-	//	'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{' properties+=Property* methods+=Method* '}';
+	//	'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'
+	//	properties+=Property*
+	//	methods+=Method*
+	//	'}';
 	public EntityElements getEntityAccess() {
 		return pEntity;
 	}
@@ -673,7 +706,9 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Dto:
-	//	'dto' name=ID ('extends' superType=[Dto|QualifiedName])? '{' properties+=DtoProperty* '}';
+	//	'dto' name=ID ('extends' superType=[Dto|QualifiedName])? '{'
+	//	properties+=DtoProperty*
+	//	'}';
 	public DtoElements getDtoAccess() {
 		return pDto;
 	}
@@ -699,7 +734,8 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Property:
-	//	relation=Relation? name=ID ':' (classType=[Entity|QualifiedName] | type=DATATYPE) array='[]'? ';'?;
+	//	relation=Relation?
+	//	name=ID ':' (classType=[Entity|QualifiedName] | type=DATATYPE) array='[]'? ';'?;
 	public PropertyElements getPropertyAccess() {
 		return pProperty;
 	}
@@ -757,7 +793,7 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//Method:
 	//	verb=('Get' | 'Post' | 'Delete' | 'Put') name=ID '(' (args+=MethodArg ','?)* '):'
-	//	returnType=[AbstractElement|QualifiedName] array='[]'? ';'?;
+	//	(returnClassType=[AbstractElement|QualifiedName] | returnType=DATATYPE) array='[]'? ';'?;
 	public MethodElements getMethodAccess() {
 		return pMethod;
 	}
@@ -767,7 +803,7 @@ public class NestDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//MethodArg:
-	//	name=ID ':' type=[AbstractElement|QualifiedName] array='[]'?;
+	//	name=ID ':' (classType=[AbstractElement|QualifiedName] | type=DATATYPE) array='[]'?;
 	public MethodArgElements getMethodArgAccess() {
 		return pMethodArg;
 	}

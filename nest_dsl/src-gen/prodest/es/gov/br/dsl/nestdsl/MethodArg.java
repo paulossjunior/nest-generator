@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.MethodArg#getName <em>Name</em>}</li>
+ *   <li>{@link prodest.es.gov.br.dsl.nestdsl.MethodArg#getClassType <em>Class Type</em>}</li>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.MethodArg#getType <em>Type</em>}</li>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.MethodArg#getArray <em>Array</em>}</li>
  * </ul>
@@ -48,26 +49,48 @@ public interface MethodArg extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Type</b></em>' reference.
+   * Returns the value of the '<em><b>Class Type</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' reference.
-   * @see #setType(AbstractElement)
+   * @return the value of the '<em>Class Type</em>' reference.
+   * @see #setClassType(AbstractElement)
+   * @see prodest.es.gov.br.dsl.nestdsl.NestdslPackage#getMethodArg_ClassType()
+   * @model
+   * @generated
+   */
+  AbstractElement getClassType();
+
+  /**
+   * Sets the value of the '{@link prodest.es.gov.br.dsl.nestdsl.MethodArg#getClassType <em>Class Type</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Class Type</em>' reference.
+   * @see #getClassType()
+   * @generated
+   */
+  void setClassType(AbstractElement value);
+
+  /**
+   * Returns the value of the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Type</em>' attribute.
+   * @see #setType(String)
    * @see prodest.es.gov.br.dsl.nestdsl.NestdslPackage#getMethodArg_Type()
    * @model
    * @generated
    */
-  AbstractElement getType();
+  String getType();
 
   /**
-   * Sets the value of the '{@link prodest.es.gov.br.dsl.nestdsl.MethodArg#getType <em>Type</em>}' reference.
+   * Sets the value of the '{@link prodest.es.gov.br.dsl.nestdsl.MethodArg#getType <em>Type</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' reference.
+   * @param value the new value of the '<em>Type</em>' attribute.
    * @see #getType()
    * @generated
    */
-  void setType(AbstractElement value);
+  void setType(String value);
 
   /**
    * Returns the value of the '<em><b>Array</b></em>' attribute.

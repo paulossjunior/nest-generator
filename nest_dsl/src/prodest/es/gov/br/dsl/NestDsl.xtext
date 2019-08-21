@@ -62,11 +62,11 @@ terminal ARGUMENTREGEX:
 	;
 
 Method:
-	verb=( 'Get' | 'Post' | 'Delete' | 'Put' ) name=ID '(' (args+= MethodArg(',')?)* '):' returnType=[AbstractElement|QualifiedName](array='[]')?(';')?
+	verb=( 'Get' | 'Post' | 'Delete' | 'Put' ) name=ID '(' (args+= MethodArg(',')?)* '):' (returnClassType=[AbstractElement|QualifiedName] | returnType=DATATYPE)(array='[]')?(';')?
 	;
 	
 MethodArg:
-	name=ID ':' type=[AbstractElement|QualifiedName](array='[]')?
+	name=ID ':' (classType=[AbstractElement|QualifiedName] | type=DATATYPE)(array='[]')?
 ;
 
 

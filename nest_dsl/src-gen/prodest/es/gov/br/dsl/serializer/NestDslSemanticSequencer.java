@@ -129,7 +129,7 @@ public class NestDslSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     MethodArg returns MethodArg
 	 *
 	 * Constraint:
-	 *     (name=ID type=[AbstractElement|QualifiedName] array='[]'?)
+	 *     (name=ID (classType=[AbstractElement|QualifiedName] | type=DATATYPE) array='[]'?)
 	 */
 	protected void sequence_MethodArg(ISerializationContext context, MethodArg semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -141,7 +141,13 @@ public class NestDslSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     Method returns Method
 	 *
 	 * Constraint:
-	 *     ((verb='Get' | verb='Post' | verb='Delete' | verb='Put') name=ID args+=MethodArg* returnType=[AbstractElement|QualifiedName] array='[]'?)
+	 *     (
+	 *         (verb='Get' | verb='Post' | verb='Delete' | verb='Put') 
+	 *         name=ID 
+	 *         args+=MethodArg* 
+	 *         (returnClassType=[AbstractElement|QualifiedName] | returnType=DATATYPE) 
+	 *         array='[]'?
+	 *     )
 	 */
 	protected void sequence_Method(ISerializationContext context, Method semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

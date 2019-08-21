@@ -453,10 +453,10 @@ public class InternalNestDslLexer extends Lexer {
         try {
             int _type = RULE_DATATYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalNestDsl.g:999:15: ( ( 'string' | 'number' | 'Date' | 'boolean' ) )
-            // InternalNestDsl.g:999:17: ( 'string' | 'number' | 'Date' | 'boolean' )
+            // InternalNestDsl.g:1041:15: ( ( 'string' | 'number' | 'Date' | 'boolean' ) )
+            // InternalNestDsl.g:1041:17: ( 'string' | 'number' | 'Date' | 'boolean' )
             {
-            // InternalNestDsl.g:999:17: ( 'string' | 'number' | 'Date' | 'boolean' )
+            // InternalNestDsl.g:1041:17: ( 'string' | 'number' | 'Date' | 'boolean' )
             int alt1=4;
             switch ( input.LA(1) ) {
             case 's':
@@ -488,7 +488,7 @@ public class InternalNestDslLexer extends Lexer {
 
             switch (alt1) {
                 case 1 :
-                    // InternalNestDsl.g:999:18: 'string'
+                    // InternalNestDsl.g:1041:18: 'string'
                     {
                     match("string"); 
 
@@ -496,7 +496,7 @@ public class InternalNestDslLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalNestDsl.g:999:27: 'number'
+                    // InternalNestDsl.g:1041:27: 'number'
                     {
                     match("number"); 
 
@@ -504,7 +504,7 @@ public class InternalNestDslLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // InternalNestDsl.g:999:36: 'Date'
+                    // InternalNestDsl.g:1041:36: 'Date'
                     {
                     match("Date"); 
 
@@ -512,7 +512,7 @@ public class InternalNestDslLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // InternalNestDsl.g:999:43: 'boolean'
+                    // InternalNestDsl.g:1041:43: 'boolean'
                     {
                     match("boolean"); 
 
@@ -538,8 +538,8 @@ public class InternalNestDslLexer extends Lexer {
         try {
             int _type = RULE_ARGUMENTREGEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalNestDsl.g:1001:20: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* '=>' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* '.' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalNestDsl.g:1001:22: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* '=>' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* '.' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalNestDsl.g:1043:20: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* '=>' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* '.' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalNestDsl.g:1043:22: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* '=>' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* '.' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
             if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
@@ -550,7 +550,7 @@ public class InternalNestDslLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalNestDsl.g:1001:46: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalNestDsl.g:1043:46: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -594,7 +594,7 @@ public class InternalNestDslLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalNestDsl.g:1001:109: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalNestDsl.g:1043:109: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop3:
             do {
                 int alt3=2;
@@ -637,7 +637,7 @@ public class InternalNestDslLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalNestDsl.g:1001:171: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalNestDsl.g:1043:171: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop4:
             do {
                 int alt4=2;
@@ -686,10 +686,10 @@ public class InternalNestDslLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalNestDsl.g:1003:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalNestDsl.g:1003:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalNestDsl.g:1045:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalNestDsl.g:1045:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalNestDsl.g:1003:11: ( '^' )?
+            // InternalNestDsl.g:1045:11: ( '^' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -698,7 +698,7 @@ public class InternalNestDslLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // InternalNestDsl.g:1003:11: '^'
+                    // InternalNestDsl.g:1045:11: '^'
                     {
                     match('^'); 
 
@@ -716,7 +716,7 @@ public class InternalNestDslLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalNestDsl.g:1003:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalNestDsl.g:1045:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop6:
             do {
                 int alt6=2;
@@ -765,10 +765,10 @@ public class InternalNestDslLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalNestDsl.g:1005:10: ( ( '0' .. '9' )+ )
-            // InternalNestDsl.g:1005:12: ( '0' .. '9' )+
+            // InternalNestDsl.g:1047:10: ( ( '0' .. '9' )+ )
+            // InternalNestDsl.g:1047:12: ( '0' .. '9' )+
             {
-            // InternalNestDsl.g:1005:12: ( '0' .. '9' )+
+            // InternalNestDsl.g:1047:12: ( '0' .. '9' )+
             int cnt7=0;
             loop7:
             do {
@@ -782,7 +782,7 @@ public class InternalNestDslLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalNestDsl.g:1005:13: '0' .. '9'
+            	    // InternalNestDsl.g:1047:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -814,10 +814,10 @@ public class InternalNestDslLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalNestDsl.g:1007:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalNestDsl.g:1007:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalNestDsl.g:1049:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalNestDsl.g:1049:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalNestDsl.g:1007:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalNestDsl.g:1049:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -835,10 +835,10 @@ public class InternalNestDslLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalNestDsl.g:1007:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalNestDsl.g:1049:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalNestDsl.g:1007:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalNestDsl.g:1049:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop8:
                     do {
                         int alt8=3;
@@ -854,7 +854,7 @@ public class InternalNestDslLexer extends Lexer {
 
                         switch (alt8) {
                     	case 1 :
-                    	    // InternalNestDsl.g:1007:21: '\\\\' .
+                    	    // InternalNestDsl.g:1049:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -862,7 +862,7 @@ public class InternalNestDslLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalNestDsl.g:1007:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalNestDsl.g:1049:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -887,10 +887,10 @@ public class InternalNestDslLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalNestDsl.g:1007:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalNestDsl.g:1049:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalNestDsl.g:1007:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalNestDsl.g:1049:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop9:
                     do {
                         int alt9=3;
@@ -906,7 +906,7 @@ public class InternalNestDslLexer extends Lexer {
 
                         switch (alt9) {
                     	case 1 :
-                    	    // InternalNestDsl.g:1007:54: '\\\\' .
+                    	    // InternalNestDsl.g:1049:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -914,7 +914,7 @@ public class InternalNestDslLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalNestDsl.g:1007:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalNestDsl.g:1049:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -957,12 +957,12 @@ public class InternalNestDslLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalNestDsl.g:1009:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalNestDsl.g:1009:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalNestDsl.g:1051:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalNestDsl.g:1051:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalNestDsl.g:1009:24: ( options {greedy=false; } : . )*
+            // InternalNestDsl.g:1051:24: ( options {greedy=false; } : . )*
             loop11:
             do {
                 int alt11=2;
@@ -987,7 +987,7 @@ public class InternalNestDslLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // InternalNestDsl.g:1009:52: .
+            	    // InternalNestDsl.g:1051:52: .
             	    {
             	    matchAny(); 
 
@@ -1017,12 +1017,12 @@ public class InternalNestDslLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalNestDsl.g:1011:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalNestDsl.g:1011:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalNestDsl.g:1053:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalNestDsl.g:1053:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalNestDsl.g:1011:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalNestDsl.g:1053:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop12:
             do {
                 int alt12=2;
@@ -1035,7 +1035,7 @@ public class InternalNestDslLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // InternalNestDsl.g:1011:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalNestDsl.g:1053:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1055,7 +1055,7 @@ public class InternalNestDslLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalNestDsl.g:1011:40: ( ( '\\r' )? '\\n' )?
+            // InternalNestDsl.g:1053:40: ( ( '\\r' )? '\\n' )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -1064,9 +1064,9 @@ public class InternalNestDslLexer extends Lexer {
             }
             switch (alt14) {
                 case 1 :
-                    // InternalNestDsl.g:1011:41: ( '\\r' )? '\\n'
+                    // InternalNestDsl.g:1053:41: ( '\\r' )? '\\n'
                     {
-                    // InternalNestDsl.g:1011:41: ( '\\r' )?
+                    // InternalNestDsl.g:1053:41: ( '\\r' )?
                     int alt13=2;
                     int LA13_0 = input.LA(1);
 
@@ -1075,7 +1075,7 @@ public class InternalNestDslLexer extends Lexer {
                     }
                     switch (alt13) {
                         case 1 :
-                            // InternalNestDsl.g:1011:41: '\\r'
+                            // InternalNestDsl.g:1053:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1107,10 +1107,10 @@ public class InternalNestDslLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalNestDsl.g:1013:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalNestDsl.g:1013:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalNestDsl.g:1055:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalNestDsl.g:1055:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalNestDsl.g:1013:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalNestDsl.g:1055:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt15=0;
             loop15:
             do {
@@ -1164,8 +1164,8 @@ public class InternalNestDslLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalNestDsl.g:1015:16: ( . )
-            // InternalNestDsl.g:1015:18: .
+            // InternalNestDsl.g:1057:16: ( . )
+            // InternalNestDsl.g:1057:18: .
             {
             matchAny(); 
 

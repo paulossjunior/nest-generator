@@ -76,7 +76,8 @@ public class NestDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     ','?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     args+=MethodArg (ambiguity) '):' returnType=[AbstractElement|QualifiedName]
+	 *     args+=MethodArg (ambiguity) '):' returnClassType=[AbstractElement|QualifiedName]
+	 *     args+=MethodArg (ambiguity) '):' returnType=DATATYPE
 	 *     args+=MethodArg (ambiguity) args+=MethodArg
 	 */
 	protected void emit_Method_CommaKeyword_3_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -89,7 +90,8 @@ public class NestDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     array='[]' (ambiguity) (rule end)
-	 *     returnType=[AbstractElement|QualifiedName] (ambiguity) (rule end)
+	 *     returnClassType=[AbstractElement|QualifiedName] (ambiguity) (rule end)
+	 *     returnType=DATATYPE (ambiguity) (rule end)
 	 */
 	protected void emit_Method_SemicolonKeyword_7_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

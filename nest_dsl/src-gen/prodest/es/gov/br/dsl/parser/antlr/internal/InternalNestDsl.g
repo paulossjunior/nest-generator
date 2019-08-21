@@ -888,38 +888,59 @@ ruleMethod returns [EObject current=null]
 		}
 		(
 			(
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getMethodRule());
+				(
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getMethodRule());
+						}
 					}
-				}
-				{
-					newCompositeNode(grammarAccess.getMethodAccess().getReturnTypeAbstractElementCrossReference_5_0());
-				}
-				ruleQualifiedName
-				{
-					afterParserOrEnumRuleCall();
-				}
+					{
+						newCompositeNode(grammarAccess.getMethodAccess().getReturnClassTypeAbstractElementCrossReference_5_0_0());
+					}
+					ruleQualifiedName
+					{
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			    |
+			(
+				(
+					lv_returnType_7_0=RULE_DATATYPE
+					{
+						newLeafNode(lv_returnType_7_0, grammarAccess.getMethodAccess().getReturnTypeDATATYPETerminalRuleCall_5_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getMethodRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"returnType",
+							lv_returnType_7_0,
+							"prodest.es.gov.br.dsl.NestDsl.DATATYPE");
+					}
+				)
 			)
 		)
 		(
 			(
-				lv_array_7_0='[]'
+				lv_array_8_0='[]'
 				{
-					newLeafNode(lv_array_7_0, grammarAccess.getMethodAccess().getArrayLeftSquareBracketRightSquareBracketKeyword_6_0());
+					newLeafNode(lv_array_8_0, grammarAccess.getMethodAccess().getArrayLeftSquareBracketRightSquareBracketKeyword_6_0());
 				}
 				{
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getMethodRule());
 					}
-					setWithLastConsumed($current, "array", lv_array_7_0, "[]");
+					setWithLastConsumed($current, "array", lv_array_8_0, "[]");
 				}
 			)
 		)?
 		(
-			otherlv_8=';'
+			otherlv_9=';'
 			{
-				newLeafNode(otherlv_8, grammarAccess.getMethodAccess().getSemicolonKeyword_7());
+				newLeafNode(otherlv_9, grammarAccess.getMethodAccess().getSemicolonKeyword_7());
 			}
 		)?
 	)
@@ -965,31 +986,52 @@ ruleMethodArg returns [EObject current=null]
 		}
 		(
 			(
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getMethodArgRule());
+				(
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getMethodArgRule());
+						}
 					}
-				}
-				{
-					newCompositeNode(grammarAccess.getMethodArgAccess().getTypeAbstractElementCrossReference_2_0());
-				}
-				ruleQualifiedName
-				{
-					afterParserOrEnumRuleCall();
-				}
+					{
+						newCompositeNode(grammarAccess.getMethodArgAccess().getClassTypeAbstractElementCrossReference_2_0_0());
+					}
+					ruleQualifiedName
+					{
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			    |
+			(
+				(
+					lv_type_3_0=RULE_DATATYPE
+					{
+						newLeafNode(lv_type_3_0, grammarAccess.getMethodArgAccess().getTypeDATATYPETerminalRuleCall_2_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getMethodArgRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"type",
+							lv_type_3_0,
+							"prodest.es.gov.br.dsl.NestDsl.DATATYPE");
+					}
+				)
 			)
 		)
 		(
 			(
-				lv_array_3_0='[]'
+				lv_array_4_0='[]'
 				{
-					newLeafNode(lv_array_3_0, grammarAccess.getMethodArgAccess().getArrayLeftSquareBracketRightSquareBracketKeyword_3_0());
+					newLeafNode(lv_array_4_0, grammarAccess.getMethodArgAccess().getArrayLeftSquareBracketRightSquareBracketKeyword_3_0());
 				}
 				{
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getMethodArgRule());
 					}
-					setWithLastConsumed($current, "array", lv_array_3_0, "[]");
+					setWithLastConsumed($current, "array", lv_array_4_0, "[]");
 				}
 			)
 		)?
