@@ -14,6 +14,7 @@ class NestDslGenerator extends AbstractGenerator {
     @Inject DatabaseGenerator dbGenerator
     @Inject ClassDiagramGenerator classDiagramGenerator
     @Inject GenericCoreGenerator genericCoreGenerator
+    @Inject TestGenerator testGenerator
  	
     override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
         coreGenerator.doGenerate(resource, fsa, context);
@@ -22,6 +23,7 @@ class NestDslGenerator extends AbstractGenerator {
      	dbGenerator.doGenerate(resource, fsa, context);
      	classDiagramGenerator.doGenerate(resource, fsa, context);
      	genericCoreGenerator.doGenerate(resource, fsa, context);
+     	testGenerator.doGenerate(resource, fsa, context);
     }
 	
 }

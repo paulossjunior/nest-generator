@@ -11,6 +11,7 @@ import prodest.es.gov.br.dsl.generator.DatabaseGenerator;
 import prodest.es.gov.br.dsl.generator.DtoGenerator;
 import prodest.es.gov.br.dsl.generator.GenericCoreGenerator;
 import prodest.es.gov.br.dsl.generator.HelpersGenerator;
+import prodest.es.gov.br.dsl.generator.TestGenerator;
 
 @SuppressWarnings("all")
 public class NestDslGenerator extends AbstractGenerator {
@@ -32,6 +33,9 @@ public class NestDslGenerator extends AbstractGenerator {
   @Inject
   private GenericCoreGenerator genericCoreGenerator;
   
+  @Inject
+  private TestGenerator testGenerator;
+  
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     this.coreGenerator.doGenerate(resource, fsa, context);
@@ -40,5 +44,6 @@ public class NestDslGenerator extends AbstractGenerator {
     this.dbGenerator.doGenerate(resource, fsa, context);
     this.classDiagramGenerator.doGenerate(resource, fsa, context);
     this.genericCoreGenerator.doGenerate(resource, fsa, context);
+    this.testGenerator.doGenerate(resource, fsa, context);
   }
 }
