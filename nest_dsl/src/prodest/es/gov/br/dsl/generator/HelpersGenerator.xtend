@@ -5,19 +5,25 @@ import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
 import prodest.es.gov.br.dsl.nestdsl.Entity
+import prodest.es.gov.br.dsl.nestdsl.Dto
 import java.util.List
 import java.util.ArrayList
 
 class HelpersGenerator extends AbstractGenerator {
  
-	var List<String> modules;
+	var List<String> entities;
+	var List<String> dtos;
 	
 	override doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		
-		modules = new ArrayList();
+		entities = new ArrayList();
+		dtos = new ArrayList();
 		
 		for (e : resource.allContents.toIterable.filter(Entity)) {
-			modules.add(e.name);
+			entities.add(e.name);
+		}
+		for (dto : resource.allContents.toIterable.filter(Dto)) {
+			dtos.add(dto.name);
 		}
 		
 		fsa.generateFile(
@@ -25,7 +31,7 @@ class HelpersGenerator extends AbstractGenerator {
     		mainCompile)
     	fsa.generateFile(
        		"src/app.module.ts",
-        	appModuleCompile(modules))
+        	appModuleCompile(entities))
 		fsa.generateFile(
        		"Dockerfile",
         	dockerfileCompile)
@@ -41,6 +47,9 @@ class HelpersGenerator extends AbstractGenerator {
 		fsa.generateFile(
        		" .env.example",
     		envCompile)
+		fsa.generateFile(
+       		"docs/entitiesDescription.md",
+    		mdCompiler(entities, dtos))
 	}
 	
 	def mainCompile()
@@ -223,8 +232,8 @@ class HelpersGenerator extends AbstractGenerator {
 			    "test:cov": "jest --coverage",
 			    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
 			    "test:e2e": "jest --config ./test/jest-e2e.json",
-			    "generate:classDiagram": "mmdc -i classDiagram.mmd -o classDiagram.png",
-			    "generate:archDiagram": "mmdc -i archDiagram.mmd -o archDiagram.png"
+			    "generate:classDiagram": "mmdc -i classDiagram.mmd -o ./docs/classDiagram.png",
+			    "generate:archDiagram": "mmdc -i archDiagram.mmd -o ./docs/archDiagram.png"
 			  },
 			  "dependencies": {
 			    "@nestjs/common": "^6.0.0",
@@ -280,5 +289,36 @@ class HelpersGenerator extends AbstractGenerator {
 			SCHEMA=master
 			ORM_SYNC=false
 			
+		'''
+		
+		def mdCompiler(List<String> entities, List<String> dtos)
+		'''
+		«IF entities.size()>0»
+		###Entidades
+		
+		Entidade  | Descricao
+		:-------------: | :-------------:
+		«FOR e: entities»
+			«e» | Preencha este campo
+		«ENDFOR»
+		«ENDIF»
+		«IF dtos.size()>0»
+		
+		
+		###DTOs
+		
+		Entidade  | Descricao
+		:-------------: | :-------------:
+		«FOR dto: dtos»
+			«dto» | Preencha este campo
+		«ENDFOR»
+		
+		###Diagrama de classe
+		![classDiagram](./classDiagram.png)
+		
+		###Arquitetura generica
+		![archDiagram](./archDiagram.png)
+		
+		«ENDIF»
 		'''
 }

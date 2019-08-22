@@ -10,26 +10,35 @@ import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import prodest.es.gov.br.dsl.nestdsl.Dto;
 import prodest.es.gov.br.dsl.nestdsl.Entity;
 
 @SuppressWarnings("all")
 public class HelpersGenerator extends AbstractGenerator {
-  private List<String> modules;
+  private List<String> entities;
+  
+  private List<String> dtos;
   
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     ArrayList<String> _arrayList = new ArrayList<String>();
-    this.modules = _arrayList;
+    this.entities = _arrayList;
+    ArrayList<String> _arrayList_1 = new ArrayList<String>();
+    this.dtos = _arrayList_1;
     Iterable<Entity> _filter = Iterables.<Entity>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Entity.class);
     for (final Entity e : _filter) {
-      this.modules.add(e.getName());
+      this.entities.add(e.getName());
+    }
+    Iterable<Dto> _filter_1 = Iterables.<Dto>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Dto.class);
+    for (final Dto dto : _filter_1) {
+      this.dtos.add(dto.getName());
     }
     fsa.generateFile(
       "src/main.ts", 
       this.mainCompile());
     fsa.generateFile(
       "src/app.module.ts", 
-      this.appModuleCompile(this.modules));
+      this.appModuleCompile(this.entities));
     fsa.generateFile(
       "Dockerfile", 
       this.dockerfileCompile());
@@ -45,6 +54,9 @@ public class HelpersGenerator extends AbstractGenerator {
     fsa.generateFile(
       " .env.example", 
       this.envCompile());
+    fsa.generateFile(
+      "docs/entitiesDescription.md", 
+      this.mdCompiler(this.entities, this.dtos));
   }
   
   public CharSequence mainCompile() {
@@ -461,10 +473,10 @@ public class HelpersGenerator extends AbstractGenerator {
     _builder.append("\"test:e2e\": \"jest --config ./test/jest-e2e.json\",");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("\"generate:classDiagram\": \"mmdc -i classDiagram.mmd -o classDiagram.png\",");
+    _builder.append("\"generate:classDiagram\": \"mmdc -i classDiagram.mmd -o ./docs/classDiagram.png\",");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("\"generate:archDiagram\": \"mmdc -i archDiagram.mmd -o archDiagram.png\"");
+    _builder.append("\"generate:archDiagram\": \"mmdc -i archDiagram.mmd -o ./docs/archDiagram.png\"");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("},");
@@ -618,6 +630,64 @@ public class HelpersGenerator extends AbstractGenerator {
     _builder.append("ORM_SYNC=false");
     _builder.newLine();
     _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence mdCompiler(final List<String> entities, final List<String> dtos) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      int _size = entities.size();
+      boolean _greaterThan = (_size > 0);
+      if (_greaterThan) {
+        _builder.append("###Entidades");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("Entidade  | Descricao");
+        _builder.newLine();
+        _builder.append(":-------------: | :-------------:");
+        _builder.newLine();
+        {
+          for(final String e : entities) {
+            _builder.append(e);
+            _builder.append(" | Preencha este campo");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      int _size_1 = dtos.size();
+      boolean _greaterThan_1 = (_size_1 > 0);
+      if (_greaterThan_1) {
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("###DTOs");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("Entidade  | Descricao");
+        _builder.newLine();
+        _builder.append(":-------------: | :-------------:");
+        _builder.newLine();
+        {
+          for(final String dto : dtos) {
+            _builder.append(dto);
+            _builder.append(" | Preencha este campo");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.newLine();
+        _builder.append("###Diagrama de classe");
+        _builder.newLine();
+        _builder.append("![classDiagram](./classDiagram.png)");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("###Arquitetura generica");
+        _builder.newLine();
+        _builder.append("![archDiagram](./archDiagram.png)");
+        _builder.newLine();
+        _builder.newLine();
+      }
+    }
     return _builder;
   }
 }
