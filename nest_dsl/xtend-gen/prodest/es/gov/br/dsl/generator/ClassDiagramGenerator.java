@@ -246,9 +246,9 @@ public class ClassDiagramGenerator extends AbstractGenerator {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("classDiagram");
     _builder.newLine();
-    _builder.append("BaseController o-- IBase");
+    _builder.append("BaseController *-- BaseService");
     _builder.newLine();
-    _builder.append("BaseService <-- IBase : implements");
+    _builder.append("BaseService --> IBase : implements");
     _builder.newLine();
     _builder.append("IBase: T[] findAll()");
     _builder.newLine();

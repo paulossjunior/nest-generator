@@ -24,6 +24,10 @@ class DtoGenerator extends AbstractGenerator {
 	
 	def compile(Dto dto)
 	'''
+	
+		«IF dto.superType !== null»
+			import { «dto.superType.fullyQualifiedName» } from './«dto.superType.fullyQualifiedName.toLowerCase».dto'
+    	«ENDIF»
 		«FOR p : dto.properties»
 			«IF p.classType !== null»«IF p.classType.eClass.name.equals('Dto')»import { «p.classType.fullyQualifiedName» } from './«p.classType.fullyQualifiedName.toLowerCase».dto'«ENDIF»«ENDIF»
 		«ENDFOR»

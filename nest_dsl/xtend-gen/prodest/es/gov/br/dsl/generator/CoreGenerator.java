@@ -86,17 +86,36 @@ public class CoreGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("import { ApiModelProperty } from \'@nestjs/swagger\';");
     _builder.newLine();
+    _builder.newLine();
+    {
+      Entity _superType = e.getSuperType();
+      boolean _tripleNotEquals = (_superType != null);
+      if (_tripleNotEquals) {
+        _builder.append("import { ");
+        QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(e.getSuperType());
+        _builder.append(_fullyQualifiedName);
+        _builder.append(" } from \'../");
+        QualifiedName _fullyQualifiedName_1 = this._iQualifiedNameProvider.getFullyQualifiedName(e.getSuperType());
+        _builder.append(_fullyQualifiedName_1);
+        _builder.append("/");
+        QualifiedName _lowerCase = this._iQualifiedNameProvider.getFullyQualifiedName(e.getSuperType()).toLowerCase();
+        _builder.append(_lowerCase);
+        _builder.append(".entity\'");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.newLine();
     {
       EList<Property> _properties = e.getProperties();
       for(final Property p : _properties) {
         {
           Relation _relation = p.getRelation();
-          boolean _tripleNotEquals = (_relation != null);
-          if (_tripleNotEquals) {
+          boolean _tripleNotEquals_1 = (_relation != null);
+          if (_tripleNotEquals_1) {
             {
               OneArgumentRelation _oneArgument = p.getRelation().getOneArgument();
-              boolean _tripleNotEquals_1 = (_oneArgument != null);
-              if (_tripleNotEquals_1) {
+              boolean _tripleNotEquals_2 = (_oneArgument != null);
+              if (_tripleNotEquals_2) {
                 _builder.append("import { ");
                 String _name = p.getRelation().getOneArgument().getType().getName();
                 _builder.append(_name);
@@ -104,14 +123,14 @@ public class CoreGenerator extends AbstractGenerator {
                 String _name_1 = p.getRelation().getOneArgument().getType().getName();
                 _builder.append(_name_1);
                 _builder.append("/");
-                String _lowerCase = p.getRelation().getOneArgument().getType().getName().toLowerCase();
-                _builder.append(_lowerCase);
+                String _lowerCase_1 = p.getRelation().getOneArgument().getType().getName().toLowerCase();
+                _builder.append(_lowerCase_1);
                 _builder.append(".entity\'");
                 _builder.newLineIfNotEmpty();
               } else {
                 MultipleArgumentRelation _multipleArgument = p.getRelation().getMultipleArgument();
-                boolean _tripleNotEquals_2 = (_multipleArgument != null);
-                if (_tripleNotEquals_2) {
+                boolean _tripleNotEquals_3 = (_multipleArgument != null);
+                if (_tripleNotEquals_3) {
                   _builder.append("import { ");
                   String _name_2 = p.getRelation().getMultipleArgument().getType().getName();
                   _builder.append(_name_2);
@@ -119,8 +138,8 @@ public class CoreGenerator extends AbstractGenerator {
                   String _name_3 = p.getRelation().getMultipleArgument().getType().getName();
                   _builder.append(_name_3);
                   _builder.append("/");
-                  String _lowerCase_1 = p.getRelation().getMultipleArgument().getType().getName().toLowerCase();
-                  _builder.append(_lowerCase_1);
+                  String _lowerCase_2 = p.getRelation().getMultipleArgument().getType().getName().toLowerCase();
+                  _builder.append(_lowerCase_2);
                   _builder.append(".entity\'");
                   _builder.newLineIfNotEmpty();
                 }
@@ -128,6 +147,30 @@ public class CoreGenerator extends AbstractGenerator {
             }
           }
         }
+        _builder.append("\t\t    \t");
+        {
+          Entity _classType = p.getClassType();
+          boolean _tripleNotEquals_4 = (_classType != null);
+          if (_tripleNotEquals_4) {
+            {
+              boolean _equals = p.getClassType().eClass().getName().equals("Entity");
+              if (_equals) {
+                _builder.append("import { ");
+                QualifiedName _fullyQualifiedName_2 = this._iQualifiedNameProvider.getFullyQualifiedName(p.getClassType());
+                _builder.append(_fullyQualifiedName_2, "\t\t    \t");
+                _builder.append(" } from \'../");
+                QualifiedName _fullyQualifiedName_3 = this._iQualifiedNameProvider.getFullyQualifiedName(p.getClassType());
+                _builder.append(_fullyQualifiedName_3, "\t\t    \t");
+                _builder.append("/");
+                QualifiedName _lowerCase_3 = this._iQualifiedNameProvider.getFullyQualifiedName(p.getClassType()).toLowerCase();
+                _builder.append(_lowerCase_3, "\t\t    \t");
+                _builder.append(".entity\'");
+              }
+            }
+          }
+        }
+        _builder.append("   \t");
+        _builder.newLineIfNotEmpty();
       }
     }
     _builder.newLine();
@@ -138,12 +181,12 @@ public class CoreGenerator extends AbstractGenerator {
     _builder.append(_name_4);
     _builder.append(" ");
     {
-      Entity _superType = e.getSuperType();
-      boolean _tripleNotEquals_3 = (_superType != null);
-      if (_tripleNotEquals_3) {
+      Entity _superType_1 = e.getSuperType();
+      boolean _tripleNotEquals_5 = (_superType_1 != null);
+      if (_tripleNotEquals_5) {
         _builder.append("extends ");
-        QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(e.getSuperType());
-        _builder.append(_fullyQualifiedName);
+        QualifiedName _fullyQualifiedName_4 = this._iQualifiedNameProvider.getFullyQualifiedName(e.getSuperType());
+        _builder.append(_fullyQualifiedName_4);
         _builder.append(" ");
       }
     }

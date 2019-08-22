@@ -103,8 +103,8 @@ class ClassDiagramGenerator extends AbstractGenerator {
 	def archDiagram()
 	'''
 		classDiagram
-		BaseController o-- IBase
-		BaseService <-- IBase : implements
+		BaseController *-- BaseService
+		BaseService --> IBase : implements
 		IBase: T[] findAll()
 		IBase: T findOne(id: number)
 		IBase: void createOne(object: T)

@@ -41,6 +41,11 @@ class CoreGenerator extends AbstractGenerator {
 	    ''' 
 	    	import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, JoinTable, OneToOne, OneToMany, ManyToMany, ManyToOne } from 'typeorm';
 	    	import { ApiModelProperty } from '@nestjs/swagger';
+	    	
+	    	«IF e.superType !== null»
+	    	import { «e.superType.fullyQualifiedName» } from '../«e.superType.fullyQualifiedName»/«e.superType.fullyQualifiedName.toLowerCase».entity'
+	    	«ENDIF»
+	    	
 	    	«FOR p: e.properties»
 	    		«IF p.relation !== null»
 		    		«IF p.relation.oneArgument !== null»
@@ -48,7 +53,8 @@ class CoreGenerator extends AbstractGenerator {
 		    		«ELSEIF p.relation.multipleArgument !== null»
 		    			import { «p.relation.multipleArgument.type.name» } from '../«p.relation.multipleArgument.type.name»/«p.relation.multipleArgument.type.name.toLowerCase».entity'
 		    		«ENDIF»
-		    	«ENDIF»   	
+		    	«ENDIF»
+		    	«IF p.classType !== null»«IF p.classType.eClass.name.equals('Entity')»import { «p.classType.fullyQualifiedName» } from '../«p.classType.fullyQualifiedName»/«p.classType.fullyQualifiedName.toLowerCase».entity'«ENDIF»«ENDIF»   	
 	    	«ENDFOR»
 	    	
 	    	@Entity()
