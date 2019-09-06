@@ -54,7 +54,7 @@ Assim que a entidade for salva (CTRL+S), ela será compilada, se não existir ne
 
 ## Documentação
 
-Para uma documentação mais detalhada da gramática, acesse a [wiki](link_da_wiki_do_repo)
+Para uma documentação mais detalhada da gramática, acesse a [wiki](https://github.com/prodest/nest-generator/wiki)
 
 
 ## Arquitetura gerada
