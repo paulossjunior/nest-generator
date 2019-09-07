@@ -42,6 +42,8 @@ Para fazer a configuração e uso da ferramenta, realize os seguintes passos:
 
 
 #### Uso
+##### Pré-requisitos
+* Ter iniciado um projeto com o NestJS
 
 Agora basta criar um arquivo dentro de **/src**, com o nome que desejar, desde que tenha a extensão **.nestg** e definir suas entidades nesse arquivo. Os arquivos gerados estarão **/src-gen**
 
