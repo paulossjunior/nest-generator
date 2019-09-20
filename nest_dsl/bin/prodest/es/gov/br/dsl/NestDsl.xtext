@@ -12,7 +12,12 @@ AbstractElement:
     ;
  
 
+Description:
+	'#' textfield=STRING
+;
+
 Entity:
+	description = (Description)?
     'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'
         (properties += Property)*
         (methods += Method)*
@@ -20,6 +25,7 @@ Entity:
     ;
 	
 Dto:
+	description = (Description)?
 	'dto' name=ID  ('extends' superType=[Dto|QualifiedName])? '{'
 		(properties += DtoProperty)*
 	'}'

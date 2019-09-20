@@ -4,13 +4,16 @@
 package prodest.es.gov.br.dsl.nestdsl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import prodest.es.gov.br.dsl.nestdsl.AbstractElement;
+import prodest.es.gov.br.dsl.nestdsl.Description;
 import prodest.es.gov.br.dsl.nestdsl.NestdslPackage;
 
 /**
@@ -21,6 +24,7 @@ import prodest.es.gov.br.dsl.nestdsl.NestdslPackage;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link prodest.es.gov.br.dsl.nestdsl.impl.AbstractElementImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link prodest.es.gov.br.dsl.nestdsl.impl.AbstractElementImpl#getName <em>Name</em>}</li>
  * </ul>
  *
@@ -28,6 +32,16 @@ import prodest.es.gov.br.dsl.nestdsl.NestdslPackage;
  */
 public class AbstractElementImpl extends MinimalEObjectImpl.Container implements AbstractElement
 {
+  /**
+   * The cached value of the '{@link #getDescription() <em>Description</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDescription()
+   * @generated
+   * @ordered
+   */
+  protected Description description;
+
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -75,6 +89,56 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
+  public Description getDescription()
+  {
+    return description;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetDescription(Description newDescription, NotificationChain msgs)
+  {
+    Description oldDescription = description;
+    description = newDescription;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NestdslPackage.ABSTRACT_ELEMENT__DESCRIPTION, oldDescription, newDescription);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setDescription(Description newDescription)
+  {
+    if (newDescription != description)
+    {
+      NotificationChain msgs = null;
+      if (description != null)
+        msgs = ((InternalEObject)description).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - NestdslPackage.ABSTRACT_ELEMENT__DESCRIPTION, null, msgs);
+      if (newDescription != null)
+        msgs = ((InternalEObject)newDescription).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - NestdslPackage.ABSTRACT_ELEMENT__DESCRIPTION, null, msgs);
+      msgs = basicSetDescription(newDescription, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, NestdslPackage.ABSTRACT_ELEMENT__DESCRIPTION, newDescription, newDescription));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public String getName()
   {
     return name;
@@ -100,10 +164,28 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case NestdslPackage.ABSTRACT_ELEMENT__DESCRIPTION:
+        return basicSetDescription(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
     {
+      case NestdslPackage.ABSTRACT_ELEMENT__DESCRIPTION:
+        return getDescription();
       case NestdslPackage.ABSTRACT_ELEMENT__NAME:
         return getName();
     }
@@ -120,6 +202,9 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
+      case NestdslPackage.ABSTRACT_ELEMENT__DESCRIPTION:
+        setDescription((Description)newValue);
+        return;
       case NestdslPackage.ABSTRACT_ELEMENT__NAME:
         setName((String)newValue);
         return;
@@ -137,6 +222,9 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
+      case NestdslPackage.ABSTRACT_ELEMENT__DESCRIPTION:
+        setDescription((Description)null);
+        return;
       case NestdslPackage.ABSTRACT_ELEMENT__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -154,6 +242,8 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
+      case NestdslPackage.ABSTRACT_ELEMENT__DESCRIPTION:
+        return description != null;
       case NestdslPackage.ABSTRACT_ELEMENT__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }

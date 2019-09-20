@@ -86,6 +86,11 @@ public class NestdslAdapterFactory extends AdapterFactoryImpl
         return createAbstractElementAdapter();
       }
       @Override
+      public Adapter caseDescription(Description object)
+      {
+        return createDescriptionAdapter();
+      }
+      @Override
       public Adapter caseEntity(Entity object)
       {
         return createEntityAdapter();
@@ -178,6 +183,21 @@ public class NestdslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createAbstractElementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link prodest.es.gov.br.dsl.nestdsl.Description <em>Description</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see prodest.es.gov.br.dsl.nestdsl.Description
+   * @generated
+   */
+  public Adapter createDescriptionAdapter()
   {
     return null;
   }

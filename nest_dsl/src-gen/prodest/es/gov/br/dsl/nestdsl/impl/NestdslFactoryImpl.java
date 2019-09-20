@@ -67,6 +67,7 @@ public class NestdslFactoryImpl extends EFactoryImpl implements NestdslFactory
     {
       case NestdslPackage.DOMAINMODEL: return createDomainmodel();
       case NestdslPackage.ABSTRACT_ELEMENT: return createAbstractElement();
+      case NestdslPackage.DESCRIPTION: return createDescription();
       case NestdslPackage.ENTITY: return createEntity();
       case NestdslPackage.DTO: return createDto();
       case NestdslPackage.PROPERTY: return createProperty();
@@ -103,6 +104,18 @@ public class NestdslFactoryImpl extends EFactoryImpl implements NestdslFactory
   {
     AbstractElementImpl abstractElement = new AbstractElementImpl();
     return abstractElement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Description createDescription()
+  {
+    DescriptionImpl description = new DescriptionImpl();
+    return description;
   }
 
   /**

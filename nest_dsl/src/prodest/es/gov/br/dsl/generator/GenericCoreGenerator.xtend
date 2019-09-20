@@ -26,7 +26,6 @@ class GenericCoreGenerator extends AbstractGenerator {
             fsa.generateFile(
                 "src/BaseModule/base.controller.ts",
                 controllerCompiller())
-           
         }    
 	}
 	

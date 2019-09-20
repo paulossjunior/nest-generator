@@ -10,29 +10,24 @@ import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import prodest.es.gov.br.dsl.nestdsl.Description;
 import prodest.es.gov.br.dsl.nestdsl.Dto;
 import prodest.es.gov.br.dsl.nestdsl.Entity;
 
 @SuppressWarnings("all")
 public class HelpersGenerator extends AbstractGenerator {
-  private List<String> entities;
+  private List<Entity> entities;
   
-  private List<String> dtos;
+  private List<Dto> dtos;
   
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
-    ArrayList<String> _arrayList = new ArrayList<String>();
+    ArrayList<Entity> _arrayList = new ArrayList<Entity>();
     this.entities = _arrayList;
-    ArrayList<String> _arrayList_1 = new ArrayList<String>();
+    ArrayList<Dto> _arrayList_1 = new ArrayList<Dto>();
     this.dtos = _arrayList_1;
-    Iterable<Entity> _filter = Iterables.<Entity>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Entity.class);
-    for (final Entity e : _filter) {
-      this.entities.add(e.getName());
-    }
-    Iterable<Dto> _filter_1 = Iterables.<Dto>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Dto.class);
-    for (final Dto dto : _filter_1) {
-      this.dtos.add(dto.getName());
-    }
+    Iterables.<Entity>addAll(this.entities, Iterables.<Entity>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Entity.class));
+    Iterables.<Dto>addAll(this.dtos, Iterables.<Dto>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Dto.class));
     fsa.generateFile(
       "src/main.ts", 
       this.mainCompile());
@@ -120,18 +115,20 @@ public class HelpersGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence appModuleCompile(final List<String> modules) {
+  public CharSequence appModuleCompile(final List<Entity> modules) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import { Module } from \'@nestjs/common\';");
     _builder.newLine();
     {
-      for(final String module : modules) {
+      for(final Entity module : modules) {
         _builder.append("import { ");
-        _builder.append(module);
+        String _name = module.getName();
+        _builder.append(_name);
         _builder.append("Module } from \'./");
-        _builder.append(module);
+        String _name_1 = module.getName();
+        _builder.append(_name_1);
         _builder.append("/");
-        String _lowerCase = module.toLowerCase();
+        String _lowerCase = module.getName().toLowerCase();
         _builder.append(_lowerCase);
         _builder.append(".module\';");
         _builder.newLineIfNotEmpty();
@@ -145,9 +142,10 @@ public class HelpersGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t");
     {
-      for(final String module_1 : modules) {
+      for(final Entity module_1 : modules) {
         _builder.append("\t\t");
-        _builder.append(module_1, "\t");
+        String _name_2 = module_1.getName();
+        _builder.append(_name_2, "\t");
         _builder.append("Module,");
         _builder.newLineIfNotEmpty();
       }
@@ -633,7 +631,7 @@ public class HelpersGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence mdCompiler(final List<String> entities, final List<String> dtos) {
+  public CharSequence mdCompiler(final List<Entity> entities, final List<Dto> dtos) {
     StringConcatenation _builder = new StringConcatenation();
     {
       int _size = entities.size();
@@ -647,10 +645,24 @@ public class HelpersGenerator extends AbstractGenerator {
         _builder.append(":-------------: | :-------------:");
         _builder.newLine();
         {
-          for(final String e : entities) {
-            _builder.append(e);
-            _builder.append(" | Preencha este campo");
-            _builder.newLineIfNotEmpty();
+          for(final Entity e : entities) {
+            {
+              Description _description = e.getDescription();
+              boolean _tripleNotEquals = (_description != null);
+              if (_tripleNotEquals) {
+                String _name = e.getName();
+                _builder.append(_name);
+                _builder.append(" | ");
+                String _textfield = e.getDescription().getTextfield();
+                _builder.append(_textfield);
+                _builder.newLineIfNotEmpty();
+              } else {
+                String _name_1 = e.getName();
+                _builder.append(_name_1);
+                _builder.append(" | Preencha este campo");
+                _builder.newLineIfNotEmpty();
+              }
+            }
           }
         }
       }
@@ -669,10 +681,24 @@ public class HelpersGenerator extends AbstractGenerator {
         _builder.append(":-------------: | :-------------:");
         _builder.newLine();
         {
-          for(final String dto : dtos) {
-            _builder.append(dto);
-            _builder.append(" | Preencha este campo");
-            _builder.newLineIfNotEmpty();
+          for(final Dto dto : dtos) {
+            {
+              Description _description_1 = dto.getDescription();
+              boolean _tripleNotEquals_1 = (_description_1 != null);
+              if (_tripleNotEquals_1) {
+                String _name_2 = dto.getName();
+                _builder.append(_name_2);
+                _builder.append(" | ");
+                String _textfield_1 = dto.getDescription().getTextfield();
+                _builder.append(_textfield_1);
+                _builder.newLineIfNotEmpty();
+              } else {
+                String _name_3 = dto.getName();
+                _builder.append(_name_3);
+                _builder.append(" | Preencha este campo");
+                _builder.newLineIfNotEmpty();
+              }
+            }
           }
         }
         _builder.newLine();

@@ -96,13 +96,22 @@ public interface NestdslPackage extends EPackage
   int ABSTRACT_ELEMENT = 1;
 
   /**
+   * The feature id for the '<em><b>Description</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ABSTRACT_ELEMENT__DESCRIPTION = 0;
+
+  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ABSTRACT_ELEMENT__NAME = 0;
+  int ABSTRACT_ELEMENT__NAME = 1;
 
   /**
    * The number of structural features of the '<em>Abstract Element</em>' class.
@@ -111,7 +120,35 @@ public interface NestdslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ABSTRACT_ELEMENT_FEATURE_COUNT = 1;
+  int ABSTRACT_ELEMENT_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.DescriptionImpl <em>Description</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see prodest.es.gov.br.dsl.nestdsl.impl.DescriptionImpl
+   * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getDescription()
+   * @generated
+   */
+  int DESCRIPTION = 2;
+
+  /**
+   * The feature id for the '<em><b>Textfield</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DESCRIPTION__TEXTFIELD = 0;
+
+  /**
+   * The number of structural features of the '<em>Description</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DESCRIPTION_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.EntityImpl <em>Entity</em>}' class.
@@ -121,7 +158,16 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getEntity()
    * @generated
    */
-  int ENTITY = 2;
+  int ENTITY = 3;
+
+  /**
+   * The feature id for the '<em><b>Description</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENTITY__DESCRIPTION = ABSTRACT_ELEMENT__DESCRIPTION;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -176,7 +222,16 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getDto()
    * @generated
    */
-  int DTO = 3;
+  int DTO = 4;
+
+  /**
+   * The feature id for the '<em><b>Description</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DTO__DESCRIPTION = ABSTRACT_ELEMENT__DESCRIPTION;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -222,7 +277,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getProperty()
    * @generated
    */
-  int PROPERTY = 4;
+  int PROPERTY = 5;
 
   /**
    * The feature id for the '<em><b>Relation</b></em>' containment reference.
@@ -286,7 +341,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getDtoProperty()
    * @generated
    */
-  int DTO_PROPERTY = 5;
+  int DTO_PROPERTY = 6;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -341,7 +396,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getRelation()
    * @generated
    */
-  int RELATION = 6;
+  int RELATION = 7;
 
   /**
    * The feature id for the '<em><b>One Argument</b></em>' containment reference.
@@ -378,7 +433,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getOneArgumentRelation()
    * @generated
    */
-  int ONE_ARGUMENT_RELATION = 7;
+  int ONE_ARGUMENT_RELATION = 8;
 
   /**
    * The feature id for the '<em><b>Argument</b></em>' attribute.
@@ -415,7 +470,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getMultipleArgumentRelation()
    * @generated
    */
-  int MULTIPLE_ARGUMENT_RELATION = 8;
+  int MULTIPLE_ARGUMENT_RELATION = 9;
 
   /**
    * The feature id for the '<em><b>Argument</b></em>' attribute.
@@ -461,7 +516,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getMethod()
    * @generated
    */
-  int METHOD = 9;
+  int METHOD = 10;
 
   /**
    * The feature id for the '<em><b>Verb</b></em>' attribute.
@@ -534,7 +589,7 @@ public interface NestdslPackage extends EPackage
    * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getMethodArg()
    * @generated
    */
-  int METHOD_ARG = 10;
+  int METHOD_ARG = 11;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -614,6 +669,17 @@ public interface NestdslPackage extends EPackage
   EClass getAbstractElement();
 
   /**
+   * Returns the meta object for the containment reference '{@link prodest.es.gov.br.dsl.nestdsl.AbstractElement#getDescription <em>Description</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Description</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.AbstractElement#getDescription()
+   * @see #getAbstractElement()
+   * @generated
+   */
+  EReference getAbstractElement_Description();
+
+  /**
    * Returns the meta object for the attribute '{@link prodest.es.gov.br.dsl.nestdsl.AbstractElement#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -623,6 +689,27 @@ public interface NestdslPackage extends EPackage
    * @generated
    */
   EAttribute getAbstractElement_Name();
+
+  /**
+   * Returns the meta object for class '{@link prodest.es.gov.br.dsl.nestdsl.Description <em>Description</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Description</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.Description
+   * @generated
+   */
+  EClass getDescription();
+
+  /**
+   * Returns the meta object for the attribute '{@link prodest.es.gov.br.dsl.nestdsl.Description#getTextfield <em>Textfield</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Textfield</em>'.
+   * @see prodest.es.gov.br.dsl.nestdsl.Description#getTextfield()
+   * @see #getDescription()
+   * @generated
+   */
+  EAttribute getDescription_Textfield();
 
   /**
    * Returns the meta object for class '{@link prodest.es.gov.br.dsl.nestdsl.Entity <em>Entity</em>}'.
@@ -1107,12 +1194,38 @@ public interface NestdslPackage extends EPackage
     EClass ABSTRACT_ELEMENT = eINSTANCE.getAbstractElement();
 
     /**
+     * The meta object literal for the '<em><b>Description</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ABSTRACT_ELEMENT__DESCRIPTION = eINSTANCE.getAbstractElement_Description();
+
+    /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EAttribute ABSTRACT_ELEMENT__NAME = eINSTANCE.getAbstractElement_Name();
+
+    /**
+     * The meta object literal for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.DescriptionImpl <em>Description</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see prodest.es.gov.br.dsl.nestdsl.impl.DescriptionImpl
+     * @see prodest.es.gov.br.dsl.nestdsl.impl.NestdslPackageImpl#getDescription()
+     * @generated
+     */
+    EClass DESCRIPTION = eINSTANCE.getDescription();
+
+    /**
+     * The meta object literal for the '<em><b>Textfield</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DESCRIPTION__TEXTFIELD = eINSTANCE.getDescription_Textfield();
 
     /**
      * The meta object literal for the '{@link prodest.es.gov.br.dsl.nestdsl.impl.EntityImpl <em>Entity</em>}' class.

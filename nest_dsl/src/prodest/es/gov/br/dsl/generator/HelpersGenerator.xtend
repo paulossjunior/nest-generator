@@ -6,25 +6,22 @@ import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
 import prodest.es.gov.br.dsl.nestdsl.Entity
 import prodest.es.gov.br.dsl.nestdsl.Dto
+import prodest.es.gov.br.dsl.nestdsl.Description
 import java.util.List
 import java.util.ArrayList
 
 class HelpersGenerator extends AbstractGenerator {
  
-	var List<String> entities;
-	var List<String> dtos;
+	var List<Entity> entities;
+	var List<Dto> dtos;
 	
 	override doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		
 		entities = new ArrayList();
 		dtos = new ArrayList();
 		
-		for (e : resource.allContents.toIterable.filter(Entity)) {
-			entities.add(e.name);
-		}
-		for (dto : resource.allContents.toIterable.filter(Dto)) {
-			dtos.add(dto.name);
-		}
+		entities.addAll(resource.allContents.toIterable.filter(Entity))
+		dtos.addAll(resource.allContents.toIterable.filter(Dto))
 		
 		fsa.generateFile(
        		"src/main.ts",
@@ -82,16 +79,16 @@ class HelpersGenerator extends AbstractGenerator {
 		bootstrap();
 	'''
 	
-	def appModuleCompile(List<String> modules)
+	def appModuleCompile(List<Entity> modules)
 	'''
 		import { Module } from '@nestjs/common';
 		«FOR module: modules»
-			import { «module»Module } from './«module»/«module.toLowerCase».module';
+			import { «module.name»Module } from './«module.name»/«module.name.toLowerCase».module';
 		«ENDFOR»
 		
 		@Module({
 			imports: [
-			«FOR module: modules»		«module»Module,
+			«FOR module: modules»		«module.name»Module,
 			«ENDFOR»
 			],
 			controllers: [],
@@ -291,7 +288,7 @@ class HelpersGenerator extends AbstractGenerator {
 			
 		'''
 		
-		def mdCompiler(List<String> entities, List<String> dtos)
+		def mdCompiler(List<Entity> entities, List<Dto> dtos)
 		'''
 		«IF entities.size()>0»
 		###Entidades
@@ -299,7 +296,11 @@ class HelpersGenerator extends AbstractGenerator {
 		Entidade  | Descricao
 		:-------------: | :-------------:
 		«FOR e: entities»
-			«e» | Preencha este campo
+			«IF e.description !== null»
+				«e.name» | «e.description.textfield»
+			«ELSE»
+				«e.name» | Preencha este campo
+			«ENDIF»
 		«ENDFOR»
 		«ENDIF»
 		«IF dtos.size()>0»
@@ -310,7 +311,11 @@ class HelpersGenerator extends AbstractGenerator {
 		Entidade  | Descricao
 		:-------------: | :-------------:
 		«FOR dto: dtos»
-			«dto» | Preencha este campo
+			«IF dto.description !== null»
+				«dto.name» | «dto.description.textfield»
+			«ELSE»
+				«dto.name» | Preencha este campo
+			«ENDIF»
 		«ENDFOR»
 		
 		###Diagrama de classe
