@@ -42,7 +42,7 @@ QualifiedName:
  
 Property:
 	relation = (Relation)?
-    name=ID ':' (classType=[Entity|QualifiedName] | type=DATATYPE)(array='[]')?(';')?
+    name=ID ':' (classType=[Entity|QualifiedName] | type=DATATYPE)(array='[]')?(';')? ('{'(propertyOptions=PropertyOptions)'}')?
     ;
     
 DtoProperty:
@@ -62,7 +62,17 @@ MultipleArgumentRelation:
 	argument = ('ManyToOne' | 'OneToMany') type=[Entity]',' secondArgument = ARGUMENTREGEX
 	;
 	
-	
+PropertyOptions:
+	RequiredOption /*Modular, dessa forma uma propertyOption pode ser adicionada com mais facilidade no futuro */
+	;
+
+RequiredOption:
+	'required'':' BOOLEANTYTPE
+;
+
+terminal BOOLEANTYTPE:
+	'true' | 'false'
+	;	
 terminal ARGUMENTREGEX:
 	('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*'=>'('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*'.'('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*
 	;
